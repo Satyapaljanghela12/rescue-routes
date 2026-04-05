@@ -487,7 +487,7 @@ export default function AboutPage() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Link
-                    href="#donate"
+                    href="/donate"
                     className="bg-primary hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
                   >
                     Donate Now

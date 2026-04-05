@@ -36,7 +36,7 @@ export default function FinalCTA() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="#donate"
+                href="/donate"
                 className="group relative inline-flex items-center justify-center gap-3 bg-primary text-white font-fredoka font-bold py-5 px-12 rounded-full text-xl shadow-[0_15px_30px_rgba(249,115,22,0.3)] hover:bg-secondary transition-all"
               >
                 <span>Donate Now</span>

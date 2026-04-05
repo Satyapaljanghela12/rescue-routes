@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
+import OrganizationsCarousel from "@/components/sections/OrganizationsCarousel";
 import StatsSection from "@/components/sections/StatsSection";
 import AboutSection from "@/components/sections/AboutSection";
 import WhyRescueMatters from "@/components/sections/WhyRescueMatters";
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 w-full overflow-hidden">
         <HeroSection />
+        <OrganizationsCarousel />
         <StatsSection />
         <AboutSection />
         <WhyRescueMatters />

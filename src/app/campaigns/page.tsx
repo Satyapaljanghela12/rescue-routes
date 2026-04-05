@@ -6,53 +6,63 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
-const campaigns = [
-  {
-    icon: Stethoscope,
-    title: "Emergency Medical Care Fund",
-    description: "Every day, injured animals are left helpless on the streets. This campaign helps us provide urgent surgeries, medicines, and life-saving treatment.",
-    buttonText: "Donate Now",
-    image: "/About1.jpg",
-  },
-  {
-    icon: Home,
-    title: "Shelter & Rehabilitation Drive",
-    description: "Help provide safe shelter, food, and recovery care for rescued animals until they are healthy and ready for adoption.",
-    buttonText: "Donate Now",
-    image: "/About2.jpg",
-  },
-  {
-    icon: Shield,
-    title: "Vaccination & Sterilization Campaign",
-    description: "Support programs that prevent diseases and help control the stray animal population in a humane way.",
-    buttonText: "Donate Now",
-    image: "/About1.jpg",
-  },
-  {
-    icon: Home,
-    title: "Winter Bed Drive",
-    description: "Help us provide warm beds for stray animals during cold nights and protect them from harsh weather.",
-    buttonText: "Support Now",
-    image: "/About2.jpg",
-  },
-  {
-    icon: Droplet,
-    title: "Summer Water Pot Drive",
-    description: "Support installation of water pots across the city so animals can survive extreme summer heat.",
-    buttonText: "Support Now",
-    image: "/About1.jpg",
-  },
-  {
-    icon: Heart,
-    title: "Food Distribution Program",
-    description: "Help us provide daily meals to street animals who struggle to find food and often go hungry for days.",
-    buttonText: "Support Now",
-    image: "/About2.jpg",
-  },
-];
+// Icon mapping for campaigns
+const iconMap: any = {
+  "Emergency": Stethoscope,
+  "Medical": Stethoscope,
+  "Shelter": Home,
+  "Rehabilitation": Home,
+  "Vaccination": Shield,
+  "Sterilization": Shield,
+  "Winter": Home,
+  "Bed": Home,
+  "Summer": Droplet,
+  "Water": Droplet,
+  "Food": Heart,
+};
+
+const getIconForCampaign = (title: string) => {
+  for (const key in iconMap) {
+    if (title.includes(key)) return iconMap[key];
+  }
+  return Heart;
+};
 
 export default function CampaignsPage() {
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [adoptions, setAdoptions] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchCampaigns();
+    fetchAdoptions();
+  }, []);
+
+  const fetchCampaigns = async () => {
+    try {
+      const response = await fetch("/api/campaigns");
+      const data = await response.json();
+      if (data.success) {
+        setCampaigns(data.campaigns);
+      }
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+    }
+  };
+
+  const fetchAdoptions = async () => {
+    try {
+      const response = await fetch("/api/adoptions");
+      const data = await response.json();
+      if (data.success) {
+        // Only show available animals
+        setAdoptions(data.adoptions.filter((a: any) => a.status === "Available"));
+      }
+    } catch (error) {
+      console.error("Error fetching adoptions:", error);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -107,9 +117,11 @@ export default function CampaignsPage() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {campaigns.map((campaign, index) => (
+              {campaigns.map((campaign, index) => {
+                const CampaignIcon = getIconForCampaign(campaign.title);
+                return (
                 <motion.div
-                  key={campaign.title}
+                  key={campaign._id || index}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -126,7 +138,7 @@ export default function CampaignsPage() {
                     />
                     {/* Icon badge overlay */}
                     <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                      <campaign.icon className="w-6 h-6 text-primary" strokeWidth={2.5} />
+                      <CampaignIcon className="w-6 h-6 text-primary" strokeWidth={2.5} />
                     </div>
                   </div>
 
@@ -146,10 +158,10 @@ export default function CampaignsPage() {
                       </p>
                       
                       <Link
-                        href="#donate"
+                        href="/donate"
                         className="inline-flex items-center font-fredoka text-primary hover:text-orange-600 transition-colors"
                       >
-                        {campaign.buttonText}
+                        Donate Now
                         <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
@@ -168,8 +180,98 @@ export default function CampaignsPage() {
                     </div>
                   </div>
                 </motion.div>
+              );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Adoption Section */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
+                <span className="text-primary">Meet Your</span> <span className="text-gray-600">New Friend</span>
+              </h2>
+              <p className="font-fredoka text-xl text-gray-600">
+                These rescued animals are looking for their forever homes
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {adoptions.map((animal, index) => (
+                <motion.div
+                  key={animal._id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 overflow-hidden"
+                >
+                  {/* Animal Image */}
+                  <div className="relative h-56 bg-gray-100">
+                    <Image
+                      src={animal.image}
+                      alt={animal.animalName}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Gender Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-fredoka font-medium text-gray-700">
+                        {animal.gender}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <h3 className="font-poetsen text-2xl mb-2">
+                      <span className="text-primary">{animal.animalName}</span>
+                    </h3>
+                    
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="font-poppins text-sm text-gray-600">{animal.animalType}</span>
+                      <span className="text-gray-400">•</span>
+                      <span className="font-poppins text-sm text-gray-600">{animal.age}</span>
+                    </div>
+
+                    {animal.description && (
+                      <p className="font-poppins text-sm text-gray-700 leading-relaxed mb-4 line-clamp-2">
+                        {animal.description}
+                      </p>
+                    )}
+
+                    <button className="w-full bg-primary hover:bg-orange-600 text-white font-fredoka py-2.5 rounded-xl transition-all">
+                      Adopt Me
+                    </button>
+
+                    {/* Paw decoration */}
+                    <div className="absolute bottom-3 right-3 opacity-10">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
+                        <circle cx="12" cy="16" r="3" />
+                        <circle cx="8" cy="12" r="2" />
+                        <circle cx="16" cy="12" r="2" />
+                        <circle cx="10" cy="8" r="1.5" />
+                        <circle cx="14" cy="8" r="1.5" />
+                      </svg>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
+
+            {adoptions.length === 0 && (
+              <div className="text-center py-12">
+                <p className="font-poppins text-gray-500">No animals available for adoption at the moment</p>
+              </div>
+            )}
           </div>
         </section>
 

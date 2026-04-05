@@ -198,7 +198,7 @@ export default function MissionPage() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link
-                  href="#donate"
+                  href="/donate"
                   className="bg-primary hover:bg-secondary text-white font-semibold text-base py-3 px-8 rounded-lg transition-all hover:scale-105 shadow-md"
                 >
                   Donate Now

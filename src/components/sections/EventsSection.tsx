@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Calendar, MapPin, ChevronLeft, ChevronRight, Heart, Sparkles, ArrowRight } from "lucide-react";
 
 const events = [
@@ -86,7 +86,7 @@ export default function EventsSection() {
               Don't Miss Out
             </div>
             <h2 className="text-5xl md:text-7xl font-briem font-bold leading-tight">
-              <span className="text-dark/40">Our Upcoming</span>{" "}
+              <span className="text-gray-500">Our Upcoming</span>{" "}
               <span className="text-primary">Events</span>
             </h2>
             <p className="text-dark/60 text-lg font-fredoka max-w-md mt-4">
@@ -136,7 +136,7 @@ export default function EventsSection() {
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 400, damping: 25 }
                 }}
-                className="bg-white rounded-[3rem] overflow-hidden border border-primary/10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] group h-full flex flex-col"
+                className="bg-white rounded-[3rem] overflow-hidden border-2 border-gray-100 hover:border-primary shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(249,115,22,0.15)] group h-full flex flex-col transition-all duration-300"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image

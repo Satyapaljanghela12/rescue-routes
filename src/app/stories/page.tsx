@@ -273,7 +273,7 @@ export default function StoriesPage() {
               </div>
               
               <h2 className="font-poetsen text-4xl md:text-5xl mb-8">
-                <span className="text-primary">Every Story</span> <span className="text-gray-600">Matters</span> 💛
+                <span className="text-primary">Every Story</span> <span className="text-gray-600">Matters</span> 
               </h2>
               
               <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
@@ -314,7 +314,7 @@ export default function StoriesPage() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Link
-                    href="#donate"
+                    href="/donate"
                     className="bg-primary hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
                   >
                     Donate Now

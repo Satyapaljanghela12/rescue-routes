@@ -44,7 +44,7 @@ export default function TeamSection() {
               Meet the Hearts
             </span>
             <h2 className="text-6xl md:text-8xl font-briem font-bold text-dark leading-none">
-              <span className="text-dark/40">Our</span> <span className="text-primary">Founding Team</span>
+              <span className="text-gray-500">Our</span> <span className="text-primary">Founding Team</span>
             </h2>
             <p className="text-lg text-dark/60 font-fredoka max-w-xl mt-6">
               The compassionate minds behind Rescue Routes, dedicated to providing a second chance to every life we rescue.

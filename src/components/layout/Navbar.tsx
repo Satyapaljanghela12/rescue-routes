@@ -10,7 +10,8 @@ const navLinks = [
   { name: "About Us", href: "/about" },
   { name: "Campaigns", href: "/campaigns" },
   { name: "Stories", href: "/stories" },
-  { name: "Volunteers", href: "#" },
+  { name: "Volunteers", href: "/volunteers" },
+  { name: "Store", href: "/store" },
   { name: "Blogs", href: "#" },
 ];
 
@@ -47,13 +48,13 @@ export default function Navbar() {
         </Link>
 
         {/* Center: Desktop Nav (Centred using absolute positioned container) */}
-        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-2xl justify-center z-10">
-          <ul className="flex items-center justify-center gap-8 xl:gap-12">
+        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-4xl justify-center z-10">
+          <ul className="flex items-center justify-center gap-5 xl:gap-7">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className="text-[14px] font-medium text-gray-700 hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-[13px] font-medium text-gray-700 hover:text-primary transition-colors whitespace-nowrap"
                 >
                   {link.name}
                 </Link>
@@ -63,12 +64,18 @@ export default function Navbar() {
         </nav>
 
         {/* Right: CTA & Mobile Toggle */}
-        <div className="flex items-center gap-4 z-20">
+        <div className="flex items-center gap-3 z-20">
           <Link
-            href="#donate"
+            href="/donate"
             className="hidden sm:inline-flex bg-primary hover:bg-secondary text-white font-semibold text-[14px] py-2.5 px-6 rounded-lg transition-all hover:scale-105"
           >
             Donate Now
+          </Link>
+          <Link
+            href="/membership"
+            className="hidden sm:inline-flex bg-gray-700 hover:bg-gray-800 text-white font-semibold text-[14px] py-2.5 px-6 rounded-lg transition-all hover:scale-105"
+          >
+            Join Now
           </Link>
           
           <button
@@ -100,11 +107,18 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="#donate"
+              href="/donate"
               onClick={() => setIsOpen(false)}
               className="mt-2 bg-primary hover:bg-secondary text-white text-center font-semibold py-3 px-6 rounded-lg transition-all active:scale-95"
             >
               Donate Now
+            </Link>
+            <Link
+              href="/membership"
+              onClick={() => setIsOpen(false)}
+              className="bg-gray-700 hover:bg-gray-800 text-white text-center font-semibold py-3 px-6 rounded-lg transition-all active:scale-95"
+            >
+              Join Now
             </Link>
           </motion.div>
         )}

@@ -22,8 +22,8 @@ export default function AboutSection() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-4 leading-tight">
               <img src="/hindi.png" alt="Compassion towards all living beings" />
             </h2>
-            <h3 className="text-3xl md:text-5xl lg:text-5xl font-briem font-bold text-dark mt-4">
-              <span className="text-primary">Compassion</span> toward all living beings
+            <h3 className="text-3xl md:text-5xl lg:text-5xl font-briem font-bold mt-4">
+              <span className="text-primary">Compassion</span> <span className="text-gray-500">towards all living beings</span>
             </h3>
           </motion.div>
 
@@ -38,8 +38,8 @@ export default function AboutSection() {
               className="bg-white rounded-[32px] p-8 md:p-12 shadow-lg shadow-gray-200/50 relative border-2 border-transparent hover:border-orange-100 transition-colors"
             >
               <PawPrint className="absolute -top-4 -left-4 w-12 h-12 text-orange-200 rotate-[-15deg] opacity-70" />
-              <h4 className="text-2xl md:text-3xl font-heading font-bold text-dark mb-4 tracking-tight">
-                Our Mission of Care
+              <h4 className="text-2xl md:text-3xl font-heading font-bold mb-4 tracking-tight">
+                <span className="text-primary">Our Mission of Care</span>
               </h4>
               <p className="text-xl md:text-2xl font-fredoka text-gray-600 leading-relaxed font-normal">
                 Rescue Routes saves injured and abandoned animals by providing medical care, shelter, and rehabilitation.
@@ -54,8 +54,8 @@ export default function AboutSection() {
               className="bg-white rounded-[32px] p-8 md:p-12 shadow-lg shadow-gray-200/50 relative border-2 border-transparent hover:border-orange-100 transition-colors"
             >
               <PawPrint className="absolute -bottom-4 -right-4 w-12 h-12 text-orange-200 rotate-[15deg] opacity-70" />
-              <h4 className="text-2xl md:text-3xl font-heading font-bold text-dark mb-4 tracking-tight">
-                A Community That Cares
+              <h4 className="text-2xl md:text-3xl font-heading font-bold mb-4 tracking-tight">
+                <span className="text-primary">A Community That Cares</span>
               </h4>
               <p className="text-xl md:text-2xl font-fredoka text-gray-600 leading-relaxed font-normal">
                 Through adoption drives, awareness, and volunteer support, we are building a compassionate ecosystem where every life truly matters.
