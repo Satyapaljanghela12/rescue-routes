@@ -192,7 +192,20 @@ export default function StorePage() {
       if (data.success) {
         setShowPaymentModal(false);
         setShowSuccessModal(true);
-        setFormData({ userName: "", email: "", phone: "", address: "" });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          company: "",
+          country: "India",
+          streetAddress: "",
+          apartment: "",
+          city: "",
+          state: "",
+          pinCode: "",
+          phone: "",
+          email: "",
+          orderNotes: "",
+        });
         setTimeout(() => {
           setShowSuccessModal(false);
           router.push(`/my-orders?email=${encodeURIComponent(formData.email)}`);
