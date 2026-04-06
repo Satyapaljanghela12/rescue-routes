@@ -9,7 +9,7 @@ const team = [
     name: "Sneha Saxena",
     role: "Founder & Director",
     bio: "With over 12 years of experience in animal rescue, Sneha founded Rescue Routes to create a safe path for every stray. Her mission is to build a world where every paw has a home.",
-    image: "/sneha.jpeg",
+    image: "/sneha2.png",
     color: "bg-primary/10",
   },
 ];
@@ -68,7 +68,7 @@ export default function TeamSection() {
                       src={member.image}
                       alt={member.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="object-contain group-hover:scale-110 transition-transform duration-700"
                     />
                   </div>
 
