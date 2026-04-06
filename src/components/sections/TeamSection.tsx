@@ -6,18 +6,11 @@ import { PawPrint, Globe, Mail, Link, Heart } from "lucide-react";
 
 const team = [
   {
-    name: "Sarah Jenkins",
+    name: "Sneha Saxena",
     role: "Founder & Director",
-    bio: "With over 12 years of experience in animal rescue, Sarah founded Rescue Routes to create a safe path for every stray. Her mission is to build a world where every paw has a home.",
-    image: "/images/team/founder.png",
+    bio: "With over 12 years of experience in animal rescue, Sneha founded Rescue Routes to create a safe path for every stray. Her mission is to build a world where every paw has a home.",
+    image: "/sneha.jpeg",
     color: "bg-primary/10",
-  },
-  {
-    name: "David Miller",
-    role: "Co-Founder & Operations",
-    bio: "David leads our on-ground rescue operations and community outreach. His background in logistics ensures that our rescue teams are always ready for any emergency.",
-    image: "/images/team/co-founder.png",
-    color: "bg-secondary/10",
   },
 ];
 
@@ -52,7 +45,7 @@ export default function TeamSection() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
+        <div className="flex justify-center max-w-6xl mx-auto">
           {team.map((member, index) => (
             <motion.div
               key={index}

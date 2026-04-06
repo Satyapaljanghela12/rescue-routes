@@ -49,21 +49,35 @@ export default function AboutPage() {
                 </p>
               </motion.div>
 
-              {/* Right - Image with decorative frame */}
+              {/* Right - Image */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-orange-300/20 rounded-[3rem] blur-xl" />
-                <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
-                  <Image
-                    src="/About1.jpg"
-                    alt="Rescue Routes mission"
-                    fill
-                    className="object-cover"
-                  />
+                {/* Warm gradient background effect */}
+                <div className="absolute -inset-6 bg-gradient-to-br from-orange-200/40 via-orange-300/30 to-primary/20 rounded-3xl blur-2xl" />
+                
+                <div className="relative w-full h-[500px] bg-white p-4 rounded-2xl shadow-xl">
+                  <div className="relative w-full h-full rounded-lg overflow-hidden">
+                    <Image
+                      src="/About1.png"
+                      alt="Rescue Routes mission"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                {/* Paw badge */}
+                <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                    <circle cx="12" cy="16" r="3" />
+                    <circle cx="8" cy="12" r="2" />
+                    <circle cx="16" cy="12" r="2" />
+                    <circle cx="10" cy="8" r="1.5" />
+                    <circle cx="14" cy="8" r="1.5" />
+                  </svg>
                 </div>
               </motion.div>
             </div>

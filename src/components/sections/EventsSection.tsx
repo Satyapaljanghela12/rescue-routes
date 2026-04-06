@@ -1,44 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, ChevronLeft, ChevronRight, Heart, Sparkles, ArrowRight } from "lucide-react";
-
-const events = [
-  {
-    id: 1,
-    title: "Community Mega Adoption Drive",
-    date: "April 15, 2026",
-    location: "City Central Park",
-    image: "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=600&q=80",
-    desc: "Join us to find your new furry best friend. Over 50 rescued dogs and cats are looking for their forever homes.",
-  },
-  {
-    id: 2,
-    title: "Free Vaccination Camp",
-    date: "May 02, 2026",
-    location: "Rescue Routes Shelter",
-    image: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&w=600&q=80",
-    desc: "Protecting our community pets and strays. We are offering free anti-rabies and multi-vaccines.",
-  },
-  {
-    id: 3,
-    title: "Volunteer Training & Orientation",
-    date: "May 20, 2026",
-    location: "Community Center",
-    image: "https://images.unsplash.com/photo-1553322378-eb94e5966b0c?auto=format&fit=crop&w=600&q=80",
-    desc: "Want to learn how to handle rescues safely? Join our expert-led volunteer orientation session.",
-  },
-  {
-    id: 4,
-    title: "Paws & Paint Workshop",
-    date: "June 10, 2026",
-    location: "Art Studio Downtown",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80",
-    desc: "A creative afternoon where you and your pet can create art together! All proceeds go to our rescue fund.",
-  },
-];
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.8, rotate: -5 },
@@ -57,6 +22,27 @@ const cardVariants = {
 
 export default function EventsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
+
+  const fetchCampaigns = async () => {
+    try {
+      const response = await fetch("/api/campaigns");
+      const data = await response.json();
+      if (data.success) {
+        // Get only the first 6 campaigns for the landing page
+        setCampaigns(data.campaigns.slice(0, 6));
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+      setLoading(false);
+    }
+  };
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -64,6 +50,15 @@ export default function EventsSection() {
       const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+    });
   };
 
   return (
@@ -120,86 +115,97 @@ export default function EventsSection() {
           className="flex gap-8 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory scrollbar-hide no-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {events.map((event, index) => (
-            <motion.div
-              key={event.id}
-              custom={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="min-w-[320px] md:min-w-[400px] snap-center"
-            >
+          {loading ? (
+            <div className="w-full flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          ) : campaigns.length > 0 ? (
+            campaigns.map((campaign, index) => (
               <motion.div
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.02,
-                  transition: { type: "spring", stiffness: 400, damping: 25 }
-                }}
-                className="bg-white rounded-[3rem] overflow-hidden border-2 border-gray-100 hover:border-primary shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(249,115,22,0.15)] group h-full flex flex-col transition-all duration-300"
+                key={campaign._id}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="min-w-[320px] md:min-w-[400px] snap-center"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-6 right-6">
-                    <motion.div 
-                      whileHover={{ scale: 1.1 }}
-                      className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-2xl flex items-center justify-center text-primary shadow-xl"
-                    >
-                      <Heart size={24} fill="currentColor" />
-                    </motion.div>
+                <motion.div
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { type: "spring", stiffness: 400, damping: 25 }
+                  }}
+                  className="bg-white rounded-[3rem] overflow-hidden border-2 border-gray-100 hover:border-primary shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(249,115,22,0.15)] group h-full flex flex-col transition-all duration-300"
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={campaign.image || "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=600&q=80"}
+                      alt={campaign.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-6 right-6">
+                      <motion.div 
+                        whileHover={{ scale: 1.1 }}
+                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-2xl flex items-center justify-center text-primary shadow-xl"
+                      >
+                        <Heart size={24} fill="currentColor" />
+                      </motion.div>
+                    </div>
                   </div>
-                </div>
 
-                <div className="p-8 flex flex-col flex-grow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="bg-primary text-white font-fredoka font-bold text-xs py-1.5 px-4 rounded-full flex items-center gap-2">
-                      <Calendar size={14} />
-                      {event.date}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-3xl font-fredoka font-bold text-primary group-hover:text-secondary transition-colors mb-4 leading-tight">
-                    {event.title}
-                  </h3>
-                  
-                  <p className="text-dark/60 font-fredoka text-base mb-8 line-clamp-3">
-                    {event.desc}
-                  </p>
-
-                  <div className="mt-auto pt-6 border-t border-primary/5 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-primary font-fredoka font-bold text-sm">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                        <MapPin size={16} />
-                      </div>
-                      {event.location}
+                  <div className="p-8 flex flex-col flex-grow">
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="bg-primary text-white font-fredoka font-bold text-xs py-1.5 px-4 rounded-full flex items-center gap-2">
+                        <Calendar size={14} />
+                        {formatDate(campaign.date)}
+                      </span>
                     </div>
                     
-                    <motion.div 
-                      whileHover={{ x: 5, color: "#F97316" }}
-                      whileTap={{ scale: 0.95 }}
-                      className="group/btn flex items-center gap-2 text-secondary font-fredoka font-bold text-sm cursor-pointer"
-                    >
-                      <span className="border-b-2 border-secondary/20 group-hover/btn:border-primary/40 transition-colors">
-                        Join Event
-                      </span>
-                      <motion.div
-                        initial={{ x: -5, opacity: 0 }}
-                        whileHover={{ x: 0, opacity: 1 }}
-                        className="text-primary"
+                    <h3 className="text-3xl font-fredoka font-bold text-primary group-hover:text-secondary transition-colors mb-4 leading-tight">
+                      {campaign.title}
+                    </h3>
+                    
+                    <p className="text-dark/60 font-fredoka text-base mb-8 line-clamp-3">
+                      {campaign.description}
+                    </p>
+
+                    <div className="mt-auto pt-6 border-t border-primary/5 flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-primary font-fredoka font-bold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <MapPin size={16} />
+                        </div>
+                        {campaign.location}
+                      </div>
+                      
+                      <motion.div 
+                        whileHover={{ x: 5, color: "#F97316" }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group/btn flex items-center gap-2 text-secondary font-fredoka font-bold text-sm cursor-pointer"
                       >
-                        <ArrowRight size={16} />
+                        <span className="border-b-2 border-secondary/20 group-hover/btn:border-primary/40 transition-colors">
+                          Join Event
+                        </span>
+                        <motion.div
+                          initial={{ x: -5, opacity: 0 }}
+                          whileHover={{ x: 0, opacity: 1 }}
+                          className="text-primary"
+                        >
+                          <ArrowRight size={16} />
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))
+          ) : (
+            <div className="w-full text-center py-20">
+              <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <p className="font-fredoka text-gray-500">No upcoming campaigns yet</p>
+            </div>
+          )}
         </div>
       </div>
 

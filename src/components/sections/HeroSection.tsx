@@ -121,7 +121,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative lg:h-[600px] flex justify-center items-center"
+            className="relative lg:h-[600px] flex flex-col justify-center items-center gap-3"
           >
             <div className="relative w-full max-w-lg xl:max-w-xl aspect-square mx-auto">
               <Image
@@ -145,6 +145,16 @@ export default function HeroSection() {
                   className="object-contain drop-shadow-sm"
                 />
               </motion.div>
+            </div>
+            
+            {/* Registration Numbers */}
+            <div className="text-center space-y-1">
+              <p className="text-gray-400 text-sm font-medium tracking-wide">
+                Registration No.: HI/01/01/01/33445/18
+              </p>
+              <p className="text-gray-400 text-sm font-medium tracking-wide">
+                NITI Ayog/NGO Registration No.: MP/2018/0188360
+              </p>
             </div>
           </motion.div>
           

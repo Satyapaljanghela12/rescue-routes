@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNav from "@/components/admin/TopNav";
-import { Plus, Edit, Trash2, X } from "lucide-react";
+import { Plus, Edit, Trash2, X, Upload, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Function to check if campaign is active based on current date
 const getCampaignStatus = (startDate: string, endDate: string) => {
@@ -22,6 +22,10 @@ export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -45,6 +49,42 @@ export default function CampaignsPage() {
       }
     } catch (error) {
       console.error("Error fetching campaigns:", error);
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -312,23 +352,59 @@ export default function CampaignsPage() {
                     </div>
                   </div>
 
-                  {/* Image Selection */}
+                  {/* Image Upload */}
                   <div>
                     <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
-                      Campaign Image
+                      Campaign Image *
                     </label>
-                    <select
-                      value={formData.image}
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
+                    <div
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={() => fileInputRef.current?.click()}
+                      className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
+                        isDragging
+                          ? "border-primary bg-primary/5"
+                          : "border-gray-300 hover:border-primary hover:bg-gray-50"
+                      }`}
                     >
-                      <option value="/About1.jpg">About1.jpg</option>
-                      <option value="/About2.jpg">About2.jpg</option>
-                      <option value="/img1.jpg">img1.jpg</option>
-                      <option value="/img2.jpg">img2.jpg</option>
-                      <option value="/dog1.png">dog1.png</option>
-                      <option value="/dog2.png">dog2.png</option>
-                    </select>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="hidden"
+                      />
+                      {imagePreview ? (
+                        <div className="space-y-3">
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                            <Image
+                              src={imagePreview}
+                              alt="Preview"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <p className="font-poppins text-sm text-gray-600">
+                            Click or drag to change image
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                            <Upload className="w-8 h-8 text-gray-400" />
+                          </div>
+                          <div>
+                            <p className="font-poppins text-sm font-medium text-gray-700 mb-1">
+                              Drop your image here, or click to browse
+                            </p>
+                            <p className="font-poppins text-xs text-gray-500">
+                              PNG, JPG, GIF up to 10MB
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Submit Button */}

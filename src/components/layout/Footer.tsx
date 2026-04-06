@@ -21,20 +21,40 @@ export default function Footer() {
               We're on a mission to bring hope, healing, and forever homes to every stray heart. Join our journey! 🐾
             </p>
             <div className="flex items-center gap-4">
-              {[
-                { icon: <Globe size={20} />, label: "Website" },
-                { icon: <MessageCircle size={20} />, label: "Chat" },
-                { icon: <Camera size={20} />, label: "Instagram" }
-              ].map((social, i) => (
-                <Link 
-                  key={i} 
-                  href="#" 
-                  className="w-12 h-12 rounded-2xl bg-[#F1F5F9] text-primary flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 hover:rotate-3 transition-all shadow-sm"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </Link>
-              ))}
+              <Link 
+                href="https://www.instagram.com/rescueroutes?igsh=cG0zeGpkZHgwNGk="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#F1F5F9] text-primary flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 hover:rotate-3 transition-all shadow-sm"
+                aria-label="Instagram"
+              >
+                <Camera size={20} />
+              </Link>
+              <Link 
+                href="https://youtube.com/@rescueroutes?si=hTewtsvMPLYYC4SU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#F1F5F9] text-primary flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 hover:rotate-3 transition-all shadow-sm"
+                aria-label="YouTube"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                </svg>
+              </Link>
+              <Link 
+                href="https://www.linkedin.com/company/rescue-routes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#F1F5F9] text-primary flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 hover:rotate-3 transition-all shadow-sm"
+                aria-label="LinkedIn"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </Link>
             </div>
           </div>
 
@@ -44,13 +64,26 @@ export default function Footer() {
               Explore
             </h4>
             <ul className="flex flex-col gap-4">
-              {['Our Story', 'Success Stories', 'Programs', 'Volunteer'].map(item => (
-                <li key={item}>
-                  <Link href="#" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/about" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/stories" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Success Stories
+                </Link>
+              </li>
+              <li>
+                <Link href="/campaigns" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Programs
+                </Link>
+              </li>
+              <li>
+                <Link href="/volunteers" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Volunteer
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -60,13 +93,26 @@ export default function Footer() {
               Support
             </h4>
             <ul className="flex flex-col gap-4">
-              {['Donate', 'Foster Care', 'Privacy Policy', 'Contact Us'].map(item => (
-                <li key={item}>
-                  <Link href="#" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/donate" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Donate
+                </Link>
+              </li>
+              <li>
+                <Link href="/volunteers" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Foster Care
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-dark/60 font-fredoka hover:text-primary transition-colors hover:translate-x-1 inline-block">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
 

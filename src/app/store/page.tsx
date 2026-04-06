@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, X, Check, Plus, Minus, CreditCard, Banknote, ArrowRight, Package } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -798,6 +799,7 @@ export default function StorePage() {
           )}
         </AnimatePresence>
       </div>
+      <Footer />
     </>
   );
 }

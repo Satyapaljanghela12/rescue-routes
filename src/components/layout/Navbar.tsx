@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -36,14 +37,15 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between relative">
         
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-2 group z-20">
-          <div className="relative w-8 h-8 flex items-end">
-            <div className="absolute bottom-0 left-0 w-4 h-5 bg-yellow-400 rounded-t-lg rounded-bl-sm" />
-            <div className="absolute bottom-0 right-0 w-5 h-7 bg-[#A3D139] rounded-t-lg rounded-br-sm -z-10" />
-          </div>
-          <div className="flex flex-col leading-[1.1] font-heading font-black text-dark tracking-tight">
-            <span className="text-[16px]">Rescue</span>
-            <span className="text-[16px]">Routes</span>
+        <Link href="/" className="flex items-center group z-20">
+          <div className="relative w-15 h-15">
+            <Image
+              src="/logo.png"
+              alt="Rescue Routes"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
         </Link>
 
