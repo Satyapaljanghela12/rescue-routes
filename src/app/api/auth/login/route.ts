@@ -15,8 +15,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
+    // Connect to MongoDB with timeout handling
+    let client;
+    try {
+      client = await Promise.race([
+        clientPromise,
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Database connection timeout')), 10000)
+        )
+      ]) as any;
+    } catch (connectionError) {
+      console.error("MongoDB connection error:", connectionError);
+      return NextResponse.json(
+        { error: "Database connection failed. Please try again." },
+        { status: 503 }
+      );
+    }
+
     const db = client.db("rescue-routes");
     const usersCollection = db.collection("users");
 
