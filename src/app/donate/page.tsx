@@ -129,9 +129,20 @@ export default function DonatePage() {
           email: formData.email,
           contact: formData.phone,
         },
+        method: {
+          upi: true,
+          card: true,
+          netbanking: true,
+          wallet: true,
+        },
         theme: {
           color: "#F97316",
         },
+        modal: {
+          ondismiss: function() {
+            setLoading(false);
+          }
+        }
       };
 
       const razorpay = new window.Razorpay(options);
