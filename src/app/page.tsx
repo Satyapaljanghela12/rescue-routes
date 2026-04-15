@@ -55,7 +55,7 @@ const whyRescueMattersImages = [
   },
 ];
 
-const whyRescueMattersVideo = "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.16.mp4";
+const whyRescueMattersVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.15 (1).mp4";
 
 const whyRescueMattersPoints = [
   "Stray animals are often hit by vehicles and left injured on the street without immediate help and medical care. Our rapid response team is their only hope.",
