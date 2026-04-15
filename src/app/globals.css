@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff6ea;
-  --foreground: #3f251f;
-  --surface: #fffaf2;
-  --muted: #7b5448;
-  --primary: #c75146;
-  --primary-deep: #aa4137;
-  --secondary: #ea8c55;
-  --accent: #fac602;
-  --hope: #bad701;
-  --sky: #2dc0fa;
+  --background: #FFFFFF;
+  --foreground: #1E293B;
+  --surface: #F8FAFC;
+  --muted: #64748B;
+  --primary: #2563EB;
+  --primary-deep: #1D4ED8;
+  --secondary: #0EA5E9;
+  --accent: #3B82F6;
+  --success: #10B981;
+  --warm: #F59E0B;
 }
 
 @theme {
@@ -18,16 +18,16 @@
   --color-primary-deep: var(--primary-deep);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --color-hope: var(--hope);
-  --color-sky: var(--sky);
+  --color-success: var(--success);
+  --color-warm: var(--warm);
   --color-dark: var(--foreground);
   --color-light: var(--muted);
   --color-surface: var(--surface);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-montserrat), sans-serif;
-  --font-heading: var(--font-cormorant), serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-poppins), sans-serif;
 }
 
 * {
@@ -43,9 +43,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   background-image:
-    radial-gradient(circle at top left, rgba(234, 140, 85, 0.15), transparent 28%),
-    radial-gradient(circle at top right, rgba(250, 198, 2, 0.1), transparent 24%),
-    linear-gradient(to bottom, rgba(255, 250, 242, 0.96), rgba(255, 246, 234, 1));
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.03), transparent 40%);
 }
 
 a {
