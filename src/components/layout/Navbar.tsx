@@ -35,12 +35,12 @@ export default function Navbar() {
         className={`mx-auto border transition-all duration-300 ${
           scrolled
             ? "max-w-7xl rounded-full border-black/8 bg-white/96 shadow-[0_16px_45px_rgba(20,20,20,0.08)] backdrop-blur-xl"
-            : "max-w-none rounded-none border-transparent bg-white shadow-none"
+            : "max-w-none rounded-none border-transparent bg-white shadow-sm"
         }`}
       >
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative h-12 w-12 overflow-hidden rounded-full border border-black/8 bg-white">
+            <div className={`relative transition-all duration-300 overflow-hidden rounded-full border border-black/8 bg-white ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}>
               <Image src="/logo.png" alt="Rescue Routes" fill className="object-contain p-1.5" priority />
             </div>
           </Link>
@@ -70,7 +70,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/donate"
-              className="rounded-full bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
+              className="rounded-full bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep shadow-sm"
             >
               Donate
             </Link>
@@ -79,9 +79,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen((open) => !open)}
-            className={`inline-flex rounded-full p-2.5 lg:hidden ${
-              scrolled ? "text-foreground" : "text-white"
-            }`}
+            className="inline-flex rounded-full p-2.5 lg:hidden text-foreground"
             aria-label="Toggle navigation"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

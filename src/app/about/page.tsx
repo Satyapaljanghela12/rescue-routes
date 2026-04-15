@@ -1,525 +1,447 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Users, Droplet, BedDouble } from "lucide-react";
+import {
+  PawPrint,
+  ArrowRight,
+  Quote,
+  CheckCircle,
+} from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
 import Link from "next/link";
 
+/* ─── Media (all fresh — NOT used on landing page) ─────────────────────── */
+const heroVideo     = "/Images/WhatsApp Video 2026-04-11 at 20.21.16 (1).mp4";
+const storyVideo    = "/Images/WhatsApp Video 2026-04-11 at 20.21.12 (1).mp4";
+const missionVideo  = "/Images/WhatsApp Video 2026-04-11 at 20.21.11 (2).mp4";
+const impactVideo   = "/Images/WhatsApp Video 2026-04-11 at 20.21.11.mp4";
+
+const img1 = "/Images/WhatsApp Image 2026-04-11 at 20.21.09.jpeg";
+const img2 = "/Images/WhatsApp Image 2026-04-11 at 20.21.10 (1).jpeg";
+const img3 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg";
+const img4 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (3).jpeg";
+const img5 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (4).jpeg";
+const img6 = "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (2).jpeg";
+const img7 = "/Images/WhatsApp Image 2026-04-11 at 20.21.16 (1).jpeg";
+const img8 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17.jpeg";
+
+/* ─── Data ──────────────────────────────────────────────────────────────── */
 const stats = [
-  { icon: BedDouble, number: "3400+", label: "Beds Created" },
-  { icon: Heart, number: "830+", label: "Animals Rescued" },
-  { icon: Droplet, number: "100+", label: "Water Pots Installed" },
+  { number: "830+",  label: "Animals Rescued", emoji: "🐶" },
+  { number: "3400+", label: "Beds Created",    emoji: "🛏️" },
+  { number: "100+",  label: "Water Pots",      emoji: "💧" },
 ];
 
+const whatWeDoPoints = [
+  {
+    image: img3,
+    title: "Rescue & Response",
+    desc: "We rescue injured and distressed animals — often in the middle of the night, often alone on the road. Our rapid response teams act immediately, ensuring no animal waits too long for help."
+  },
+  {
+    image: img4,
+    title: "Treatment & Healing",
+    desc: "Every animal receives proper medical care. From emergency wound dressing to full surgeries and post-op care, we work with veterinarians to give each life the attention it deserves."
+  },
+  {
+    image: img5,
+    title: "Shelter & Adoption",
+    desc: "Recovery takes time, so we provide nourished, safe shelter. Once healed, we organise adoption drives to find every animal a loving, permanent home."
+  }
+];
+
+/* ─── Page ──────────────────────────────────────────────────────────────── */
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full overflow-hidden pt-20">
-        
-        {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              
-              {/* Left - Text */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-                  <span className="font-fredoka text-primary text-sm">Who We Are</span>
-                </div>
-                <h1 className="font-poetsen text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
-                  <span className="text-primary">About</span> <span className="text-gray-600">Rescue Routes</span>
-                </h1>
-                <p className="font-fredoka text-2xl md:text-3xl text-primary mb-6 leading-snug">
-                  From the streets of Bhopal to a journey of compassion and care 🐾
-                </p>
-                <p className="font-poppins text-lg text-gray-700 leading-relaxed">
-                  What started as a small effort to help injured stray animals in Bhopal has grown 
-                  into a mission to rescue, heal, and protect those who cannot speak for themselves.
-                </p>
-              </motion.div>
+      <main className="overflow-hidden bg-white">
 
-              {/* Right - Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative"
-              >
-                {/* Warm gradient background effect */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-orange-200/40 via-orange-300/30 to-primary/20 rounded-3xl blur-2xl" />
-                
-                <div className="relative w-full h-[500px] bg-white p-4 rounded-2xl shadow-xl">
-                  <div className="relative w-full h-full rounded-lg overflow-hidden">
-                    <Image
-                      src="/About1.png"
-                      alt="Rescue Routes mission"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                {/* Paw badge */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
-                    <circle cx="12" cy="16" r="3" />
-                    <circle cx="8" cy="12" r="2" />
-                    <circle cx="16" cy="12" r="2" />
-                    <circle cx="10" cy="8" r="1.5" />
-                    <circle cx="14" cy="8" r="1.5" />
-                  </svg>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+        {/* ══════════════════════════════════════════════════════
+            HERO — full-bleed video with left-side text panel
+        ══════════════════════════════════════════════════════ */}
+        <section className="relative min-h-[90vh] flex items-end overflow-hidden">
+          {/* bg video */}
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay loop muted playsInline preload="metadata"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
 
-        {/* Our Story Section */}
-        <section className="py-16 md:py-24 bg-white relative">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              
-              {/* Left - Image with playful styling */}
-              <motion.div
-                initial={{ opacity: 0, rotate: -3 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.6 }}
-                className="relative order-2 lg:order-1"
-              >
-                <div className="absolute -inset-6 bg-gradient-to-br from-primary/10 to-orange-200/20 rounded-[3rem] blur-2xl" />
-                <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white transform hover:scale-105 transition-transform duration-300">
-                  <Image
-                    src="/About2.jpg"
-                    alt="Our story"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                {/* Floating paw prints */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-                    <circle cx="12" cy="16" r="3" />
-                    <circle cx="8" cy="12" r="2" />
-                    <circle cx="16" cy="12" r="2" />
-                    <circle cx="10" cy="8" r="1.5" />
-                    <circle cx="14" cy="8" r="1.5" />
-                  </svg>
-                </div>
-              </motion.div>
+          {/* gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-              {/* Right - Text */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="order-1 lg:order-2"
-              >
-                <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-                  <span className="font-fredoka text-primary text-sm">Our Beginning</span>
-                </div>
-                <h2 className="font-poetsen text-4xl md:text-5xl mb-6 leading-tight">
-                  <span className="text-primary">Our</span> <span className="text-gray-600">Story</span>
-                </h2>
-                <div className="space-y-5 font-poppins text-lg text-gray-700 leading-relaxed">
-                  <p>
-                    Rescue Routes began in Bhopal with a simple yet powerful purpose — to help animals in pain.
-                  </p>
-                  <p>
-                    Every day, stray animals were seen struggling with injuries, hunger, and neglect. 
-                    What others ignored, we chose to act on. From picking up injured dogs from roadsides 
-                    to arranging urgent medical care, our journey started with compassion and a willingness 
-                    to step in when it mattered most.
-                  </p>
-                  <p className="font-fredoka text-xl text-primary">
-                    Over time, this small effort turned into a growing movement — supported by volunteers, 
-                    driven by empathy, and focused on saving lives.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Values - Creative Wave/Flow Layout */}
-        <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-          {/* Decorative floating elements */}
-          <div className="absolute top-10 right-20 w-24 h-24 bg-primary/5 rounded-full blur-2xl animate-pulse" />
-          <div className="absolute bottom-20 left-20 w-32 h-32 bg-primary/5 rounded-full blur-2xl animate-pulse" />
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
-            
+          <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              transition={{ duration: 0.9 }}
+              className="max-w-2xl"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Our Core</span> <span className="text-gray-600">Values</span>
-              </h2>
-              <p className="font-fredoka text-xl md:text-2xl text-gray-600">
-                The principles that guide every rescue, every decision, every life we touch.
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md mb-7">
+                <PawPrint size={14} />
+                About Rescue Routes
+              </span>
+              <h1 className="font-heading text-6xl sm:text-7xl lg:text-[5.5rem] text-white leading-[1.0] mb-7">
+                Compassion<br />
+                <span className="text-secondary">in Action</span> 🐾
+              </h1>
+              <p className="font-poppins text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                A community-driven animal welfare initiative born in Bhopal — where every sight of a suffering animal became impossible to ignore.
               </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="#story"
+                  className="rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-primary-deep">
+                  Our Story
+                </Link>
+                <Link href="/volunteers"
+                  className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white hover:text-black">
+                  Join the Mission
+                </Link>
+              </div>
             </motion.div>
+          </div>
+        </section>
 
-            {/* Flowing Timeline Layout */}
-            <div className="relative max-w-6xl mx-auto">
-              
-              {/* Connecting curved line */}
-              <div className="hidden lg:block absolute top-0 left-0 right-0 bottom-0">
-                <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                  <path
-                    d="M 50 100 Q 250 50, 450 100 T 950 100"
-                    stroke="#F97316"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeDasharray="8,8"
-                    opacity="0.3"
-                  />
-                </svg>
-              </div>
+        {/* ══════════════════════════════════════════════════════
+            PULL-QUOTE STRIP
+        ══════════════════════════════════════════════════════ */}
+        <section className="bg-surface py-16 border-b border-black/5">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <Quote className="mx-auto mb-6 text-primary/30" size={48} />
+            <p className="font-poppins text-xl md:text-2xl text-black leading-[1.8] font-medium italic">
+              "What started as small rescue efforts on the streets has grown into a dedicated mission. Every day, countless animals suffer silently — at Rescue Routes, we choose to act. We become their voice when they cannot ask for help."
+            </p>
+          </div>
+        </section>
 
-              {/* Values in flowing layout */}
-              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-                
-                {/* Value 1 - Top Left */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50, rotate: -5 }}
-                  animate={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="relative"
-                >
-                  <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border-4 border-gray-100 relative overflow-hidden">
-                    {/* Number badge */}
-                    <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-primary to-orange-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                      <span className="font-fredoka text-white text-2xl">1</span>
-                    </div>
-                    
-                    {/* Decorative blob */}
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
-                    
-                    <div className="relative pt-6">
-                      <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-4 shadow-md mx-auto transform -rotate-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-primary" strokeWidth="2.5">
-                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        </svg>
-                      </div>
-                      <h3 className="font-poetsen text-3xl text-primary mb-3 text-center">
-                        Compassion First
-                      </h3>
-                      <p className="font-poppins text-base text-gray-700 text-center leading-relaxed">
-                        We lead with empathy in every action we take. Every decision is rooted in care and understanding.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+        {/* ══════════════════════════════════════════════════════
+            OUR STORY — editorial split
+        ══════════════════════════════════════════════════════ */}
+        <section id="story" className="py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                {/* Value 2 - Top Right */}
-                <motion.div
-                  initial={{ opacity: 0, x: 50, rotate: 5 }}
-                  animate={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4, type: "spring" }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="relative lg:mt-16"
-                >
-                  <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border-4 border-gray-100 relative overflow-hidden">
-                    {/* Number badge */}
-                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-primary to-orange-600 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12">
-                      <span className="font-fredoka text-white text-2xl">2</span>
-                    </div>
-                    
-                    {/* Decorative blob */}
-                    <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
-                    
-                    <div className="relative pt-6">
-                      <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-4 shadow-md mx-auto transform rotate-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-primary" strokeWidth="2.5">
-                          <circle cx="12" cy="12" r="10"/>
-                          <polyline points="12 6 12 12 16 14"/>
-                        </svg>
-                      </div>
-                      <h3 className="font-poetsen text-3xl text-primary mb-3 text-center">
-                        Immediate Action
-                      </h3>
-                      <p className="font-poppins text-base text-gray-700 text-center leading-relaxed">
-                        When an animal needs help, we respond without delay. Time matters when lives are at stake.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+              {/* text */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-2 lg:order-1"
+              >
+                <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
+                  <span className="w-8 h-[2px] bg-primary rounded-full" />
+                  🐾 Our Story
+                </div>
+                <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
+                  Where Compassion<br />Turned Into Action
+                </h2>
+                <div className="space-y-5 font-poppins text-lg text-black leading-relaxed">
+                  <p>
+                    Rescue Routes began in the heart of Bhopal, where injured and helpless animals on the streets became impossible to ignore.
+                  </p>
+                  <p>
+                    In the beginning it was simple — picking up injured dogs, arranging urgent medical care, doing whatever it took to ease their pain. With limited resources but fierce determination, each rescue became a step toward something much bigger.
+                  </p>
+                  <p>
+                    Every challenge — critical surgeries, lack of shelter, long recovery journeys — only strengthened the purpose. Volunteers stepped forward. Support grew. A community was born.
+                  </p>
+                  <p className="font-bold border-l-4 border-primary pl-5 py-2 bg-primary/5 rounded-r-2xl">
+                    Today, Rescue Routes is more than an initiative — it is a growing network of compassion, dedicated to ensuring no animal is left behind.
+                  </p>
+                </div>
+              </motion.div>
 
-                {/* Value 3 - Bottom Left */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50, rotate: 5 }}
-                  animate={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="relative lg:mt-8"
-                >
-                  <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border-4 border-gray-100 relative overflow-hidden">
-                    {/* Number badge */}
-                    <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-primary to-orange-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                      <span className="font-fredoka text-white text-2xl">3</span>
-                    </div>
-                    
-                    {/* Decorative blob */}
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
-                    
-                    <div className="relative pt-6">
-                      <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-4 shadow-md mx-auto transform -rotate-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-primary" strokeWidth="2.5">
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                          <circle cx="9" cy="7" r="4"/>
-                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                      </div>
-                      <h3 className="font-poetsen text-3xl text-primary mb-3 text-center">
-                        Community Driven
-                      </h3>
-                      <p className="font-poppins text-base text-gray-700 text-center leading-relaxed">
-                        Together with volunteers, we create lasting change. Our strength lies in unity and shared purpose.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Value 4 - Bottom Right */}
-                <motion.div
-                  initial={{ opacity: 0, x: 50, rotate: -5 }}
-                  animate={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6, type: "spring" }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="relative lg:mt-24"
-                >
-                  <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border-4 border-gray-100 relative overflow-hidden">
-                    {/* Number badge */}
-                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-primary to-orange-600 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12">
-                      <span className="font-fredoka text-white text-2xl">4</span>
-                    </div>
-                    
-                    {/* Decorative blob */}
-                    <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
-                    
-                    <div className="relative pt-6">
-                      <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-4 shadow-md mx-auto transform rotate-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-primary" strokeWidth="2.5">
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                          <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                      </div>
-                      <h3 className="font-poetsen text-3xl text-primary mb-3 text-center">
-                        Lifelong Care
-                      </h3>
-                      <p className="font-poppins text-base text-gray-700 text-center leading-relaxed">
-                        We stay committed from rescue to recovery and beyond. Our responsibility doesn't end at rescue.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-              </div>
-
+              {/* media stack */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1 lg:order-2 grid grid-cols-2 gap-4"
+              >
+                <div className="col-span-2 relative rounded-[2rem] overflow-hidden h-72 shadow-2xl">
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay loop muted playsInline preload="metadata"
+                  >
+                    <source src={storyVideo} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <span className="absolute bottom-5 left-5 text-white font-heading text-xl">On-ground rescue</span>
+                </div>
+                <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
+                  <Image src={img1} alt="Rescue in Bhopal" fill className="object-cover transition hover:scale-105 duration-500" />
+                </div>
+                <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
+                  <Image src={img2} alt="Street animal care" fill className="object-cover transition hover:scale-105 duration-500" />
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* What Drives Us Section */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
-          {/* Decorative paw prints background */}
-          <div className="absolute inset-0 opacity-5">
-            {[...Array(8)].map((_, i) => (
-              <svg
-                key={i}
-                width="100"
-                height="100"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="text-primary absolute"
-                style={{
-                  top: `${Math.random() * 80 + 10}%`,
-                  left: `${Math.random() * 80 + 10}%`,
-                  transform: `rotate(${Math.random() * 360}deg)`,
-                }}
-              >
-                <circle cx="12" cy="16" r="3" />
-                <circle cx="8" cy="12" r="2" />
-                <circle cx="16" cy="12" r="2" />
-                <circle cx="10" cy="8" r="1.5" />
-                <circle cx="14" cy="8" r="1.5" />
-              </svg>
-            ))}
-          </div>
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-5xl relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-center bg-white rounded-[3rem] p-12 md:p-16 shadow-2xl border-8 border-gray-100 relative overflow-hidden"
-            >
-              {/* Decorative corner elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/2" />
-              
-              <div className="relative z-10">
-                <div className="inline-block bg-white px-6 py-2 rounded-full mb-6 shadow-md">
-                  <span className="font-fredoka text-primary text-lg">Our Purpose</span>
-                </div>
-                <h2 className="font-poetsen text-4xl md:text-5xl mb-8 leading-tight">
-                  <span className="text-primary">What</span> <span className="text-gray-700">Drives</span> <span className="text-primary">Us</span>
-                </h2>
-                <p className="font-fredoka text-2xl md:text-3xl text-primary leading-relaxed mb-6">
-                  At Rescue Routes, we are driven by one simple belief — every life matters.
-                </p>
-                <p className="font-poppins text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                  We don't just rescue animals; we stand by them through recovery, care, and transformation. 
-                  Our work is fueled by compassion and strengthened by community support.
-                </p>
+        {/* ══════════════════════════════════════════════════════
+            WHAT WE DO — white editorial section
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <div className="max-w-3xl mb-16">
+              <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
+                <span className="w-8 h-[2px] bg-primary rounded-full" />
+                🎯 What We Do
               </div>
-            </motion.div>
+              <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight">
+                Real impact, every single day.
+              </h2>
+            </div>
+
+            <div className="space-y-16">
+              {whatWeDoPoints.map((point, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col md:flex-row items-center gap-8 md:gap-14"
+                >
+                  {/* Left inline image - fixed height */}
+                  <div className="w-full md:w-5/12 h-64 md:h-72 relative rounded-[2.5rem] overflow-hidden shadow-xl shrink-0">
+                    <Image src={point.image} alt={point.title} fill className="object-cover hover:scale-105 transition duration-700" />
+                  </div>
+                  {/* Right inline paragraph */}
+                  <div className="w-full md:w-7/12 flex gap-5 items-start py-4">
+                    <div className="mt-1 shrink-0 w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <CheckCircle size={16} className="text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-2xl text-black mb-3">{point.title}</h3>
+                      <p className="font-poppins text-lg text-black leading-relaxed">{point.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
           </div>
         </section>
 
-        {/* Impact Stats Section - Redesigned */}
-        <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <div className="inline-block bg-primary/10 px-6 py-2 rounded-full mb-4">
-                <span className="font-fredoka text-primary text-base">Our Impact</span>
-              </div>
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Our Journey</span> <span className="text-gray-600">So Far</span>
-              </h2>
-            </motion.div>
+        {/* ══════════════════════════════════════════════════════
+            MISSION — video split
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-28 bg-surface">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-            {/* Cute Pill-Shaped Stats Container */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative bg-gradient-to-br from-primary to-orange-600 rounded-[40px] md:rounded-[60px] px-8 py-12 md:px-16 md:py-16 shadow-2xl"
-            >
-              
-              {/* Decorative blobs inside */}
-              <div className="absolute inset-0 overflow-hidden rounded-[40px] md:rounded-[60px] pointer-events-none">
-                <div className="absolute top-0 right-[20%] w-32 h-32 md:w-48 md:h-48 bg-orange-400/30 rounded-full -translate-y-1/2" />
-                <div className="absolute bottom-0 left-[25%] w-32 h-20 md:w-48 md:h-28 bg-orange-400/30 rounded-t-full" />
-                <div className="absolute top-1/2 left-0 w-16 h-28 md:w-24 md:h-40 bg-orange-400/30 rounded-r-full -translate-y-1/2" />
-              </div>
-
-              {/* Stats Grid */}
-              <div className="relative z-10 grid sm:grid-cols-3 gap-8 md:gap-12">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="flex flex-col items-center justify-center text-white">
-                      <div className="font-poetsen text-5xl md:text-6xl leading-tight mb-2">
-                        {stat.number}
-                      </div>
-                      <div className="font-fredoka text-lg md:text-xl">
-                        {stat.label}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Bottom message */}
+              {/* video */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="mt-10 pt-8 border-t-2 border-white/20 relative z-10"
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative rounded-[2.5rem] overflow-hidden h-[520px] shadow-2xl"
               >
-                <p className="font-fredoka text-xl md:text-2xl text-white text-center">
-                  Behind every number is a life we were able to save. 💛
+                <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
+                  <source src={missionVideo} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </motion.div>
+
+              {/* text */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
+                  <span className="w-8 h-[2px] bg-primary rounded-full" />
+                  🧡 Our Mission
+                </div>
+                <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
+                  Building a compassionate ecosystem where every life is valued.
+                </h2>
+                <p className="font-poppins text-lg text-black leading-relaxed mb-6">
+                  Our mission is to rescue, treat, and protect animals in need while building a compassionate ecosystem where every life is valued and no animal suffers due to lack of care, attention, or support.
+                </p>
+                <p className="font-poppins text-lg text-black leading-relaxed">
+                  We are committed to a future where communities and animals coexist with dignity, safety, and compassion — starting right here in Bhopal.
                 </p>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-10 left-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-5xl relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center bg-white rounded-[3rem] p-12 md:p-16 shadow-2xl border-4 border-gray-100 relative overflow-hidden"
-            >
-              {/* Decorative paw in background */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5">
-                <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
-                  <circle cx="12" cy="16" r="3" />
-                  <circle cx="8" cy="12" r="2" />
-                  <circle cx="16" cy="12" r="2" />
-                  <circle cx="10" cy="8" r="1.5" />
-                  <circle cx="14" cy="8" r="1.5" />
-                </svg>
-              </div>
+        {/* ══════════════════════════════════════════════════════
+            IMPACT STATS — full-bleed image background
+        ══════════════════════════════════════════════════════ */}
+        <section className="relative py-28 overflow-hidden">
+          {/* bg */}
+          <div className="absolute inset-0">
+            <Image src={img6} alt="Impact" fill className="object-cover" />
+            <div className="absolute inset-0 bg-black/75" />
+          </div>
 
-              <div className="relative z-10">
-                <div className="inline-block bg-primary/10 px-6 py-2 rounded-full mb-6">
-                  <span className="font-fredoka text-primary text-base">Join Us</span>
-                </div>
-                <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                  <span className="text-primary">Be a Part</span> <span className="text-gray-600">of the Change</span> 🐾
-                </h2>
-                <p className="font-fredoka text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Your support can help us rescue, treat, and protect animals in need.
-                </p>
-                
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Link
-                    href="/donate"
-                    className="bg-primary hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
-                  >
-                    Donate Now
-                  </Link>
-                  <Link
-                    href="#volunteer"
-                    className="bg-white hover:bg-gray-50 text-primary border-4 border-primary font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
-                  >
-                    Become a Volunteer
-                  </Link>
-                </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center">
+            <div className="mb-6 text-secondary font-bold tracking-widest uppercase text-xs">📊 Our Impact</div>
+            <h2 className="font-heading text-4xl md:text-6xl text-white mb-4">A journey of second chances</h2>
+            <p className="font-poppins text-white/60 text-lg mb-16 max-w-2xl mx-auto">
+              Through continuous efforts and community support, we have created meaningful change.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15 }}
+                  viewport={{ once: true }}
+                  className="p-12 rounded-[2.5rem] border border-white/15 bg-white/10 backdrop-blur-md"
+                >
+                  <p className="text-5xl mb-5">{stat.emoji}</p>
+                  <h4 className="font-heading text-6xl text-white mb-2">{stat.number}</h4>
+                  <p className="font-poppins text-white/60 font-bold uppercase tracking-widest text-xs">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="mt-16 font-heading text-2xl text-secondary">
+              Behind every number is a life that was given a second chance. 💛
+            </p>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            IMPACT VIDEO REEL — horizontal scroll feel
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
+              <div>
+                <div className="mb-3 text-primary font-bold tracking-widest uppercase text-xs">In the field</div>
+                <h2 className="font-heading text-4xl md:text-5xl text-black">Moments from the ground</h2>
               </div>
+              <p className="font-poppins text-black max-w-sm leading-relaxed">
+                Real footage from real rescues — this is what compassion looks like every single day.
+              </p>
+            </div>
+
+            {/* 3-column media grid */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
+                <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
+                  <source src={impactVideo} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Field Rescue</span>
+              </div>
+              <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
+                <Image src={img7} alt="Community care" fill className="object-cover hover:scale-105 transition duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Community Care</span>
+              </div>
+              <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
+                <Image src={img8} alt="Recovery" fill className="object-cover hover:scale-105 transition duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Recovery</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            COMMUNITY — image + text
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-28 bg-surface">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
+                  <span className="w-8 h-[2px] bg-primary rounded-full" />
+                  🤝 Our Community
+                </div>
+                <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
+                  Powered by people<br />who care.
+                </h2>
+                <p className="font-poppins text-lg text-black leading-relaxed mb-5">
+                  From volunteers who assist in rescue operations to supporters who contribute to campaigns, every individual plays a role in this mission.
+                </p>
+                <p className="font-poppins text-lg text-black leading-relaxed mb-10">
+                  Together, we are building a stronger, more compassionate environment for animals — one rescue at a time.
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/volunteers"
+                    className="group flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition hover:bg-primary-deep">
+                    Become a Volunteer <ArrowRight size={15} />
+                  </Link>
+                  <Link href="/donate"
+                    className="group flex items-center gap-3 border-2 border-primary text-primary px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition hover:bg-primary hover:text-white">
+                    Donate <ArrowRight size={15} />
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* photo mosaic */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-2 gap-4"
+              >
+                <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
+                  <Image src={img3} alt="Community volunteers" fill className="object-cover hover:scale-105 transition duration-700" />
+                </div>
+                <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
+                  <Image src={img4} alt="Animal care" fill className="object-cover hover:scale-105 transition duration-700" />
+                </div>
+                <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
+                  <Image src={img5} alt="Relove and adopt" fill className="object-cover hover:scale-105 transition duration-700" />
+                </div>
+                <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
+                  <Image src={img2} alt="volunteers" fill className="object-cover hover:scale-105 transition duration-700" />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            PROMISE — bold close
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-32 bg-white text-center">
+          <div className="max-w-4xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="mb-6 text-primary font-bold tracking-widest uppercase text-xs">💛 Our Promise</div>
+              <h2 className="font-heading text-5xl md:text-7xl text-black leading-tight mb-8">
+                We believe that<br />
+                <span className="text-primary">every life matters.</span>
+              </h2>
+              <p className="font-poppins text-xl md:text-2xl text-black leading-relaxed font-medium mb-14 max-w-3xl mx-auto">
+                Every rescue, every treatment, and every effort is a step toward a better world — a world where animals are cared for with dignity and compassion. We ensure that no cry for help goes unheard. 🐾
+              </p>
+              <Link href="/donate"
+                className="inline-block bg-primary hover:bg-primary-deep text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm shadow-xl shadow-primary/25 transition hover:scale-105 active:scale-95">
+                Donate to Support
+              </Link>
             </motion.div>
           </div>
         </section>
 
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }
