@@ -69,7 +69,19 @@ export default function CampaignsPage() {
       <main className="flex-1 w-full overflow-hidden pt-20">
         
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          >
+            <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.16.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]" />
+
           {/* Decorative elements */}
           <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />

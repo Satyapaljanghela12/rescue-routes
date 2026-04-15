@@ -13,7 +13,7 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 
-const heroVideo = "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.12%20(2).mp4";
+const heroVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4";
 
 const galleryImages = [
   {

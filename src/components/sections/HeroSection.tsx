@@ -123,17 +123,17 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative lg:h-[600px] flex flex-col justify-center items-center gap-3"
           >
-            <div className="relative w-full max-w-lg xl:max-w-xl aspect-square mx-auto">
-              {/* Blur overlay */}
-              <div className="absolute inset-0 backdrop-blur-[2px] rounded-3xl z-10 pointer-events-none"></div>
-              
-              <Image
-                src="/Pet adoption Post 1.png"
-                alt="Pet Adoption"
-                fill
-                className="object-contain rounded-3xl"
-                priority
+            <div className="relative w-full max-w-lg xl:max-w-xl aspect-square mx-auto overflow-hidden rounded-3xl shadow-2xl">
+              <video
+                src="/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
               />
+              {/* Blur overlay */}
+              <div className="absolute inset-0 backdrop-blur-[2px] z-10 pointer-events-none"></div>
               
               {/* Floating Custom Paw Print */}
               <motion.div
