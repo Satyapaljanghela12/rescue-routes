@@ -73,7 +73,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="text-xs font-fredoka font-bold text-primary uppercase tracking-widest mb-1">Call Us</p>
-                      <span className="text-dark/80 font-fredoka font-medium">+1 (555) 123-4567</span>
+                      <span className="text-dark/80 font-fredoka font-medium">+91 7067223922</span>
                     </div>
                   </motion.div>
 
@@ -83,7 +83,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="text-xs font-fredoka font-bold text-primary uppercase tracking-widest mb-1">Visit Us</p>
-                      <span className="text-dark/80 font-fredoka font-medium">123 Rescue Ave, Compassion City</span>
+                      <span className="text-dark/80 font-fredoka font-medium">Bhopal, Madhya Pradesh</span>
                     </div>
                   </motion.div>
                 </div>
