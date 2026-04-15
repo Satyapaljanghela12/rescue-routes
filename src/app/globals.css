@@ -1,34 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #F9FAFB;
-  --foreground: #1F2937;
+  --background: #fff6ea;
+  --foreground: #3f251f;
+  --surface: #fffaf2;
+  --muted: #7b5448;
+  --primary: #c75146;
+  --primary-deep: #aa4137;
+  --secondary: #ea8c55;
+  --accent: #fac602;
+  --hope: #bad701;
+  --sky: #2dc0fa;
 }
 
 @theme {
-  --color-primary: #F97316;
-  --color-secondary: #EA580C;
-  --color-accent: #FACC15;
-  --color-dark: #1F2937;
-  --color-light: #6B7280;
+  --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-hope: var(--hope);
+  --color-sky: var(--sky);
+  --color-dark: var(--foreground);
+  --color-light: var(--muted);
+  --color-surface: var(--surface);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
-  --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-poppins), sans-serif;
-  --font-poetsen: var(--font-poetsen), cursive;
-  --font-fredoka: var(--font-fredoka), sans-serif;
-  --font-briem: "Briem Hand", cursive;
+
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-heading: var(--font-cormorant), serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  background-image:
+    radial-gradient(circle at top left, rgba(234, 140, 85, 0.15), transparent 28%),
+    radial-gradient(circle at top right, rgba(250, 198, 2, 0.1), transparent 24%),
+    linear-gradient(to bottom, rgba(255, 250, 242, 0.96), rgba(255, 246, 234, 1));
 }
 
-/* Base custom utilities */
+a {
+  text-decoration: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

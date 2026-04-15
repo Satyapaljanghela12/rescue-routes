@@ -1,19 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Our Mission", href: "/mission" },
   { name: "About Us", href: "/about" },
+  { name: "Mission", href: "/mission" },
   { name: "Campaigns", href: "/campaigns" },
   { name: "Stories", href: "/stories" },
   { name: "Volunteers", href: "/volunteers" },
   { name: "Store", href: "/store" },
-  { name: "Blogs", href: "#" },
 ];
 
 export default function Navbar() {
@@ -21,110 +20,114 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 16);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-gray-100 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-3" : "bg-white py-4"
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between relative">
-        
-        {/* Left: Logo */}
-        <Link href="/" className="flex items-center group z-20">
-          <div className="relative w-15 h-15">
-            <Image
-              src="/logo.png"
-              alt="Rescue Routes"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </Link>
-
-        {/* Center: Desktop Nav (Centred using absolute positioned container) */}
-        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-4xl justify-center z-10">
-          <ul className="flex items-center justify-center gap-5 xl:gap-7">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className="text-[13px] font-medium text-gray-700 hover:text-primary transition-colors whitespace-nowrap"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Right: CTA & Mobile Toggle */}
-        <div className="flex items-center gap-3 z-20">
-          <Link
-            href="/donate"
-            className="hidden sm:inline-flex bg-primary hover:bg-secondary text-white font-semibold text-[14px] py-2.5 px-6 rounded-lg transition-all hover:scale-105"
-          >
-            Donate Now
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "px-3 pt-3 sm:px-5" : ""}`}>
+      <div
+        className={`mx-auto border transition-all duration-300 ${
+          scrolled
+            ? "max-w-7xl rounded-full border-black/8 bg-white/96 shadow-[0_16px_45px_rgba(20,20,20,0.08)] backdrop-blur-xl"
+            : "max-w-none rounded-none border-transparent bg-white shadow-none"
+        }`}
+      >
+        <div className="flex items-center justify-between px-4 py-2.5 sm:px-6">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="relative h-12 w-12 overflow-hidden rounded-full border border-black/8 bg-white">
+              <Image src="/logo.png" alt="Rescue Routes" fill className="object-contain p-1.5" priority />
+            </div>
           </Link>
-          <Link
-            href="/membership"
-            className="hidden sm:inline-flex bg-gray-700 hover:bg-gray-800 text-white font-semibold text-[14px] py-2.5 px-6 rounded-lg transition-all hover:scale-105"
-          >
-            Join Now
-          </Link>
-          
-          <button
-            className="lg:hidden text-dark p-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </div>
 
-      {/* Mobile Nav */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 py-4 px-4 flex flex-col gap-4"
-          >
+          <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-dark font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors"
-                onClick={() => setIsOpen(false)}
+                className={`text-sm font-medium uppercase tracking-[0.16em] transition ${
+                  "text-black/75 hover:text-black"
+                }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="/donate"
-              onClick={() => setIsOpen(false)}
-              className="mt-2 bg-primary hover:bg-secondary text-white text-center font-semibold py-3 px-6 rounded-lg transition-all active:scale-95"
-            >
-              Donate Now
-            </Link>
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
             <Link
               href="/membership"
-              onClick={() => setIsOpen(false)}
-              className="bg-gray-700 hover:bg-gray-800 text-white text-center font-semibold py-3 px-6 rounded-lg transition-all active:scale-95"
+              className={`rounded-full border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition ${
+                "border-black/10 text-black hover:border-black/20 hover:bg-black/3"
+              }`}
             >
-              Join Now
+              Join
             </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Link
+              href="/donate"
+              className="rounded-full bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
+            >
+              Donate
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((open) => !open)}
+            className={`inline-flex rounded-full p-2.5 lg:hidden ${
+              scrolled ? "text-foreground" : "text-white"
+            }`}
+            aria-label="Toggle navigation"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              className="border-t border-black/8 px-4 pb-5 pt-3 lg:hidden"
+            >
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-2xl px-4 py-3 text-sm font-medium uppercase tracking-[0.14em] text-foreground/80 transition hover:bg-[#fac602]/12 hover:text-primary"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <Link
+                  href="/membership"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full border border-black/10 px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-foreground"
+                >
+                  Join
+                </Link>
+                <Link
+                  href="/donate"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full bg-primary px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-white"
+                >
+                  Donate
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }
