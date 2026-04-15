@@ -3,7 +3,7 @@
 :root {
   --background: #FFFFFF;
   --foreground: #1E293B;
-  --surface: #F8FAFC;
+  --surface: #FFFFFF;
   --muted: #64748B;
   --primary: #2563EB;
   --primary-deep: #1D4ED8;
@@ -26,8 +26,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-poppins), sans-serif;
+  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-fredoka), sans-serif;
+  --font-subheading: var(--font-poetsen), cursive;
+  --font-poetsen: var(--font-poetsen), cursive;
+  --font-fredoka: var(--font-fredoka), sans-serif;
 }
 
 * {
@@ -39,12 +42,9 @@ html {
 }
 
 body {
-  background-color: var(--background);
+  background-color: #FFFFFF;
   color: var(--foreground);
   font-family: var(--font-sans);
-  background-image:
-    radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent 40%),
-    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.03), transparent 40%);
 }
 
 a {

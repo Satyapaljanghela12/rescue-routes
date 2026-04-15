@@ -81,35 +81,35 @@ export default function HeroSection() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-start gap-6"
           >
-            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-primary py-1.5 px-4 rounded-full font-medium text-sm">
+            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-primary py-2 px-5 rounded-full font-medium text-sm">
               <PawPrint size={16} />
               🐾 Parwati Seva Foundation 
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-[96px] lg:leading-[90px] font-poetsen tracking-normal mt-2 lg:mt-4">
-              <span className="text-gray-600">Saving Lives</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-poetsen tracking-tight mt-2 lg:mt-4 leading-tight">
+              <span className="text-gray-800">Saving Lives</span>
               <br />
               <span className="text-primary">
                 One Rescue
               </span>
               <br />
-              <span className="text-gray-600">at a Time.</span>
+              <span className="text-gray-800">at a Time.</span>
             </h1>
             
-            <p className="font-heading text-lg text-light max-w-lg leading-relaxed mt-4 text-balance">
+            <p className="font-sans text-base md:text-lg text-gray-600 max-w-lg leading-relaxed mt-4">
               Rescue Routes rescues injured and abandoned animals, providing care, shelter, and love. Join our mission to create a compassionate world for all.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full sm:w-auto">
               <Link
                 href="#volunteer"
-                className="inline-flex items-center justify-center bg-primary text-white font-semibold py-3 px-8 rounded-full transition-all hover:scale-105 hover:bg-secondary shadow-md hover:shadow-lg"
+                className="inline-flex items-center justify-center bg-primary text-white font-semibold py-3.5 px-8 rounded-lg transition-all hover:bg-primary-deep shadow-md hover:shadow-lg"
               >
                 Become a Volunteer
               </Link>
               <button
                 onClick={() => setShowAdoptModal(true)}
-                className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-primary text-primary font-semibold py-3 px-8 rounded-full transition-all hover:scale-105 hover:bg-orange-50"
+                className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary font-semibold py-3.5 px-8 rounded-lg transition-all hover:bg-blue-50"
               >
                 Adopt a Dog 
               </button>
@@ -124,11 +124,14 @@ export default function HeroSection() {
             className="relative lg:h-[600px] flex flex-col justify-center items-center gap-3"
           >
             <div className="relative w-full max-w-lg xl:max-w-xl aspect-square mx-auto">
+              {/* Blur overlay */}
+              <div className="absolute inset-0 backdrop-blur-[2px] rounded-3xl z-10 pointer-events-none"></div>
+              
               <Image
                 src="/Pet adoption Post 1.png"
                 alt="Pet Adoption"
                 fill
-                className="object-contain"
+                className="object-contain rounded-3xl"
                 priority
               />
               
@@ -136,7 +139,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-6 right-4 md:top-12 md:right-12 xl:right-16 w-16 h-16 md:w-28 md:h-28 z-10"
+                className="absolute top-6 right-4 md:top-12 md:right-12 xl:right-16 w-16 h-16 md:w-28 md:h-28 z-20"
               >
                 <Image
                   src="/Lion_King_-_orange_paw_print-removebg-preview 9.png"
