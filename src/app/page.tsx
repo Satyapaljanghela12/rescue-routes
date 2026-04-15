@@ -368,17 +368,17 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/donate"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
+                  href="/about"
+                  className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary transition hover:bg-primary hover:text-white"
                 >
-                  Donate Now
+                  Read Our Story
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/volunteers"
-                  className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary transition hover:bg-primary hover:text-white"
+                  href="/campaigns"
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-foreground/72 transition hover:text-primary"
                 >
-                  Become a Volunteer
+                  Explore Campaigns
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -386,70 +386,30 @@ export default function Home() {
 
             <div className="rounded-[2.4rem] bg-[linear-gradient(180deg,#c75146_0%,#a94338_100%)] p-8 text-white shadow-[0_22px_60px_rgba(95,35,28,0.22)] sm:p-10">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#fff6ea]/70">
-                Connect With Us
+                Call to action
               </p>
               <h3 className="mt-4 font-heading text-4xl leading-tight">
-                Let's Chat!
+                Help us turn care into action, treatment into healing, and rescue into belonging.
               </h3>
               <p className="mt-5 text-base leading-8 text-white/76">
-                Have questions about adopting your new best friend or want to volunteer? We're here for you! 🐾
+                Whether you donate, volunteer, foster, or adopt, your support directly strengthens
+                the journey from distress to safety.
               </p>
-              
-              <div className="mt-8 space-y-6">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#fff6ea]/70 mb-3">Email Us</p>
-                  <a href="mailto:hello@rescueroutes.org" className="text-base text-white hover:text-[#fff6ea] transition">
-                    hello@rescueroutes.org
-                  </a>
-                </div>
-                
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#fff6ea]/70 mb-3">Call Us</p>
-                  <a href="tel:+15551234567" className="text-base text-white hover:text-[#fff6ea] transition">
-                    +1 (555) 123-4567
-                  </a>
-                </div>
-                
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#fff6ea]/70 mb-3">Visit Us</p>
-                  <p className="text-base text-white/90">
-                    123 Rescue Ave, Compassion City
-                  </p>
-                </div>
-                
-                <div className="pt-4 border-t border-white/20">
-                  <p className="text-sm italic text-white/70">
-                    Saving lives, one paw at a time
-                  </p>
-                </div>
-              </div>
-              
-              <div className="mt-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#fff6ea]/70 mb-4">Send a Message</p>
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-white/40 transition"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-white/40 transition"
-                  />
-                  <textarea
-                    placeholder="What's on your mind?"
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-white/40 transition resize-none"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-primary-deep"
-                  >
-                    Send Message
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </form>
+              <div className="mt-8 space-y-4">
+                <Link
+                  href="/membership"
+                  className="flex items-center justify-between rounded-[1.5rem] border border-white/14 bg-[#fff6ea]/10 px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] transition hover:bg-[#fff6ea]/16"
+                >
+                  Become a member
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/donate"
+                  className="flex items-center justify-between rounded-[1.5rem] bg-primary px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-primary-deep"
+                >
+                  Support a rescue
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
