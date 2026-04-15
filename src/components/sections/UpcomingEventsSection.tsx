@@ -64,24 +64,20 @@ export default function UpcomingEventsSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#fffaf4] py-20 sm:py-24">
-      <PawPrint className="pointer-events-none absolute left-10 top-16 h-16 w-16 rotate-[-15deg] text-primary/10" />
-      <PawPrint className="pointer-events-none absolute right-14 top-24 h-12 w-12 rotate-[18deg] text-[#fac602]/25" />
-      <PawPrint className="pointer-events-none absolute bottom-16 right-10 h-20 w-20 rotate-[14deg] text-primary/8" />
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+          <p className="text-xs font-fredoka font-semibold uppercase tracking-[0.28em] text-primary">
             Upcoming Events
           </p>
-          <h2 className="mt-4 font-heading text-4xl leading-tight text-foreground sm:text-5xl">
+          <h2 className="mt-4 font-fredoka text-4xl leading-tight text-foreground sm:text-5xl">
             Upcoming rescue drives, outreach efforts, and community welfare events.
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-foreground/72">
+          <p className="mt-5 max-w-2xl text-base font-poppins leading-8 text-foreground/72">
             These events bring together rescue response, treatment support, adoption outreach, and
             community participation to improve the lives of street and abandoned animals.
           </p>
-          <p className="mt-4 flex items-center gap-2 text-sm font-medium text-foreground/68">
-            <PawPrint className="h-4 w-4 text-primary" />
+          <p className="mt-4 flex items-center gap-2 text-sm font-poppins font-medium text-foreground/68">
             Join us on the ground and support meaningful action for animals in need.
           </p>
         </div>
@@ -113,23 +109,23 @@ export default function UpcomingEventsSection() {
                     {formatDateRange(campaign.startDate, campaign.endDate)}
                   </div>
 
-                  <h3 className="mt-5 font-heading text-3xl leading-tight text-foreground">
+                  <h3 className="mt-5 font-fredoka text-3xl leading-tight text-foreground">
                     {campaign.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-foreground/72">
+                  <p className="mt-4 text-sm font-poppins leading-7 text-foreground/72">
                     {campaign.description}
                   </p>
 
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link
                       href="/campaigns"
-                      className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary-deep"
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-fredoka font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary-deep"
                     >
                       Learn More
                     </Link>
                     <Link
                       href="/donate"
-                      className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-foreground transition hover:border-primary hover:text-primary"
+                      className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-fredoka font-semibold uppercase tracking-[0.14em] text-foreground transition hover:border-primary hover:text-primary"
                     >
                       Support This Work
                       <ArrowRight className="h-4 w-4" />
@@ -140,8 +136,8 @@ export default function UpcomingEventsSection() {
             ))
           ) : (
             <div className="col-span-full rounded-[2rem] border border-black/10 bg-white p-10 text-center shadow-[0_18px_50px_rgba(90,55,32,0.08)]">
-              <p className="font-heading text-3xl text-foreground">No upcoming events right now</p>
-              <p className="mt-3 text-sm leading-7 text-foreground/68">
+              <p className="font-fredoka text-3xl text-foreground">No upcoming events right now</p>
+              <p className="mt-3 text-sm font-poppins leading-7 text-foreground/68">
                 New rescue drives and welfare events will appear here as soon as they are scheduled.
               </p>
             </div>
