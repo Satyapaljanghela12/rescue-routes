@@ -180,12 +180,11 @@ export default function Home() {
         </section>
 
         <section className="relative overflow-hidden bg-white py-20 sm:py-24">
-          <div className="absolute inset-x-0 top-0 h-2 bg-[linear-gradient(90deg,#ea8c55_0%,#fac602_50%,#c75146_100%)]" />
-          <div className="absolute left-0 top-10 h-40 w-40 rounded-full bg-[#fac602]/10 blur-3xl" />
-          <div className="absolute bottom-10 right-0 h-48 w-48 rounded-full bg-[#ea8c55]/10 blur-3xl" />
+          <div className="absolute left-0 top-10 h-40 w-40 rounded-full bg-blue-100/30 blur-3xl" />
+          <div className="absolute bottom-10 right-0 h-48 w-48 rounded-full bg-blue-50/30 blur-3xl" />
           <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+              <p className="text-xs font-fredoka font-semibold uppercase tracking-[0.35em] text-primary">
                 Seva • Karuna • Jeevan
               </p>
               <Image
@@ -193,9 +192,10 @@ export default function Home() {
                 alt="Hindi compassion message"
                 width={360}
                 height={120}
-                className="h-auto w-auto max-w-full object-contain opacity-95 [filter:sepia(1)_saturate(6)_hue-rotate(-14deg)_brightness(0.82)]"
+                style={{ filter: 'sepia(1) saturate(3) hue-rotate(180deg) brightness(0.6)' }}
+                className="h-auto w-auto max-w-full object-contain opacity-95"
               />
-              <h2 className="max-w-4xl font-heading text-4xl leading-tight text-foreground sm:text-5xl">
+              <h2 className="max-w-4xl font-fredoka text-4xl leading-tight text-foreground sm:text-5xl">
                 Compassion towards all living beings
               </h2>
               <p className="max-w-2xl text-base leading-8 text-foreground/72">
@@ -384,28 +384,28 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-[2.4rem] bg-[linear-gradient(180deg,#c75146_0%,#a94338_100%)] p-8 text-white shadow-[0_22px_60px_rgba(95,35,28,0.22)] sm:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#fff6ea]/70">
+            <div style={{ backgroundColor: '#2563EB' }} className="rounded-[2.4rem] p-8 text-white shadow-[0_22px_60px_rgba(37,99,235,0.22)] sm:p-10">
+              <p className="text-xs font-fredoka font-semibold uppercase tracking-[0.28em] text-white/70">
                 Call to action
               </p>
-              <h3 className="mt-4 font-heading text-4xl leading-tight">
+              <h3 className="mt-4 font-fredoka text-4xl leading-tight">
                 Help us turn care into action, treatment into healing, and rescue into belonging.
               </h3>
-              <p className="mt-5 text-base leading-8 text-white/76">
+              <p className="mt-5 text-base font-poppins leading-8 text-white/76">
                 Whether you donate, volunteer, foster, or adopt, your support directly strengthens
                 the journey from distress to safety.
               </p>
               <div className="mt-8 space-y-4">
                 <Link
                   href="/membership"
-                  className="flex items-center justify-between rounded-[1.5rem] border border-white/14 bg-[#fff6ea]/10 px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] transition hover:bg-[#fff6ea]/16"
+                  className="flex items-center justify-between rounded-[1.5rem] border border-white/14 bg-white/10 px-5 py-4 text-sm font-fredoka font-semibold uppercase tracking-[0.12em] transition hover:bg-white/16"
                 >
                   Become a member
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/donate"
-                  className="flex items-center justify-between rounded-[1.5rem] bg-primary px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-primary-deep"
+                  className="flex items-center justify-between rounded-[1.5rem] bg-white px-5 py-4 text-sm font-fredoka font-semibold uppercase tracking-[0.12em] text-[#2563EB] transition hover:bg-white/90"
                 >
                   Support a rescue
                   <ArrowRight className="h-4 w-4" />
