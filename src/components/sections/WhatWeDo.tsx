@@ -136,8 +136,7 @@ export default function WhatWeDo() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
