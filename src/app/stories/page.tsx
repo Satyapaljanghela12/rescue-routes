@@ -77,16 +77,10 @@ export default function StoriesPage() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-                <span className="font-fredoka text-primary text-sm">Real Stories</span>
-              </div>
-              <h1 className="font-poetsen text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
-                <span className="text-primary">Stories of Hope</span> <span className="text-gray-600">& Recovery</span>
+              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-primary">
+                Stories of Hope & Recovery
               </h1>
-              <p className="font-fredoka text-2xl md:text-3xl mb-6 leading-snug">
-                <span className="text-primary">Every rescue has a story</span> <span className="text-gray-600">— from pain to healing</span> 🐾
-              </p>
-              <p className="font-poppins text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
                 Behind every rescue is a life that was once struggling to survive. These stories reflect 
                 courage, care, and the power of compassion.
               </p>
@@ -105,10 +99,10 @@ export default function StoriesPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="font-poetsen text-3xl md:text-4xl mb-3">
-                <span className="text-primary">Tales of</span> <span className="text-gray-600">Transformation</span>
+              <h2 className="font-fredoka text-3xl md:text-4xl mb-3 text-primary">
+                Tales of Transformation
               </h2>
-              <p className="font-fredoka text-lg text-gray-600">
+              <p className="font-poppins text-lg text-gray-600">
                 Each journey from rescue to recovery
               </p>
             </motion.div>
@@ -180,15 +174,12 @@ export default function StoriesPage() {
                         <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl">
                           {/* Story name with cute styling */}
                           <div className="mb-6">
-                            <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-3">
-                              <span className="font-fredoka text-primary text-sm">🐾 Rescued & Loved</span>
-                            </div>
-                            <h3 className="font-poetsen text-4xl md:text-5xl mb-2">
-                              <span className="text-primary">{story.name}</span>
+                            <h3 className="font-fredoka text-4xl md:text-5xl mb-2 text-primary">
+                              {story.name}
                             </h3>
                             <div className="flex items-center gap-2">
                               <div className="h-1 w-16 bg-primary rounded-full" />
-                              <p className="font-fredoka text-xl text-gray-600">
+                              <p className="font-poetsen text-xl text-gray-600">
                                 {story.subtitle}
                               </p>
                             </div>
@@ -272,8 +263,8 @@ export default function StoriesPage() {
                 <span className="font-fredoka text-primary text-lg">Our Impact</span>
               </div>
               
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-8">
-                <span className="text-primary">Every Story</span> <span className="text-gray-600">Matters</span> 
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-8 text-primary">
+                Every Story Matters
               </h2>
               
               <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
@@ -304,10 +295,10 @@ export default function StoriesPage() {
               </div>
 
               <div className="relative z-10">
-                <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                  <span className="text-primary">Be Part of More Stories</span> <span className="text-gray-600">Like These</span> 🐾
+                <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                  Be Part of More Stories Like These
                 </h2>
-                <p className="font-fredoka text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                <p className="font-poppins text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
                   Your support helps us rescue, treat, and protect animals in need.
                 </p>
                 
@@ -315,13 +306,13 @@ export default function StoriesPage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Link
                     href="/donate"
-                    className="bg-primary hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
+                    className="bg-primary hover:bg-orange-600 text-white font-fredoka font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
                   >
                     Donate Now
                   </Link>
                   <Link
-                    href="#volunteer"
-                    className="bg-white hover:bg-gray-50 text-primary border-4 border-primary font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
+                    href="/volunteers"
+                    className="bg-white hover:bg-gray-50 text-primary border-4 border-primary font-fredoka font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
                   >
                     Become a Volunteer
                   </Link>

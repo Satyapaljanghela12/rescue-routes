@@ -29,9 +29,9 @@ const img8 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17.jpeg";
 
 /* ─── Data ──────────────────────────────────────────────────────────────── */
 const stats = [
-  { number: "830+",  label: "Animals Rescued", emoji: "🐶" },
-  { number: "3400+", label: "Beds Created",    emoji: "🛏️" },
-  { number: "100+",  label: "Water Pots",      emoji: "💧" },
+  { number: "830+",  label: "Animals Rescued" },
+  { number: "3400+", label: "Beds Created" },
+  { number: "100+",  label: "Water Pots" },
 ];
 
 const whatWeDoPoints = [
@@ -88,7 +88,7 @@ export default function AboutPage() {
               </span>
               <h1 className="font-heading text-6xl sm:text-7xl lg:text-[5.5rem] text-white leading-[1.0] mb-7">
                 Compassion<br />
-                <span className="text-secondary">in Action</span> 🐾
+                <span className="text-secondary">in Action</span>
               </h1>
               <p className="font-poppins text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
                 A community-driven animal welfare initiative born in Bhopal — where every sight of a suffering animal became impossible to ignore.
@@ -134,11 +134,11 @@ export default function AboutPage() {
                 className="order-2 lg:order-1"
               >
                 <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
-                  <span className="w-8 h-[2px] bg-primary rounded-full" />
-                  🐾 Our Story
+                  <PawPrint size={14} className="text-primary" />
+                  The Beginning
                 </div>
                 <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
-                  Where Compassion<br />Turned Into Action
+                  How It All Started
                 </h2>
                 <div className="space-y-5 font-poppins text-lg text-black leading-relaxed">
                   <p>
@@ -192,11 +192,11 @@ export default function AboutPage() {
             
             <div className="max-w-3xl mb-16">
               <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
-                <span className="w-8 h-[2px] bg-primary rounded-full" />
-                🎯 What We Do
+                <PawPrint size={14} className="text-primary" />
+                Our Work
               </div>
               <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight">
-                Real impact, every single day.
+                How We Make a Difference
               </h2>
             </div>
 
@@ -257,11 +257,11 @@ export default function AboutPage() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
-                  <span className="w-8 h-[2px] bg-primary rounded-full" />
-                  🧡 Our Mission
+                  <PawPrint size={14} className="text-primary" />
+                  Our Vision
                 </div>
                 <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
-                  Building a compassionate ecosystem where every life is valued.
+                  Creating a Better Future for Animals
                 </h2>
                 <p className="font-poppins text-lg text-black leading-relaxed mb-6">
                   Our mission is to rescue, treat, and protect animals in need while building a compassionate ecosystem where every life is valued and no animal suffers due to lack of care, attention, or support.
@@ -285,8 +285,11 @@ export default function AboutPage() {
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center">
-            <div className="mb-6 text-secondary font-bold tracking-widest uppercase text-xs">📊 Our Impact</div>
-            <h2 className="font-heading text-4xl md:text-6xl text-white mb-4">A journey of second chances</h2>
+            <div className="mb-6 text-secondary font-bold tracking-widest uppercase text-xs flex items-center justify-center gap-2">
+              <PawPrint size={14} className="text-secondary" />
+              By The Numbers
+            </div>
+            <h2 className="font-heading text-4xl md:text-6xl text-white mb-4">Lives Transformed</h2>
             <p className="font-poppins text-white/60 text-lg mb-16 max-w-2xl mx-auto">
               Through continuous efforts and community support, we have created meaningful change.
             </p>
@@ -301,7 +304,6 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   className="p-12 rounded-[2.5rem] border border-white/15 bg-white/10 backdrop-blur-md"
                 >
-                  <p className="text-5xl mb-5">{stat.emoji}</p>
                   <h4 className="font-heading text-6xl text-white mb-2">{stat.number}</h4>
                   <p className="font-poppins text-white/60 font-bold uppercase tracking-widest text-xs">{stat.label}</p>
                 </motion.div>
@@ -309,7 +311,7 @@ export default function AboutPage() {
             </div>
 
             <p className="mt-16 font-heading text-2xl text-secondary">
-              Behind every number is a life that was given a second chance. 💛
+              Behind every number is a life that was given a second chance.
             </p>
           </div>
         </section>
@@ -365,11 +367,11 @@ export default function AboutPage() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
-                  <span className="w-8 h-[2px] bg-primary rounded-full" />
-                  🤝 Our Community
+                  <PawPrint size={14} className="text-primary" />
+                  Join Us
                 </div>
                 <h2 className="font-heading text-4xl md:text-5xl text-black leading-tight mb-8">
-                  Powered by people<br />who care.
+                  Be Part of the Change
                 </h2>
                 <p className="font-poppins text-lg text-black leading-relaxed mb-5">
                   From volunteers who assist in rescue operations to supporters who contribute to campaigns, every individual plays a role in this mission.
@@ -424,13 +426,16 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="mb-6 text-primary font-bold tracking-widest uppercase text-xs">💛 Our Promise</div>
+              <div className="mb-6 text-primary font-bold tracking-widest uppercase text-xs flex items-center justify-center gap-2">
+                <PawPrint size={14} className="text-primary" />
+                Our Commitment
+              </div>
               <h2 className="font-heading text-5xl md:text-7xl text-black leading-tight mb-8">
-                We believe that<br />
-                <span className="text-primary">every life matters.</span>
+                Every Life Deserves<br />
+                <span className="text-primary">a Second Chance</span>
               </h2>
               <p className="font-poppins text-xl md:text-2xl text-black leading-relaxed font-medium mb-14 max-w-3xl mx-auto">
-                Every rescue, every treatment, and every effort is a step toward a better world — a world where animals are cared for with dignity and compassion. We ensure that no cry for help goes unheard. 🐾
+                Every rescue, every treatment, and every effort is a step toward a better world — a world where animals are cared for with dignity and compassion. We ensure that no cry for help goes unheard.
               </p>
               <Link href="/donate"
                 className="inline-block bg-primary hover:bg-primary-deep text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm shadow-xl shadow-primary/25 transition hover:scale-105 active:scale-95">

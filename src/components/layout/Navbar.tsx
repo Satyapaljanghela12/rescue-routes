@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Mission", href: "/mission" },
   { name: "Campaigns", href: "/campaigns" },
   { name: "Stories", href: "/stories" },
+  { name: "Blogs", href: "/blogs" },
   { name: "Volunteers", href: "/volunteers" },
   { name: "Store", href: "/store" },
 ];

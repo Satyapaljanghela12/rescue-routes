@@ -5,6 +5,23 @@ import { Heart, Users, Calendar, Megaphone } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import Image from "next/image";
+
+// Featured volunteers data
+const featuredVolunteers = [
+  { name: "Priya Sharma", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (1).jpeg" },
+  { name: "Rahul Verma", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg" },
+  { name: "Anjali Patel", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (3).jpeg" },
+  { name: "Vikram Singh", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (4).jpeg" },
+  { name: "Neha Gupta", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17.jpeg" },
+  { name: "Arjun Mehta", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (1).jpeg" },
+  { name: "Kavya Reddy", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (2).jpeg" },
+  { name: "Rohan Kumar", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18.jpeg" },
+  { name: "Ishita Joshi", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.10 (1).jpeg" },
+  { name: "Aditya Nair", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.10.jpeg" },
+  { name: "Pooja Desai", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.09.jpeg" },
+  { name: "Karan Malhotra", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.16 (1).jpeg" },
+];
 
 export default function VolunteersPage() {
   return (
@@ -13,25 +30,30 @@ export default function VolunteersPage() {
       <main className="flex-1 w-full overflow-hidden pt-20">
         
         {/* Hero Section - Clean & Centered (No Image) */}
-        <section className="py-20 md:py-32 bg-white">
-          <div className="container mx-auto px-4 md:px-8 max-w-4xl">
+        <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+          {/* Background Video */}
+          <div className="absolute inset-0">
+            <video
+              className="absolute inset-0 h-full w-full object-cover opacity-15"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            >
+              <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.15.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <div className="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="inline-block bg-primary px-6 py-2 rounded-full mb-8 shadow-lg"
-              >
-                <span className="font-fredoka text-white text-sm">Compassion in Every Mile</span>
-              </motion.div>
-              
-              <h1 className="font-poetsen text-5xl md:text-6xl lg:text-7xl mb-8 leading-tight">
-                <span className="text-primary">Join Our Rescue</span><br />
-                <span className="text-gray-600">Family</span>
+              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-8 leading-tight text-primary">
+                Join Our Rescue Family
               </h1>
               
               <p className="font-poppins text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
@@ -53,9 +75,8 @@ export default function VolunteersPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Why </span>
-                <span className="text-gray-600">Volunteer?</span>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Why Volunteer?
               </h2>
             </motion.div>
 
@@ -92,8 +113,8 @@ export default function VolunteersPage() {
                     <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full" />
                     
                     <div className="relative z-10">
-                      <h3 className="font-fredoka text-2xl mb-3">
-                        <span className="text-primary">Make an</span> <span className="text-gray-600">Impact</span>
+                      <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                        Make an Impact
                       </h3>
                       <p className="font-poppins text-sm text-gray-600 leading-relaxed">
                         Every action you take directly saves and improves lives. Your time and effort create real, lasting change.
@@ -123,8 +144,8 @@ export default function VolunteersPage() {
                     <div className="absolute top-0 left-0 w-20 h-20 bg-primary/5 rounded-br-full" />
                     
                     <div className="relative z-10">
-                      <h3 className="font-fredoka text-2xl mb-3">
-                        <span className="text-primary">Join a</span> <span className="text-gray-600">Community</span>
+                      <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                        Join a Community
                       </h3>
                       <p className="font-poppins text-sm text-gray-600 leading-relaxed">
                         Be part of a team of like-minded animal lovers who share your passion for making a difference.
@@ -157,8 +178,8 @@ export default function VolunteersPage() {
                     <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary/5 rounded-tl-full" />
                     
                     <div className="relative z-10">
-                      <h3 className="font-fredoka text-2xl mb-3">
-                        <span className="text-primary">Gain</span> <span className="text-gray-600">Experience</span>
+                      <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                        Gain Experience
                       </h3>
                       <p className="font-poppins text-sm text-gray-600 leading-relaxed">
                         Learn about animal care, rescue operations, and develop skills that last a lifetime.
@@ -188,8 +209,8 @@ export default function VolunteersPage() {
                     <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-tr-full" />
                     
                     <div className="relative z-10">
-                      <h3 className="font-fredoka text-2xl mb-3">
-                        <span className="text-primary">Feel the</span> <span className="text-gray-600">Love</span>
+                      <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                        Feel the Love
                       </h3>
                       <p className="font-poppins text-sm text-gray-600 leading-relaxed">
                         Experience the joy and fulfillment of making a real difference in innocent lives.
@@ -224,9 +245,8 @@ export default function VolunteersPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Ways to </span>
-                <span className="text-gray-600">Help</span>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Ways to Help
               </h2>
             </motion.div>
 
@@ -251,8 +271,8 @@ export default function VolunteersPage() {
                   </div>
                 </div>
                 <div className="flex-1 bg-gray-50 rounded-2xl p-8 shadow-md">
-                  <h3 className="font-fredoka text-2xl mb-3">
-                    <span className="text-primary">Rescue</span> <span className="text-gray-600">Operations</span>
+                  <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                    Rescue Operations
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Join emergency rescue teams and help save animals in distress. Be the first responder when lives are at stake.
@@ -278,8 +298,8 @@ export default function VolunteersPage() {
                   </div>
                 </div>
                 <div className="flex-1 bg-gray-50 rounded-2xl p-8 shadow-md">
-                  <h3 className="font-fredoka text-2xl mb-3">
-                    <span className="text-primary">Foster</span> <span className="text-gray-600">Care</span>
+                  <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                    Foster Care
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Provide temporary homes for rescued animals during their recovery and rehabilitation journey.
@@ -305,8 +325,8 @@ export default function VolunteersPage() {
                   </div>
                 </div>
                 <div className="flex-1 bg-gray-50 rounded-2xl p-8 shadow-md">
-                  <h3 className="font-fredoka text-2xl mb-3">
-                    <span className="text-primary">Event</span> <span className="text-gray-600">Support</span>
+                  <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                    Event Support
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Help organize adoption drives, awareness campaigns, and fundraising events that bring communities together.
@@ -332,8 +352,8 @@ export default function VolunteersPage() {
                   </div>
                 </div>
                 <div className="flex-1 bg-gray-50 rounded-2xl p-8 shadow-md">
-                  <h3 className="font-fredoka text-2xl mb-3">
-                    <span className="text-primary">Digital</span> <span className="text-gray-600">Advocacy</span>
+                  <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                    Digital Advocacy
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Spread awareness online, create content, and help amplify our mission to reach more people.
@@ -355,8 +375,8 @@ export default function VolunteersPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Our Volunteer</span> <span className="text-gray-600">Impact</span>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Our Volunteer Impact
               </h2>
             </motion.div>
 
@@ -436,6 +456,100 @@ export default function VolunteersPage() {
           </div>
         </section>
 
+        {/* Featured Volunteers Section */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Meet Our Heroes
+              </h2>
+              <p className="font-poppins text-lg text-gray-600 max-w-2xl mx-auto">
+                These amazing individuals dedicate their time and energy to making a difference in the lives of animals
+              </p>
+            </motion.div>
+
+            {/* Volunteers Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+              {featuredVolunteers.map((volunteer, index) => (
+                <motion.div
+                  key={volunteer.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  className="group relative"
+                >
+                  <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg border-4 border-white group-hover:border-primary/30 transition-all duration-300">
+                    <Image
+                      src={volunteer.image}
+                      alt={volunteer.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Heart icon on hover */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileHover={{ scale: 1 }}
+                      className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <Heart className="w-5 h-5 text-primary" fill="currentColor" />
+                    </motion.div>
+                  </div>
+                  
+                  {/* Name badge */}
+                  <div className="mt-4 text-center">
+                    <h3 className="font-fredoka text-lg text-primary group-hover:text-orange-600 transition-colors">
+                      {volunteer.name}
+                    </h3>
+                    <p className="font-poppins text-sm text-gray-500">Volunteer</p>
+                  </div>
+
+                  {/* Decorative paw print */}
+                  <div className="absolute -bottom-2 -right-2 opacity-0 group-hover:opacity-20 transition-opacity duration-300">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
+                      <circle cx="12" cy="16" r="3" />
+                      <circle cx="8" cy="12" r="2" />
+                      <circle cx="16" cy="12" r="2" />
+                      <circle cx="10" cy="8" r="1.5" />
+                      <circle cx="14" cy="8" r="1.5" />
+                    </svg>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Join them CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center mt-16"
+            >
+              <p className="font-fredoka text-2xl text-gray-700 mb-6">
+                Want to join these amazing people?
+              </p>
+              <Link
+                href="/signup"
+                className="inline-block bg-primary hover:bg-orange-600 text-white font-fredoka font-bold text-lg py-4 px-12 rounded-full transition-all hover:scale-105 shadow-xl"
+              >
+                Become a Volunteer Today
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Ready to Help - CTA Section */}
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 md:px-8 max-w-5xl">
@@ -450,9 +564,8 @@ export default function VolunteersPage() {
                 transition={{ duration: 0.6 }}
                 className="bg-white rounded-3xl p-12 shadow-lg text-center md:text-left"
               >
-                <h2 className="font-poetsen text-3xl md:text-4xl mb-6">
-                  <span className="text-primary">Ready to </span>
-                  <span className="text-gray-600">Help?</span>
+                <h2 className="font-fredoka text-3xl md:text-4xl mb-6 text-primary">
+                  Ready to Help?
                 </h2>
                 
                 <p className="font-poppins text-lg text-gray-700 leading-relaxed mb-8">
@@ -485,8 +598,8 @@ export default function VolunteersPage() {
               >
                 {/* Info card 1 */}
                 <div className="bg-white rounded-3xl p-8 shadow-lg">
-                  <h3 className="font-fredoka text-xl mb-3">
-                    <span className="text-primary">Who Can</span> <span className="text-gray-600">Join?</span>
+                  <h3 className="font-fredoka text-xl mb-3 text-primary">
+                    Who Can Join?
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Anyone with compassion and willingness to help. No prior experience needed — just bring your heart and dedication.
@@ -495,8 +608,8 @@ export default function VolunteersPage() {
 
                 {/* Info card 2 */}
                 <div className="bg-white rounded-3xl p-8 shadow-lg">
-                  <h3 className="font-fredoka text-xl mb-3">
-                    <span className="text-primary">Need Quick</span> <span className="text-gray-600">Answers?</span>
+                  <h3 className="font-fredoka text-xl mb-3 text-primary">
+                    Need Quick Answers?
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed mb-4">
                     Have questions about volunteering? We're here to help you get started.
@@ -504,7 +617,7 @@ export default function VolunteersPage() {
                   
                   <Link
                     href="#contact"
-                    className="inline-block bg-primary hover:bg-orange-600 text-white font-fredoka text-sm py-3 px-6 rounded-xl transition-all"
+                    className="inline-block bg-primary hover:bg-orange-600 text-white font-fredoka font-bold text-sm py-3 px-6 rounded-xl transition-all"
                   >
                     Contact Us
                   </Link>

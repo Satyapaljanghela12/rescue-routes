@@ -69,18 +69,19 @@ export default function CampaignsPage() {
       <main className="flex-1 w-full overflow-hidden pt-20">
         
         {/* Hero Section */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          >
-            <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.16.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]" />
+        <section className="py-16 md:py-24 relative overflow-hidden bg-white">
+          <div className="absolute inset-0">
+            <video
+              className="absolute inset-0 h-full w-full object-cover opacity-20"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            >
+              <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.16.mp4" type="video/mp4" />
+            </video>
+          </div>
 
           {/* Decorative elements */}
           <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
@@ -93,16 +94,10 @@ export default function CampaignsPage() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-                <span className="font-fredoka text-primary text-sm">Make a Difference</span>
-              </div>
-              <h1 className="font-poetsen text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
-                <span className="text-primary">Support Our</span> <span className="text-gray-600">Campaigns</span>
+              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-primary">
+                Support Our Campaigns
               </h1>
-              <p className="font-fredoka text-2xl md:text-3xl mb-6 leading-snug">
-                <span className="text-primary">Every small act of kindness</span> <span className="text-gray-600">can save a life</span> 🐾
-              </p>
-              <p className="font-poppins text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
                 Our campaigns are focused on rescuing, treating, and protecting animals in need. 
                 Your support helps us bring care, safety, and hope to those who cannot ask for it.
               </p>
@@ -120,10 +115,10 @@ export default function CampaignsPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Our Active</span> <span className="text-gray-600">Campaigns</span>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Our Active Campaigns
               </h2>
-              <p className="font-fredoka text-xl text-gray-600">
+              <p className="font-poppins text-lg text-gray-600">
                 Choose a cause that speaks to your heart
               </p>
             </motion.div>
@@ -208,10 +203,10 @@ export default function CampaignsPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-4">
-                <span className="text-primary">Meet Your</span> <span className="text-gray-600">New Friend</span>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Meet Your New Friend
               </h2>
-              <p className="font-fredoka text-xl text-gray-600">
+              <p className="font-poppins text-lg text-gray-600">
                 These rescued animals are looking for their forever homes
               </p>
             </motion.div>
@@ -244,8 +239,8 @@ export default function CampaignsPage() {
 
                   {/* Content */}
                   <div className="p-5">
-                    <h3 className="font-poetsen text-2xl mb-2">
-                      <span className="text-primary">{animal.animalName}</span>
+                    <h3 className="font-poetsen text-2xl mb-2 text-primary">
+                      {animal.animalName}
                     </h3>
                     
                     <div className="flex items-center gap-2 mb-3">
@@ -325,14 +320,30 @@ export default function CampaignsPage() {
                 <span className="font-fredoka text-primary text-lg">Your Impact</span>
               </div>
               
-              <h2 className="font-poetsen text-4xl md:text-5xl mb-8">
-                <span className="text-primary">Why Your Support</span> <span className="text-gray-600">Matters</span> 
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-8 text-primary">
+                Why Your Support Matters
               </h2>
               
-              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-10">
                 Every donation you make goes directly into saving lives. From medical care to shelter and 
                 daily support, your contribution helps us reach animals in need and give them a second chance.
               </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="/donate"
+                  className="bg-primary hover:bg-orange-600 text-white font-fredoka font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
+                >
+                  Donate Now
+                </Link>
+                <Link
+                  href="/volunteers"
+                  className="bg-white hover:bg-gray-50 text-primary border-4 border-primary font-fredoka font-bold text-lg py-4 px-10 rounded-2xl transition-all hover:scale-105 shadow-lg"
+                >
+                  Become a Volunteer
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

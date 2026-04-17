@@ -61,67 +61,42 @@ export default function WhatWeDo() {
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
-          
-          {/* Header Area */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:w-1/3 sticky top-24"
-          >
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
-                <span className="text-secondary font-fredoka font-medium tracking-[0.2em] uppercase text-sm border-l-4 border-primary pl-4">
-                  Our Impact
-                </span>
-                <h2 className="text-6xl md:text-7xl font-briem font-bold text-primary leading-[0.9]">
-                  What We Do
-                </h2>
-                <p className="text-lg text-dark/70 font-fredoka max-w-sm leading-relaxed mt-4">
-                  We believe in a <span className="text-secondary font-semibold italic">holistic approach</span> to welfare. From emergency response to long-term community health.
-                </p>
-              </div>
-              
-              <motion.button 
-                whileHover={{ scale: 1.05, x: 5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group flex items-center justify-between bg-primary text-white font-fredoka font-bold py-4 px-8 rounded-full shadow-lg shadow-primary/20 transition-all w-max gap-4"
-              >
-                <span>Explore Our Programs</span>
-                <div className="bg-white/20 p-2 rounded-full transform group-hover:translate-x-1 transition-transform">
-                  <ArrowRight size={20} />
-                </div>
-              </motion.button>
+        {/* Header Area - Centered at Top */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12 max-w-3xl mx-auto"
+        >
+          <span className="text-secondary font-fredoka font-medium tracking-[0.2em] uppercase text-sm">
+            WHAT WE DO
+          </span>
+          <h2 className="text-4xl md:text-5xl font-fredoka font-bold text-primary leading-tight mt-3 mb-4">
+            We believe in a holistic approach to welfare.
+          </h2>
+          <p className="text-base text-dark/70 font-poppins leading-relaxed">
+            From emergency response to long-term community health, we're committed to making a difference in every animal's life.
+          </p>
+        </motion.div>
 
-              <div className="flex items-center gap-2 text-primary/40 font-fredoka text-xs animate-pulse">
-                <Heart size={14} fill="currentColor" />
-                <span>Join our mission today</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Staggered Services Grid */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
-          >
+        {/* Services Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+        >
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                style={{ 
-                  marginTop: index % 2 !== 0 ? "2rem" : "0", 
-                }}
                 whileHover={{ 
                   scale: 1.02,
-                  y: -10,
+                  y: -8,
                   transition: { type: "spring", stiffness: 300, damping: 15 }
                 }}
-                className="group relative bg-white p-8 rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-white hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 overflow-hidden"
+                className="group relative bg-white p-5 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-white hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 overflow-hidden"
               >
                 {/* Cute Floating Heart Animation */}
                 <motion.div 
@@ -130,31 +105,31 @@ export default function WhatWeDo() {
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="absolute top-1/2 left-1/2 pointer-events-none text-primary"
                 >
-                  <Heart size={24} fill="currentColor" />
+                  <Heart size={20} fill="currentColor" />
                 </motion.div>
 
-                <div className="flex flex-col gap-6 relative z-10">
+                <div className="flex flex-col gap-4 relative z-10">
                   <motion.div 
                     whileHover={{ rotate: [0, -10, 10, 0] }}
-                    className="w-16 h-16 bg-primary/5 text-primary rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm"
+                    className="w-12 h-12 bg-primary/5 text-primary rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm"
                   >
-                    <service.icon size={32} />
+                    <service.icon size={24} />
                   </motion.div>
                   
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-fredoka font-bold text-primary group-hover:translate-x-1 transition-transform duration-300">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-poetsen font-bold text-primary group-hover:translate-x-1 transition-transform duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-dark/60 text-sm font-fredoka leading-relaxed group-hover:text-dark/80 transition-colors">
+                    <p className="text-dark/60 text-sm font-poppins leading-relaxed group-hover:text-dark/80 transition-colors">
                       {service.desc}
                     </p>
                   </div>
 
-                  <div className="pt-4 flex items-center gap-2 group-hover:gap-4 transition-all">
-                    <div className="w-10 h-10 rounded-full bg-secondary/5 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
-                      <ArrowRight size={18} />
+                  <div className="pt-2 flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-secondary/5 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
+                      <ArrowRight size={16} />
                     </div>
-                    <span className="text-xs font-bold text-secondary/40 group-hover:text-secondary uppercase tracking-widest transition-colors font-fredoka">
+                    <span className="text-xs font-bold text-secondary/40 group-hover:text-secondary uppercase tracking-widest transition-colors font-poppins">
                       Read Stories
                     </span>
                   </div>
@@ -162,7 +137,6 @@ export default function WhatWeDo() {
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </div>
     </section>

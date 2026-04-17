@@ -41,9 +41,8 @@ export default function MissionPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h1 className="font-poetsen text-4xl md:text-5xl lg:text-6xl mb-4">
-                <span className="text-primary">Rescue. Rehabilitate.</span>{" "}
-                <span className="text-gray-600">Rehome. Revive.</span>
+              <h1 className="font-fredoka text-4xl md:text-5xl lg:text-6xl mb-4 text-primary">
+                Rescue. Rehabilitate. Rehome. Revive.
               </h1>
               <p className="font-poppins text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 Every life deserves care, compassion, and a second chance.
@@ -87,7 +86,7 @@ export default function MissionPage() {
               >
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/img1.jpg"
+                    src="/Images/WhatsApp Image 2026-04-11 at 20.21.17 (1).jpeg"
                     alt="Rescued dog"
                     fill
                     className="object-cover"
@@ -95,7 +94,7 @@ export default function MissionPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/img2.jpg"
+                    src="/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg"
                     alt="Happy rescued animal"
                     fill
                     className="object-cover"
@@ -113,10 +112,10 @@ export default function MissionPage() {
             >
               {/* Section Header */}
               <div className="text-center mb-12">
-                <h2 className="font-fredoka text-3xl md:text-4xl text-dark mb-2">
+                <h2 className="font-fredoka text-3xl md:text-4xl text-primary mb-2">
                   How We Change Lives
                 </h2>
-                <p className="font-poetsen text-base md:text-lg text-gray-500">
+                <p className="font-poppins text-base md:text-lg text-gray-600">
                   Every rescue is a journey from pain to hope.
                 </p>
               </div>
@@ -163,7 +162,7 @@ export default function MissionPage() {
                         <h3 className="font-fredoka text-2xl text-primary mb-3 text-center">
                           {pillar.title}
                         </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed font-poppins font-semibold text-center">
+                        <p className="text-gray-600 text-sm leading-relaxed font-poppins text-center">
                           {pillar.description}
                         </p>
 
@@ -191,7 +190,7 @@ export default function MissionPage() {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="text-center py-12 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl"
             >
-              <p className="font-poetsen text-2xl md:text-3xl text-dark max-w-2xl mx-auto px-4 mb-8">
+              <p className="font-fredoka text-2xl md:text-3xl text-primary max-w-2xl mx-auto px-4 mb-8">
                 We ensure that no cry for help goes unheard.
               </p>
               
@@ -199,13 +198,13 @@ export default function MissionPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link
                   href="/donate"
-                  className="bg-primary hover:bg-secondary text-white font-semibold text-base py-3 px-8 rounded-lg transition-all hover:scale-105 shadow-md"
+                  className="bg-primary hover:bg-orange-600 text-white font-fredoka font-semibold text-base py-3 px-8 rounded-lg transition-all hover:scale-105 shadow-md"
                 >
                   Donate Now
                 </Link>
                 <Link
-                  href="#volunteer"
-                  className="bg-white hover:bg-gray-50 text-primary border-2 border-primary font-semibold text-base py-3 px-8 rounded-lg transition-all hover:scale-105 shadow-md"
+                  href="/volunteers"
+                  className="bg-white hover:bg-gray-50 text-primary border-2 border-primary font-fredoka font-semibold text-base py-3 px-8 rounded-lg transition-all hover:scale-105 shadow-md"
                 >
                   Become a Volunteer
                 </Link>

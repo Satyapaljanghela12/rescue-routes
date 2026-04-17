@@ -72,16 +72,16 @@ export default function WhyRescueMatters() {
               whileHover={{ scale: 1.02, rotate: 1, zIndex: 30 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-[#F1B929] text-white p-8 md:p-14 rounded-[40px] shadow-xl relative overflow-hidden group cursor-pointer min-h-[280px]"
+              className="border border-white/30 bg-white/18 p-8 text-gray-800 shadow-xl backdrop-blur-md md:p-14 rounded-[40px] relative overflow-hidden group cursor-pointer min-h-[280px]"
             >
-              <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-y-1/3 translate-x-1/3 group-hover:scale-150 transition-transform duration-700" />
+              <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#F1B929]/20 rounded-full blur-3xl translate-y-1/3 translate-x-1/3 group-hover:scale-150 transition-transform duration-700" />
               <div className="flex items-center gap-2 mb-4">
-                <PawPrint className="w-6 h-6" fill="white" />
+                <PawPrint className="w-6 h-6 text-[#F1B929]" fill="currentColor" />
                 <h3 className="text-2xl font-fredoka font-semibold leading-tight relative z-10">
                   Controlling<br/>Overpopulation
                 </h3>
               </div>
-              <p className="text-white/95 font-medium leading-relaxed mb-4 pl-[1px] relative z-10">
+              <p className="text-gray-700 font-medium leading-relaxed mb-4 pl-[1px] relative z-10">
                 Systematic sterilization drives to humanely manage street animal populations and prevent future suffering.
               </p>
             </motion.div>
@@ -113,16 +113,16 @@ export default function WhyRescueMatters() {
               whileHover={{ scale: 1.02, rotate: -1, zIndex: 30 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-[#3FA09A] text-white p-8 md:p-14 rounded-[40px] shadow-xl relative overflow-hidden group cursor-pointer min-h-[280px]"
+              className="border border-white/30 bg-white/18 p-8 text-gray-800 shadow-xl backdrop-blur-md md:p-14 rounded-[40px] relative overflow-hidden group cursor-pointer min-h-[280px]"
             >
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3 group-hover:scale-150 transition-transform duration-700" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#3FA09A]/18 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3 group-hover:scale-150 transition-transform duration-700" />
               <div className="flex items-center gap-2 mb-4">
-                <Bone className="w-6 h-6" fill="white" />
+                <Bone className="w-6 h-6 text-[#3FA09A]" fill="currentColor" />
                 <h3 className="text-2xl font-fredoka font-semibold relative z-10">
                   Starvation
                 </h3>
               </div>
-              <p className="text-white/95 font-medium leading-relaxed pl-6 relative z-10">
+              <p className="text-gray-700 font-medium leading-relaxed pl-6 relative z-10">
                 Nutritional rehabilitation programs for severely malnourished rescues who have spent weeks without a stable source of food.
               </p>
             </motion.div>

@@ -12,6 +12,7 @@ import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
+import RealtimeNotifications from "@/components/RealtimeNotifications";
 
 const heroVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4";
 
@@ -130,6 +131,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <RealtimeNotifications />
       <main className="flex-1 overflow-hidden bg-background text-foreground">
         <section className="relative isolate min-h-[88vh] overflow-hidden border-b border-black/10">
           <video
@@ -153,7 +155,7 @@ export default function Home() {
                   <PawPrint className="h-4 w-4 text-[#fac602]" />
                   Parwati Seva Foundation
                 </p>
-                <h1 className="max-w-4xl font-heading text-5xl leading-none sm:text-6xl lg:text-[5.9rem]">
+                <h1 className="max-w-4xl font-heading text-5xl font-semibold leading-none sm:text-6xl lg:text-[5.9rem]">
                   Build a kinder path for every stray, injured, and abandoned life.
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-8 text-white/82 sm:text-lg">
@@ -195,7 +197,7 @@ export default function Home() {
                 style={{ filter: 'sepia(1) saturate(3) hue-rotate(180deg) brightness(0.6)' }}
                 className="h-auto w-auto max-w-full object-contain opacity-95"
               />
-              <h2 className="max-w-4xl font-fredoka text-4xl leading-tight text-foreground sm:text-5xl">
+              <h2 className="max-w-4xl font-fredoka text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
                 Compassion towards all living beings
               </h2>
               <p className="max-w-2xl text-base leading-8 text-foreground/72">
@@ -260,11 +262,14 @@ export default function Home() {
 
                 <div className="mt-8 space-y-4">
                   {whyRescueMattersPoints.map((point) => (
-                    <div key={point} className="flex items-start gap-4">
+                    <div
+                      key={point}
+                      className="flex items-start gap-4 rounded-[1.6rem] border border-white/35 bg-white/45 px-5 py-4 shadow-[0_14px_40px_rgba(90,55,32,0.08)] backdrop-blur-md"
+                    >
                       <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#bad701]/18 text-primary">
                         <PawPrint className="h-4 w-4" />
                       </div>
-                      <p className="text-sm leading-7 text-foreground/74">{point}</p>
+                      <p className="text-sm leading-7 text-foreground/78">{point}</p>
                     </div>
                   ))}
                 </div>

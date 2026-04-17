@@ -66,20 +66,10 @@ export default function UpcomingEventsSection() {
   return (
     <section className="relative overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-xs font-fredoka font-semibold uppercase tracking-[0.28em] text-primary">
+        <div className="text-center mb-12">
+          <h2 className="font-fredoka text-5xl sm:text-6xl font-medium text-primary">
             Upcoming Events
-          </p>
-          <h2 className="mt-4 font-fredoka text-4xl leading-tight text-foreground sm:text-5xl">
-            Upcoming rescue drives, outreach efforts, and community welfare events.
           </h2>
-          <p className="mt-5 max-w-2xl text-base font-poppins leading-8 text-foreground/72">
-            These events bring together rescue response, treatment support, adoption outreach, and
-            community participation to improve the lives of street and abandoned animals.
-          </p>
-          <p className="mt-4 flex items-center gap-2 text-sm font-poppins font-medium text-foreground/68">
-            Join us on the ground and support meaningful action for animals in need.
-          </p>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">

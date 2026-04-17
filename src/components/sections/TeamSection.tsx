@@ -36,12 +36,9 @@ export default function TeamSection() {
             <span className="text-primary font-fredoka font-bold text-sm uppercase tracking-[0.2em] bg-white py-2 px-6 rounded-full shadow-sm border border-primary/5">
               Meet the Hearts
             </span>
-            <h2 className="text-6xl md:text-8xl font-briem font-bold text-dark leading-none">
-              <span className="text-gray-500">Our</span> <span className="text-primary">Founding Team</span>
+            <h2 className="text-5xl md:text-6xl font-fredoka font-bold text-primary leading-tight">
+              Our Founding Team
             </h2>
-            <p className="text-lg text-dark/60 font-fredoka max-w-xl mt-6">
-              The compassionate minds behind Rescue Routes, dedicated to providing a second chance to every life we rescue.
-            </p>
           </motion.div>
         </div>
 
