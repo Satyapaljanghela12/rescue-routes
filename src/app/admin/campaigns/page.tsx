@@ -25,6 +25,7 @@ export default function CampaignsPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isDragging, setIsDragging] = useState(false);
+  const [editingCampaign, setEditingCampaign] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -58,7 +59,9 @@ export default function CampaignsPage() {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setFormData({ ...formData, image: base64String });
       };
       reader.readAsDataURL(file);
     }
@@ -82,7 +85,9 @@ export default function CampaignsPage() {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setFormData({ ...formData, image: base64String });
       };
       reader.readAsDataURL(file);
     }
@@ -116,8 +121,11 @@ export default function CampaignsPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/campaigns", {
-        method: "POST",
+      const url = editingCampaign ? `/api/campaigns?id=${editingCampaign._id}` : "/api/campaigns";
+      const method = editingCampaign ? "PUT" : "POST";
+      
+      const response = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
@@ -126,6 +134,7 @@ export default function CampaignsPage() {
       
       if (data.success) {
         setShowModal(false);
+        setEditingCampaign(null);
         setFormData({
           title: "",
           description: "",
@@ -134,16 +143,32 @@ export default function CampaignsPage() {
           endDate: "",
           image: "/About1.jpg",
         });
+        setImagePreview("");
+        setImageFile(null);
         fetchCampaigns();
       } else {
-        alert("Failed to create campaign");
+        alert(editingCampaign ? "Failed to update campaign" : "Failed to create campaign");
       }
     } catch (error) {
-      console.error("Error creating campaign:", error);
-      alert("Error creating campaign");
+      console.error("Error saving campaign:", error);
+      alert("Error saving campaign");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleEdit = (campaign: any) => {
+    setEditingCampaign(campaign);
+    setFormData({
+      title: campaign.title,
+      description: campaign.description,
+      targetAmount: campaign.targetAmount.toString(),
+      startDate: campaign.startDate.split('T')[0],
+      endDate: campaign.endDate.split('T')[0],
+      image: campaign.image,
+    });
+    setImagePreview(campaign.image);
+    setShowModal(true);
   };
 
   return (
@@ -165,7 +190,20 @@ export default function CampaignsPage() {
               </p>
             </div>
             <button 
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                setEditingCampaign(null);
+                setFormData({
+                  title: "",
+                  description: "",
+                  targetAmount: "",
+                  startDate: "",
+                  endDate: "",
+                  image: "/About1.jpg",
+                });
+                setImagePreview("");
+                setImageFile(null);
+                setShowModal(true);
+              }}
               className="bg-primary hover:bg-orange-600 text-white font-poppins font-semibold px-6 py-3 rounded-lg transition-all shadow-md flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
@@ -242,7 +280,10 @@ export default function CampaignsPage() {
 
                   {/* Actions */}
                   <div className="flex gap-2">
-                    <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-poppins font-medium py-2 rounded-lg transition-all text-sm flex items-center justify-center gap-2">
+                    <button 
+                      onClick={() => handleEdit(campaign)}
+                      className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-poppins font-medium py-2 rounded-lg transition-all text-sm flex items-center justify-center gap-2"
+                    >
                       <Edit className="w-4 h-4" />
                       Edit
                     </button>
@@ -269,9 +310,16 @@ export default function CampaignsPage() {
                 className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
-                  <h2 className="font-poppins text-2xl font-bold text-gray-800">Create New Campaign</h2>
+                  <h2 className="font-poppins text-2xl font-bold text-gray-800">
+                    {editingCampaign ? "Edit Campaign" : "Create New Campaign"}
+                  </h2>
                   <button
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                      setShowModal(false);
+                      setEditingCampaign(null);
+                      setImagePreview("");
+                      setImageFile(null);
+                    }}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-all"
                   >
                     <X className="w-5 h-5 text-gray-600" />
@@ -411,7 +459,12 @@ export default function CampaignsPage() {
                   <div className="flex gap-3 pt-4">
                     <button
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={() => {
+                        setShowModal(false);
+                        setEditingCampaign(null);
+                        setImagePreview("");
+                        setImageFile(null);
+                      }}
                       className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-poppins font-medium rounded-lg hover:bg-gray-50 transition-all"
                     >
                       Cancel
@@ -421,7 +474,7 @@ export default function CampaignsPage() {
                       disabled={loading}
                       className="flex-1 px-6 py-3 bg-primary hover:bg-orange-600 text-white font-poppins font-semibold rounded-lg transition-all disabled:opacity-50"
                     >
-                      {loading ? "Creating..." : "Create Campaign"}
+                      {loading ? (editingCampaign ? "Updating..." : "Creating...") : (editingCampaign ? "Update Campaign" : "Create Campaign")}
                     </button>
                   </div>
                 </form>

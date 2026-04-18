@@ -367,9 +367,9 @@ export default function Home() {
                 The strongest rescue platforms feel trustworthy before they ask for support.
               </h2>
               <p className="mt-5 text-base leading-8 text-foreground/74">
-                This homepage now leans into that idea with cleaner hierarchy, softer contrast,
-                stronger media, and a more institutional visual rhythm inspired by People For
-                Animals.
+                We rescue dogs from shelters and unsafe conditions, provide them with proper 
+                medical care, and help them find loving forever homes. Our goal is to give every 
+                dog a second chance at a safe, happy, and healthy life.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link

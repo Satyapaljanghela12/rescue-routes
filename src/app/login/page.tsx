@@ -8,7 +8,6 @@ import { Shield, Users, Heart } from "lucide-react";
 const roles = [
   { id: "admin", label: "Admin", icon: Shield, color: "bg-purple-50 text-purple-600 border-purple-200" },
   { id: "volunteer", label: "Volunteer", icon: Users, color: "bg-blue-50 text-blue-600 border-blue-200" },
-  { id: "donor", label: "Donor", icon: Heart, color: "bg-orange-50 text-primary border-orange-200" },
 ];
 
 export default function LoginPage() {

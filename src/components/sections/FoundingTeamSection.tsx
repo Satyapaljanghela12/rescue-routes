@@ -68,7 +68,7 @@ export default function FoundingTeamSection() {
             Our Founding Team
           </h2>
           <p className="text-base font-poppins text-foreground/70 leading-relaxed">
-            Dedicated individuals working together to rescue, rehabilitate, and rehome animals in need.
+            Dedicated individuals working together to rescue, rehabilitate, and rehome animals in need. Every rescue dog has a story of resilience and hope. Our team is committed to giving these incredible companions a second chance at life, providing them with medical care, love, and the opportunity to find their forever homes.
           </p>
         </div>
 

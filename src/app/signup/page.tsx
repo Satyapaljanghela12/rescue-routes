@@ -8,7 +8,6 @@ import { Shield, Users, Heart } from "lucide-react";
 const roles = [
   { id: "admin", label: "Admin", icon: Shield, color: "bg-purple-50 text-purple-600 border-purple-200", desc: "Manage platform" },
   { id: "volunteer", label: "Volunteer", icon: Users, color: "bg-blue-50 text-blue-600 border-blue-200", desc: "Help rescue animals" },
-  { id: "donor", label: "Donor", icon: Heart, color: "bg-orange-50 text-primary border-orange-200", desc: "Support campaigns" },
 ];
 
 export default function SignupPage() {
@@ -85,7 +84,7 @@ export default function SignupPage() {
             <label className="block font-poppins text-sm font-medium text-gray-700 mb-3">
               I want to join as
             </label>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {roles.map((role) => (
                 <button
                   key={role.id}

@@ -155,9 +155,8 @@ export default function CampaignsPage() {
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
                     
                     <div className="relative">
-                      <h3 className="font-poetsen text-xl mb-3">
-                        <span className="text-primary">{campaign.title.split(' ')[0]}</span>{' '}
-                        <span className="text-gray-600">{campaign.title.split(' ').slice(1).join(' ')}</span>
+                      <h3 className="font-fredoka text-2xl mb-3 text-primary">
+                        {campaign.title}
                       </h3>
                       
                       <p className="font-poppins text-sm text-gray-700 leading-relaxed mb-4">

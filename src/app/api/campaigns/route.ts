@@ -76,3 +76,49 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ success: false, error: "Failed to delete campaign" }, { status: 500 });
   }
 }
+
+// PUT update campaign
+export async function PUT(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: "Campaign ID is required" }, { status: 400 });
+    }
+
+    const body = await request.json();
+    const { title, description, targetAmount, startDate, endDate, image } = body;
+
+    if (!title || !description || !targetAmount || !startDate || !endDate) {
+      return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
+    }
+
+    const client = await clientPromise;
+    const db = client.db("rescue-routes");
+
+    const updateData = {
+      title,
+      description,
+      targetAmount: Number(targetAmount),
+      startDate,
+      endDate,
+      image: image || "/About1.jpg",
+      updatedAt: new Date(),
+    };
+
+    const result = await db.collection("campaigns").updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updateData }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ success: false, error: "Campaign not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, campaign: { ...updateData, _id: id } });
+  } catch (error) {
+    console.error("Error updating campaign:", error);
+    return NextResponse.json({ success: false, error: "Failed to update campaign" }, { status: 500 });
+  }
+}

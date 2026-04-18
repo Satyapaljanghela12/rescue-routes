@@ -49,7 +49,9 @@ export default function AdoptionsPage() {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setFormData({ ...formData, image: base64String });
       };
       reader.readAsDataURL(file);
     }
@@ -73,7 +75,9 @@ export default function AdoptionsPage() {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setFormData({ ...formData, image: base64String });
       };
       reader.readAsDataURL(file);
     }
@@ -108,6 +112,9 @@ export default function AdoptionsPage() {
     e.preventDefault();
     setLoading(true);
 
+    console.log("Submitting form data:", formData);
+    console.log("Image in formData:", formData.image.substring(0, 50) + "...");
+
     try {
       const response = await fetch("/api/adoptions", {
         method: "POST",
@@ -118,6 +125,7 @@ export default function AdoptionsPage() {
       const data = await response.json();
       
       if (data.success) {
+        console.log("Animal added successfully:", data.adoption);
         setShowModal(false);
         setFormData({
           animalName: "",
@@ -130,6 +138,8 @@ export default function AdoptionsPage() {
           image: "/dog1.png",
           status: "Available",
         });
+        setImagePreview("");
+        setImageFile(null);
         fetchAdoptions();
       } else {
         alert("Failed to add animal");
@@ -167,7 +177,11 @@ export default function AdoptionsPage() {
               </p>
             </div>
             <button 
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                setShowModal(true);
+                setImagePreview("");
+                setImageFile(null);
+              }}
               className="bg-primary hover:bg-orange-600 text-white font-poppins font-semibold px-6 py-3 rounded-lg transition-all shadow-md flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
@@ -269,7 +283,11 @@ export default function AdoptionsPage() {
                 <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
                   <h2 className="font-poppins text-2xl font-bold text-gray-800">Add Animal for Adoption</h2>
                   <button
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                      setShowModal(false);
+                      setImagePreview("");
+                      setImageFile(null);
+                    }}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-all"
                   >
                     <X className="w-5 h-5 text-gray-600" />
@@ -460,7 +478,11 @@ export default function AdoptionsPage() {
                   <div className="flex gap-3 pt-4">
                     <button
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={() => {
+                        setShowModal(false);
+                        setImagePreview("");
+                        setImageFile(null);
+                      }}
                       className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-poppins font-medium rounded-lg hover:bg-gray-50 transition-all"
                     >
                       Cancel

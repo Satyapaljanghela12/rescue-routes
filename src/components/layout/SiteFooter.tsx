@@ -73,25 +73,42 @@ export default function SiteFooter() {
             </div>
           </div>
 
-          <div>
+          <div className="space-y-6">
             <div className="rounded-[2rem] border border-white/18 bg-white/10 p-6 backdrop-blur-sm">
               <p className="text-sm font-fredoka font-semibold uppercase tracking-[0.22em] text-white/76">
                 Contact
               </p>
               <div className="mt-5 space-y-4 text-sm leading-7 font-poppins text-white/78">
                 <div className="flex items-start gap-3">
-                  <MapPin className="mt-1 h-4 w-4 text-white" />
-                  <p>Rescue Routes Animal Welfare Foundation, India</p>
+                  <Phone className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
+                  <p>+91 96300 57355</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Phone className="mt-1 h-4 w-4 text-white" />
-                  <p>+91 support line and volunteer coordination</p>
+                  <Mail className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
+                  <p>pawsonparade2020@gmail.com</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Mail className="mt-1 h-4 w-4 text-white" />
-                  <p>hello@rescueroutes.org</p>
+                  <Camera className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
+                  <p>@rescueroutes</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
+                  <p>HIG-HC-7, Abhiruchi Parisar Old Subhash Nagar, Bhopal, (M.P.)</p>
                 </div>
               </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-white/18 bg-white/10 p-4 backdrop-blur-sm overflow-hidden h-[280px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.4!2d77.4!3d23.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDE1JzAwLjAiTiA3N8KwMjQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0, borderRadius: '1.5rem' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Rescue Routes Location"
+              />
             </div>
           </div>
         </div>
