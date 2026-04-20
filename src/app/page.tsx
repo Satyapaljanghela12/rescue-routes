@@ -1,10 +1,11 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   HeartHandshake,
   HousePlus,
   PawPrint,
+  Plus,
   ShieldPlus,
   Stethoscope,
 } from "lucide-react";
@@ -13,6 +14,7 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import RealtimeNotifications from "@/components/RealtimeNotifications";
+import BlogCarousel from "@/components/sections/BlogCarousel";
 
 const heroVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4";
 
@@ -175,6 +177,46 @@ export default function Home() {
                   >
                     Join the Mission
                   </Link>
+                </div>
+                
+                {/* Registration Numbers */}
+                <div className="mt-8 space-y-1">
+                  <p className="text-xs sm:text-sm text-white/70 font-poppins">
+                    Registration No.: HI/01/01/01/33445/18
+                  </p>
+                  <p className="text-xs sm:text-sm text-white/70 font-poppins">
+                    NITI Ayog/NGO Registration No.: MP/2018/0188360
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Organizations Carousel Section */}
+        <section className="bg-white py-8">
+          <div className="mx-auto max-w-7xl">
+            {/* Scrolling carousel */}
+            <div className="relative overflow-hidden">
+              <div className="flex animate-scroll gap-16 items-center">
+                {/* First set of names */}
+                <div className="flex gap-16 items-center shrink-0">
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Welfare Board</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Pet Care India</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Rescue Foundation</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Rights NGO</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Paws & Hearts</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Compassion Trust</span>
+                </div>
+                
+                {/* Duplicate set for seamless loop */}
+                <div className="flex gap-16 items-center shrink-0">
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Welfare Board</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Pet Care India</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Rescue Foundation</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Rights NGO</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Paws & Hearts</span>
+                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Compassion Trust</span>
                 </div>
               </div>
             </div>
@@ -355,6 +397,7 @@ export default function Home() {
         </section>
 
         <UpcomingEventsSection />
+        <BlogCarousel />
         <FoundingTeamSection />
 
         <section className="bg-background py-20 sm:py-24">
@@ -391,28 +434,29 @@ export default function Home() {
 
             <div style={{ backgroundColor: '#2563EB' }} className="rounded-[2.4rem] p-8 text-white shadow-[0_22px_60px_rgba(37,99,235,0.22)] sm:p-10">
               <p className="text-xs font-fredoka font-semibold uppercase tracking-[0.28em] text-white/70">
-                Call to action
+                Join Our Mission
               </p>
               <h3 className="mt-4 font-fredoka text-4xl leading-tight">
-                Help us turn care into action, treatment into healing, and rescue into belonging.
+                Every Paw Deserves a Chance. Be the Reason They Smile Again.
               </h3>
               <p className="mt-5 text-base font-poppins leading-8 text-white/76">
-                Whether you donate, volunteer, foster, or adopt, your support directly strengthens
-                the journey from distress to safety.
+                Your compassion can transform a life. Whether you open your heart through donations, 
+                volunteer your time, provide a foster home, or adopt a furry friend - you become part 
+                of their journey from despair to hope, from pain to healing, from loneliness to love.
               </p>
               <div className="mt-8 space-y-4">
                 <Link
                   href="/membership"
                   className="flex items-center justify-between rounded-[1.5rem] border border-white/14 bg-white/10 px-5 py-4 text-sm font-fredoka font-semibold uppercase tracking-[0.12em] transition hover:bg-white/16"
                 >
-                  Become a member
+                  Join Our Family of Hope 🐾
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/donate"
                   className="flex items-center justify-between rounded-[1.5rem] bg-white px-5 py-4 text-sm font-fredoka font-semibold uppercase tracking-[0.12em] text-[#2563EB] transition hover:bg-white/90"
                 >
-                  Support a rescue
+                  Give Love, Save a Life ❤️
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

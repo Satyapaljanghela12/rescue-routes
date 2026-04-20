@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowLeft, CheckCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import confetti from "canvas-confetti";
 
 declare global {
@@ -443,7 +443,7 @@ export default function DonatePage() {
           )}
         </AnimatePresence>
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

@@ -10,95 +10,26 @@ const founders = [
     designation: "Founder & Rescue Lead",
     image: "/sneha.jpeg",
   },
-  {
-    name: "Aarav Mehta",
-    designation: "Co-Founder & Operations Head",
-    image: "/sneha2.png",
-  },
-  {
-    name: "Ishita Verma",
-    designation: "Community Outreach Lead",
-    image: "/sneha.jpeg",
-  },
-  {
-    name: "Rohan Kapoor",
-    designation: "Volunteer Network Coordinator",
-    image: "/sneha2.png",
-  },
-  {
-    name: "Meera Nair",
-    designation: "Animal Welfare Strategist",
-    image: "/sneha.jpeg",
-  },
-  {
-    name: "Kabir Singh",
-    designation: "Rescue Response Manager",
-    image: "/sneha2.png",
-  },
-  {
-    name: "Ananya Das",
-    designation: "Adoption & Foster Support Lead",
-    image: "/sneha.jpeg",
-  },
-  {
-    name: "Dev Malhotra",
-    designation: "Campaigns & Partnerships Lead",
-    image: "/sneha2.png",
-  },
 ];
 
 export default function FoundingTeamSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-
-    const amount = scrollRef.current.clientWidth * 0.8;
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 max-w-2xl mx-auto">
           <h2 className="font-fredoka text-5xl sm:text-6xl font-medium text-primary mb-4">
-            Our Founding Team
+            Meet Our Founder
           </h2>
           <p className="text-base font-poppins text-foreground/70 leading-relaxed">
-            Dedicated individuals working together to rescue, rehabilitate, and rehome animals in need. Every rescue dog has a story of resilience and hope. Our team is committed to giving these incredible companions a second chance at life, providing them with medical care, love, and the opportunity to find their forever homes.
+            Sneha Sharma founded Rescue Routes with a vision to create a compassionate world for animals in need. With unwavering dedication and a deep love for rescue dogs, she leads our mission to provide medical care, rehabilitation, and forever homes to every animal we rescue. Her commitment inspires our entire team to give these incredible companions a second chance at life.
           </p>
         </div>
 
-        <div className="flex justify-end items-center gap-3 mb-8">
-          <button
-            type="button"
-            onClick={() => scroll("left")}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-black/10 text-foreground transition hover:border-primary hover:text-primary"
-            aria-label="Scroll founding team left"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scroll("right")}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-black/10 text-foreground transition hover:border-primary hover:text-primary"
-            aria-label="Scroll founding team right"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-
-        <div
-          ref={scrollRef}
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
+        <div className="flex justify-center">
           {founders.map((founder) => (
             <article
               key={`${founder.name}-${founder.designation}`}
-              className="min-w-[260px] snap-start overflow-hidden rounded-[2rem] border border-black/10 bg-[#fffdf9] shadow-[0_18px_50px_rgba(90,55,32,0.08)] sm:min-w-[290px]"
+              className="w-full max-w-sm overflow-hidden rounded-[2rem] border border-black/10 bg-[#fffdf9] shadow-[0_18px_50px_rgba(90,55,32,0.08)]"
             >
               <div className="relative aspect-[4/4.8]">
                 <Image src={founder.image} alt={founder.name} fill className="object-cover" />

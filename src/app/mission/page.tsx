@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -86,7 +86,7 @@ export default function MissionPage() {
               >
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/Images/WhatsApp Image 2026-04-11 at 20.21.17 (1).jpeg"
+                    src="/About1.png"
                     alt="Rescued dog"
                     fill
                     className="object-cover"
@@ -94,7 +94,7 @@ export default function MissionPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg"
+                    src="/Images/WhatsApp Image 2026-04-11 at 20.29.35.jpeg"
                     alt="Happy rescued animal"
                     fill
                     className="object-cover"
@@ -214,7 +214,7 @@ export default function MissionPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

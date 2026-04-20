@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Heart, Users, Calendar, Megaphone } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -456,6 +456,45 @@ export default function VolunteersPage() {
           </div>
         </section>
 
+        {/* Meet Our Team Section */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-orange-50 to-white">
+          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Meet Our Team
+              </h2>
+              <p className="font-poppins text-lg text-gray-600 max-w-2xl mx-auto">
+                Our dedicated team working together to make a difference in the lives of animals
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src="/Images/20260322_165926.jpg"
+                alt="Rescue Routes Team"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
+              {/* Decorative overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+            </motion.div>
+          </div>
+        </section>
+
         {/* Featured Volunteers Section */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -628,7 +667,7 @@ export default function VolunteersPage() {
         </section>
 
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

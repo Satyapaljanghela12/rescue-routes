@@ -114,6 +114,16 @@ export default function HeroSection() {
                 Adopt a Dog 
               </button>
             </div>
+
+            {/* Registration Numbers */}
+            <div className="mt-8 space-y-2">
+              <p className="font-poppins text-xs md:text-sm text-gray-500">
+                Registration No.: HI/01/01/01/33445/18
+              </p>
+              <p className="font-poppins text-xs md:text-sm text-gray-500">
+                NITI Ayog/NGO Registration No.: MP/2018/0188360
+              </p>
+            </div>
           </motion.div>
 
           {/* Right Content / Image Area */}
@@ -132,8 +142,6 @@ export default function HeroSection() {
                 playsInline
                 className="w-full h-full object-cover"
               />
-              {/* Blur overlay */}
-              <div className="absolute inset-0 backdrop-blur-[2px] z-10 pointer-events-none"></div>
               
               {/* Floating Custom Paw Print */}
               <motion.div

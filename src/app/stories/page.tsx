@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -323,7 +323,7 @@ export default function StoriesPage() {
         </section>
 
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

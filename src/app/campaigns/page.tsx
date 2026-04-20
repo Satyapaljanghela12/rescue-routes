@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Heart, Stethoscope, Home, Droplet, Shield } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -348,7 +348,7 @@ export default function CampaignsPage() {
         </section>
 
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }
