@@ -33,7 +33,7 @@ export default function CampaignsPage() {
     targetAmount: "",
     startDate: "",
     endDate: "",
-    image: "/About1.jpg",
+    image: "/About1.png",
   });
 
   // Fetch campaigns
@@ -141,7 +141,7 @@ export default function CampaignsPage() {
           targetAmount: "",
           startDate: "",
           endDate: "",
-          image: "/About1.jpg",
+          image: "/About1.png",
         });
         setImagePreview("");
         setImageFile(null);
@@ -198,7 +198,7 @@ export default function CampaignsPage() {
                   targetAmount: "",
                   startDate: "",
                   endDate: "",
-                  image: "/About1.jpg",
+                  image: "/About1.png",
                 });
                 setImagePreview("");
                 setImageFile(null);

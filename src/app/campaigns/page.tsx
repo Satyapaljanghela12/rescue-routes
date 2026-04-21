@@ -71,16 +71,15 @@ export default function CampaignsPage() {
         {/* Hero Section */}
         <section className="py-16 md:py-24 relative overflow-hidden bg-white">
           <div className="absolute inset-0">
-            <video
-              className="absolute inset-0 h-full w-full object-cover opacity-20"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-            >
-              <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.16.mp4" type="video/mp4" />
-            </video>
+            <Image
+              src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg"
+              alt="Campaigns hero"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-white/60" />
           </div>
 
           {/* Decorative elements */}

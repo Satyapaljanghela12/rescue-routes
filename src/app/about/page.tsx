@@ -65,15 +65,12 @@ export default function AboutPage() {
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
           {/* bg video */}
           <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay loop muted playsInline preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+            autoPlay loop muted playsInline preload="auto"
+            style={{ filter: 'none' }}
           >
             <source src={heroVideo} type="video/mp4" />
           </video>
-
-          {/* gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
           <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
@@ -174,10 +171,10 @@ export default function AboutPage() {
                   <span className="absolute bottom-5 left-5 text-white font-heading text-xl">On-ground rescue</span>
                 </div>
                 <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
-                  <Image src={img1} alt="Rescue in Bhopal" fill className="object-cover transition hover:scale-105 duration-500" />
+                  <Image src={img1} alt="Rescue in Bhopal" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
                 </div>
                 <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
-                  <Image src={img2} alt="Street animal care" fill className="object-cover transition hover:scale-105 duration-500" />
+                  <Image src={img2} alt="Street animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
                 </div>
               </motion.div>
             </div>
@@ -211,7 +208,13 @@ export default function AboutPage() {
                 >
                   {/* Left inline image - fixed height */}
                   <div className="w-full md:w-5/12 h-64 md:h-72 relative rounded-[2.5rem] overflow-hidden shadow-xl shrink-0">
-                    <Image src={point.image} alt={point.title} fill className="object-cover hover:scale-105 transition duration-700" />
+                    <Image 
+                      src={point.image} 
+                      alt={point.title} 
+                      fill 
+                      sizes="(max-width: 768px) 100vw, 50vw" 
+                      className={`object-cover hover:scale-105 transition duration-700 ${i === 0 ? 'object-top' : 'object-center'}`} 
+                    />
                   </div>
                   {/* Right inline paragraph */}
                   <div className="w-full md:w-7/12 flex gap-5 items-start py-4">
@@ -280,7 +283,7 @@ export default function AboutPage() {
         <section className="relative py-28 overflow-hidden">
           {/* bg */}
           <div className="absolute inset-0">
-            <Image src={img6} alt="Impact" fill className="object-cover" />
+            <Image src={img6} alt="Impact" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
             <div className="absolute inset-0 bg-black/75" />
           </div>
 
@@ -341,12 +344,12 @@ export default function AboutPage() {
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Field Rescue</span>
               </div>
               <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
-                <Image src={img7} alt="Community care" fill className="object-cover hover:scale-105 transition duration-700" />
+                <Image src={img7} alt="Community care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Community Care</span>
               </div>
               <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
-                <Image src={img8} alt="Recovery" fill className="object-cover hover:scale-105 transition duration-700" />
+                <Image src={img8} alt="Recovery" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Recovery</span>
               </div>
@@ -400,16 +403,16 @@ export default function AboutPage() {
                 className="grid grid-cols-2 gap-4"
               >
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
-                  <Image src={img3} alt="Community volunteers" fill className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.10.jpeg" alt="Community volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
-                  <Image src={img4} alt="Animal care" fill className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.14.jpeg" alt="Animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
-                  <Image src={img5} alt="Relove and adopt" fill className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg" alt="Relove and adopt" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
-                  <Image src={img2} alt="volunteers" fill className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.18.jpeg" alt="volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
               </motion.div>
             </div>

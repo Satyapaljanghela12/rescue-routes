@@ -9,18 +9,10 @@ import Image from "next/image";
 
 // Featured volunteers data
 const featuredVolunteers = [
-  { name: "Priya Sharma", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (1).jpeg" },
-  { name: "Rahul Verma", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg" },
-  { name: "Anjali Patel", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (3).jpeg" },
-  { name: "Vikram Singh", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (4).jpeg" },
-  { name: "Neha Gupta", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.17.jpeg" },
-  { name: "Arjun Mehta", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (1).jpeg" },
-  { name: "Kavya Reddy", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (2).jpeg" },
-  { name: "Rohan Kumar", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.18.jpeg" },
-  { name: "Ishita Joshi", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.10 (1).jpeg" },
-  { name: "Aditya Nair", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.10.jpeg" },
-  { name: "Pooja Desai", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.09.jpeg" },
-  { name: "Karan Malhotra", image: "/Images/WhatsApp Image 2026-04-11 at 20.21.16 (1).jpeg" },
+  { name: "Anant Verma", role: "Marketing Intern", image: "/Interns/Anant.jpeg" },
+  { name: "Aryan Khushwaha", role: "Operations Intern", image: "/Interns/Aryan.jpeg" },
+  { name: "Harshvardhan Singh", role: "Marketing Intern", image: "/Interns/Harshvardhan.jpeg" },
+  { name: "Vaibhavi Tiwari", role: "Operations Intern", image: "/Interns/Vaibhavi.jpeg" },
 ];
 
 export default function VolunteersPage() {
@@ -456,45 +448,6 @@ export default function VolunteersPage() {
           </div>
         </section>
 
-        {/* Meet Our Team Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-orange-50 to-white">
-          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
-                Meet Our Team
-              </h2>
-              <p className="font-poppins text-lg text-gray-600 max-w-2xl mx-auto">
-                Our dedicated team working together to make a difference in the lives of animals
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative rounded-3xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                src="/Images/20260322_165926.jpg"
-                alt="Rescue Routes Team"
-                width={1200}
-                height={800}
-                className="w-full h-auto object-cover"
-              />
-              {/* Decorative overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-            </motion.div>
-          </div>
-        </section>
-
         {/* Featured Volunteers Section */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -515,14 +468,14 @@ export default function VolunteersPage() {
             </motion.div>
 
             {/* Volunteers Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {featuredVolunteers.map((volunteer, index) => (
                 <motion.div
                   key={volunteer.name}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -10, scale: 1.05 }}
                   className="group relative"
                 >
@@ -531,7 +484,8 @@ export default function VolunteersPage() {
                       src={volunteer.image}
                       alt={volunteer.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover object-top group-hover:scale-110 transition-transform duration-500"
                     />
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -551,7 +505,7 @@ export default function VolunteersPage() {
                     <h3 className="font-fredoka text-lg text-primary group-hover:text-orange-600 transition-colors">
                       {volunteer.name}
                     </h3>
-                    <p className="font-poppins text-sm text-gray-500">Volunteer</p>
+                    <p className="font-poppins text-sm text-gray-500">{volunteer.role}</p>
                   </div>
 
                   {/* Decorative paw print */}

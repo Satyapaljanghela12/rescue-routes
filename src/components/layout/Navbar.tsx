@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <div className={`relative transition-all duration-300 overflow-hidden rounded-full border border-black/8 bg-white ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}>
-              <Image src="/logo.png" alt="Rescue Routes" fill className="object-contain p-1.5" priority />
+              <Image src="/logo.png" alt="Rescue Routes" fill sizes="48px" className="object-contain p-1.5" priority />
             </div>
           </Link>
 

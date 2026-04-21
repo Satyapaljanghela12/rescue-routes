@@ -322,35 +322,52 @@ export default function Home() {
 
         <section className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-              <div className="flex h-full items-center">
-                <div className="max-w-md">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
-                  What We Do
-                </p>
-                <h2 className="mt-4 font-heading text-4xl leading-tight text-foreground sm:text-5xl">
-                  We believe in a holistic approach to welfare.
-                </h2>
-                <p className="mt-5 text-base leading-8 text-foreground/72">
-                  From emergency response to long-term community health.
-                </p>
-                <div className="mt-8 flex flex-row flex-wrap gap-4">
-                  <Link
-                    href="/campaigns"
-                    className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
-                  >
-                    Explore Our Programs
-                  </Link>
-                  <Link
-                    href="/volunteers"
-                    className="inline-flex items-center justify-center rounded-full border border-black/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition hover:border-primary hover:text-primary"
-                  >
-                    Join our mission today
-                  </Link>
+            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+              {/* Left Side - Single Card with Text and Video */}
+              <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-[#fffdf9] shadow-[0_18px_50px_rgba(90,55,32,0.08)] h-full flex flex-col">
+                <div className="p-8 flex-shrink-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                    What We Do
+                  </p>
+                  <h2 className="mt-4 font-heading text-4xl leading-tight text-foreground sm:text-5xl">
+                    We believe in a holistic approach to welfare.
+                  </h2>
+                  <p className="mt-5 text-base leading-8 text-foreground/72">
+                    From emergency response to long-term community health.
+                  </p>
+                  <div className="mt-8 flex flex-col gap-4">
+                    <Link
+                      href="/campaigns"
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
+                    >
+                      Explore Our Programs
+                    </Link>
+                    <Link
+                      href="/volunteers"
+                      className="inline-flex items-center justify-center rounded-full border border-black/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition hover:border-primary hover:text-primary"
+                    >
+                      Join our mission today
+                    </Link>
+                  </div>
                 </div>
+                
+                {/* Video Section */}
+                <div className="relative flex-1 min-h-[300px]">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                  >
+                    <source src="/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4" type="video/mp4" />
+                  </video>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                 </div>
               </div>
 
+              {/* Right Side - Program Cards Grid */}
               <div className="grid gap-6 md:grid-cols-2">
                 {programsShowcase.map((program) => (
                   <article
@@ -370,7 +387,7 @@ export default function Home() {
                           <source src={program.src} type="video/mp4" />
                         </video>
                       ) : (
-                        <Image src={program.src} alt={program.alt} fill className="object-cover" />
+                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
                       )}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                     </div>
