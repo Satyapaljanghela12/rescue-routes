@@ -135,58 +135,69 @@ export default function Home() {
       <Navbar />
       <RealtimeNotifications />
       <main className="flex-1 overflow-hidden bg-background text-foreground">
-        <section className="relative isolate min-h-[88vh] overflow-hidden border-b border-black/10">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(72,30,25,0.8)_0%,rgba(72,30,25,0.56)_46%,rgba(72,30,25,0.3)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(250,198,2,0.24),transparent_33%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(186,215,1,0.18),transparent_28%)]" />
-
-          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36">
-            <div className="grid w-full gap-10">
-              <div className="max-w-3xl text-white">
-                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#fac602]/45 bg-[#fff6ea]/14 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#fff6ea] backdrop-blur-sm">
-                  <PawPrint className="h-4 w-4 text-[#fac602]" />
-                  Parwati Seva Foundation
-                </p>
-                <h1 className="max-w-4xl font-heading text-5xl font-semibold leading-none sm:text-6xl lg:text-[5.9rem]">
+        <section className="relative isolate min-h-[88vh] overflow-hidden bg-gradient-to-br from-cyan-200 via-blue-300 to-yellow-200">
+          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8">
+            <div className="grid w-full lg:grid-cols-2 gap-12 items-start">
+              {/* Left side - Text content */}
+              <div className="text-white">
+                <h1 className="font-heading text-5xl font-semibold leading-tight sm:text-6xl lg:text-7xl drop-shadow-lg">
                   Build a kinder path for every stray, injured, and abandoned life.
                 </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-white/82 sm:text-lg">
-                  Rescue Routes pairs urgent rescue, treatment, shelter support, and adoption
-                  efforts with a warmer, people-first movement for animal welfare.
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg font-normal drop-shadow-md">
+                  Rescue Routes pairs urgent rescue, treatment, shelter support, and warmer, people-first movement for animal welfare
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
                     href="/donate"
-                    className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-deep"
+                    className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-primary transition hover:bg-gray-50 shadow-xl hover:shadow-2xl hover:scale-105"
                   >
                     Donate Now
                   </Link>
                   <Link
                     href="/volunteers"
-                    className="inline-flex items-center justify-center rounded-full border border-[#fff6ea]/45 bg-[#fff6ea]/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm transition hover:bg-[#fff6ea]/18"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-white bg-white/10 backdrop-blur-sm px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/20 shadow-lg"
                   >
                     Join the Mission
                   </Link>
                 </div>
                 
                 {/* Registration Numbers */}
-                <div className="mt-8 space-y-1">
-                  <p className="text-xs sm:text-sm text-white/70 font-poppins">
+                <div className="mt-6 space-y-1">
+                  <p className="text-xs sm:text-sm text-white/80 font-poppins">
                     Registration No.: HI/01/01/01/33445/18
                   </p>
-                  <p className="text-xs sm:text-sm text-white/70 font-poppins">
+                  <p className="text-xs sm:text-sm text-white/80 font-poppins">
                     NITI Ayog/NGO Registration No.: MP/2018/0188360
                   </p>
+                </div>
+              </div>
+
+              {/* Right side - Video frame with animals */}
+              <div className="relative hidden lg:block">
+                {/* White phone/tablet frame */}
+                <div className="relative mx-auto w-full max-w-sm">
+                  <div className="relative rounded-[3rem] bg-white p-3 shadow-2xl">
+                    {/* Video inside frame - height matches text content */}
+                    <div className="relative h-[500px] overflow-hidden rounded-[2.5rem] bg-gray-100">
+                      <video
+                        className="absolute inset-0 h-full w-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                      >
+                        <source src={heroVideo} type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  
+                  {/* "Every soul matters!" badge */}
+                  <div className="absolute -bottom-4 -right-4 rounded-2xl bg-primary px-6 py-3 shadow-lg">
+                    <p className="font-fredoka text-sm font-bold text-white">
+                      Every soul<br />matters!
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

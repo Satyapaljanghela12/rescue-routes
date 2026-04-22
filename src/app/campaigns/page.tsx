@@ -33,6 +33,15 @@ const getIconForCampaign = (title: string) => {
 export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<any[]>([]);
   const [adoptions, setAdoptions] = useState<any[]>([]);
+  const [selectedAnimal, setSelectedAnimal] = useState<any>(null);
+  const [showAdoptionForm, setShowAdoptionForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    reason: "",
+  });
 
   useEffect(() => {
     fetchCampaigns();
@@ -61,6 +70,41 @@ export default function CampaignsPage() {
       }
     } catch (error) {
       console.error("Error fetching adoptions:", error);
+    }
+  };
+
+  const handleAdoptClick = (animal: any) => {
+    setSelectedAnimal(animal);
+    setShowAdoptionForm(true);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch("/api/adoption-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          animalId: selectedAnimal._id,
+          animalName: selectedAnimal.animalName,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        alert("Adoption application submitted successfully! We'll contact you soon.");
+        setShowAdoptionForm(false);
+        setFormData({ name: "", email: "", phone: "", address: "", reason: "" });
+        setSelectedAnimal(null);
+      } else {
+        alert("Failed to submit application. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      alert("An error occurred. Please try again.");
     }
   };
   return (
@@ -253,7 +297,10 @@ export default function CampaignsPage() {
                       </p>
                     )}
 
-                    <button className="w-full bg-primary hover:bg-orange-600 text-white font-fredoka py-2.5 rounded-xl transition-all">
+                    <button 
+                      onClick={() => handleAdoptClick(animal)}
+                      className="w-full bg-primary hover:bg-orange-600 text-white font-fredoka py-2.5 rounded-xl transition-all"
+                    >
                       Adopt Me
                     </button>
 
@@ -347,6 +394,123 @@ export default function CampaignsPage() {
         </section>
 
       </main>
+
+      {/* Adoption Form Modal */}
+      {showAdoptionForm && selectedAnimal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-fredoka text-2xl text-primary">
+                  Adopt {selectedAnimal.animalName}
+                </h3>
+                <button
+                  onClick={() => {
+                    setShowAdoptionForm(false);
+                    setSelectedAnimal(null);
+                  }}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
+                    Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
+                    Address *
+                  </label>
+                  <textarea
+                    required
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    rows={2}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
+                    Why do you want to adopt {selectedAnimal.animalName}? *
+                  </label>
+                  <textarea
+                    required
+                    value={formData.reason}
+                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                    rows={3}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAdoptionForm(false);
+                      setSelectedAnimal(null);
+                    }}
+                    className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-fredoka rounded-lg hover:bg-gray-50 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-4 py-2.5 bg-primary text-white font-fredoka rounded-lg hover:bg-orange-600 transition"
+                  >
+                    Submit Application
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
       <SiteFooter />
     </>
   );

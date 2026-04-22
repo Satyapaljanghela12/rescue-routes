@@ -35,7 +35,7 @@ export default function Navbar() {
       <div
         className={`mx-auto border transition-all duration-300 ${
           scrolled
-            ? "max-w-7xl rounded-full border-black/8 bg-white/96 shadow-[0_16px_45px_rgba(20,20,20,0.08)] backdrop-blur-xl"
+            ? "max-w-7xl lg:rounded-full rounded-none border-black/8 bg-white/96 shadow-[0_16px_45px_rgba(20,20,20,0.08)] backdrop-blur-xl"
             : "max-w-none rounded-none border-transparent bg-white shadow-sm"
         }`}
       >

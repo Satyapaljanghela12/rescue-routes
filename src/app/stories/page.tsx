@@ -65,7 +65,20 @@ export default function StoriesPage() {
       <main className="flex-1 w-full overflow-hidden pt-20">
         
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/Images/WhatsApp Image 2026-04-11 at 20.21.14 (1).jpeg"
+              alt="Stories hero background"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-white/80" />
+          </div>
+
           {/* Decorative elements */}
           <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />

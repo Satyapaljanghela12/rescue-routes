@@ -60,17 +60,20 @@ export default function AboutPage() {
       <main className="overflow-hidden bg-white">
 
         {/* ══════════════════════════════════════════════════════
-            HERO — full-bleed video with left-side text panel
+            HERO — full-bleed image with left-side text panel
         ══════════════════════════════════════════════════════ */}
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
-          {/* bg video */}
-          <video
-            className="absolute inset-0 h-full w-full object-cover object-top"
-            autoPlay loop muted playsInline preload="auto"
-            style={{ filter: 'none' }}
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
+          {/* bg image */}
+          <Image
+            src="/Images/20260322_165926.jpg"
+            alt="Rescue Routes Team"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
           <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
