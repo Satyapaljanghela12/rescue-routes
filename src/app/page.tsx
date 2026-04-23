@@ -16,6 +16,7 @@ import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
 import PastCampaignsSection from "@/components/sections/PastCampaignsSection";
+import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import RealtimeNotifications from "@/components/RealtimeNotifications";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -423,9 +424,9 @@ export default function Home() {
 
         <section className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch">
               {/* Left Side - Single Card with Text and Video */}
-              <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-[#fffdf9] shadow-[0_18px_50px_rgba(90,55,32,0.08)] h-full flex flex-col">
+              <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-[#fffdf9] shadow-[0_18px_50px_rgba(90,55,32,0.08)] flex flex-col h-full">
                 <div className="p-8 flex-shrink-0">
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
                     What We Do
@@ -453,9 +454,9 @@ export default function Home() {
                 </div>
                 
                 {/* Video Section */}
-                <div className="relative flex-1 min-h-[300px] overflow-hidden rounded-b-[2rem]">
+                <div className="relative flex-1 min-h-[400px] overflow-hidden rounded-b-[2rem]">
                   <video
-                    className="h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                     autoPlay
                     loop
                     muted
@@ -515,6 +516,7 @@ export default function Home() {
         </section>
 
         <PastCampaignsSection />
+        <UpcomingEventsSection />
         <FoundingTeamSection />
 
         <section className="bg-background py-20 sm:py-24">
