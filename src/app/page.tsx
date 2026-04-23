@@ -453,9 +453,9 @@ export default function Home() {
                 </div>
                 
                 {/* Video Section */}
-                <div className="relative flex-1 min-h-[300px]">
+                <div className="relative flex-1 min-h-[300px] overflow-hidden rounded-b-[2rem]">
                   <video
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="h-full w-full object-cover"
                     autoPlay
                     loop
                     muted

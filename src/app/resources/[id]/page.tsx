@@ -6,8 +6,9 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { use } from "react";
+import React from "react";
 
-const articlesContent: Record<string, { title: string; category: string; content: JSX.Element }> = {
+const articlesContent: Record<string, { title: string; category: string; content: React.ReactElement }> = {
   "emergency-response": {
     title: "Found an Injured Dog in Bhopal? Here Is What You Should Do Immediately",
     category: "Emergency Response Guide",
