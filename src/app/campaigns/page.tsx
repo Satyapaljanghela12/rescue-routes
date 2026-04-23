@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Stethoscope, Home, Droplet, Shield } from "lucide-react";
+import { PawPrint, Stethoscope, Home, Droplet, Shield, CalendarDays } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
@@ -20,14 +20,14 @@ const iconMap: any = {
   "Bed": Home,
   "Summer": Droplet,
   "Water": Droplet,
-  "Food": Heart,
+  "Food": PawPrint,
 };
 
 const getIconForCampaign = (title: string) => {
   for (const key in iconMap) {
     if (title.includes(key)) return iconMap[key];
   }
-  return Heart;
+  return PawPrint;
 };
 
 export default function CampaignsPage() {
@@ -148,8 +148,166 @@ export default function CampaignsPage() {
           </div>
         </section>
 
-        {/* Campaign Grid */}
+        {/* Past Campaigns Section */}
         <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-4">
+                Our Journey
+              </p>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Past Campaigns
+              </h2>
+              <p className="font-poppins text-lg text-gray-600 max-w-3xl mx-auto">
+                Throughout all operations, we remain committed to community education regarding sterilization (ABC programs) and the critical importance of Rabies prevention to ensure a safe environment for both humans and animals.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  title: "Adoption Mega-Camp",
+                  date: "December 27–28, 2025",
+                  description: "Organized in collaboration with the Ram Astha Mission",
+                  impact: [
+                    "55 puppies participated",
+                    "22 successful adoptions",
+                    "Partnered with Nagar Nigam for on-site pet license registration and rabies vaccinations"
+                  ],
+                  image: "/Camapigns/27-28dec.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Winter Bed Drive",
+                  date: "November 27, 2025",
+                  description: "Providing warmth for street dogs during harsh winter",
+                  impact: [
+                    "Produced 1,000 Boribeds (stubble-filled sacks)",
+                    "Partnership with Parwati Sewa Foundation"
+                  ],
+                  image: "/Camapigns/Winterbeddrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Water Pot Drive",
+                  date: "May 4, 2025",
+                  description: "Ensuring stray animals have access to clean drinking water during summer heat",
+                  impact: [
+                    "Distributed 100 water pots across the city"
+                  ],
+                  image: "/Camapigns/WaterPotDrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Year-End Adoption Camp",
+                  date: "December 28–29, 2024",
+                  description: "Continued efforts in finding forever homes for local strays",
+                  impact: [
+                    "60 puppies participated",
+                    "18 successful adoptions"
+                  ],
+                  image: "/Camapigns/yearend.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Annual Bed Drive",
+                  date: "December 1, 2024",
+                  description: "Scaled up production to create protective beds for street animals",
+                  impact: [
+                    "Created approximately 800 protective beds using stubble and sacks"
+                  ],
+                  image: "/Camapigns/Annualbeddrive.jpg",
+                  objectPosition: "object-center"
+                },
+                {
+                  title: "New Year Adoption Drive",
+                  date: "January 27–28, 2024",
+                  description: "Location: 10 Number Market",
+                  impact: [
+                    "50 puppies participated",
+                    "21 successful adoptions"
+                  ],
+                  image: "/Camapigns/Adoptiondrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Adoption Camp at Olivers",
+                  date: "December 25, 2023",
+                  description: "Location: 10 Number",
+                  impact: [
+                    "20 puppies participated",
+                    "3 successful adoptions"
+                  ],
+                  image: "/Camapigns/adoptionolivers.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Foundation Bed Drive",
+                  date: "December 1, 2023",
+                  description: "Initial winter drive for street dogs",
+                  impact: [
+                    "Created 600 beds using boris (sacks) and bhusa (stubble)"
+                  ],
+                  image: "/Camapigns/foundationbed.jpg",
+                  objectPosition: "object-top"
+                }
+              ].map((campaign, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-[2rem] shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 overflow-hidden"
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={campaign.image}
+                      alt={campaign.title}
+                      fill
+                      className={`object-cover ${campaign.objectPosition}`}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/28 to-transparent" />
+                  </div>
+
+                  <div className="p-6">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[#fac602]/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
+                      <CalendarDays className="h-4 w-4" />
+                      {campaign.date}
+                    </div>
+
+                    <h3 className="font-fredoka text-2xl leading-tight text-primary mb-3">
+                      {campaign.title}
+                    </h3>
+                    <p className="text-sm font-poppins leading-7 text-foreground/72 mb-4">
+                      {campaign.description}
+                    </p>
+
+                    <div className="space-y-2">
+                      {campaign.impact.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <PawPrint className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                          <p className="text-xs font-poppins leading-6 text-foreground/68">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Campaign Grid */}
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
             
             <motion.div

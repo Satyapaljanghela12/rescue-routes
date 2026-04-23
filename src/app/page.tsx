@@ -1,5 +1,8 @@
-﻿import Image from "next/image";
+﻿"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   HeartHandshake,
@@ -12,9 +15,9 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
-import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
+import PastCampaignsSection from "@/components/sections/PastCampaignsSection";
 import RealtimeNotifications from "@/components/RealtimeNotifications";
-import BlogCarousel from "@/components/sections/BlogCarousel";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const heroVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4";
 
@@ -134,6 +137,7 @@ export default function Home() {
     <>
       <Navbar />
       <RealtimeNotifications />
+      <WhatsAppButton />
       <main className="flex-1 overflow-hidden bg-background text-foreground">
         <section className="relative isolate min-h-[88vh] overflow-hidden bg-gradient-to-br from-cyan-200 via-blue-300 to-yellow-200">
           <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8">
@@ -261,6 +265,91 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Stats Section */}
+        <section className="relative py-12 overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative">
+              {/* Blue rounded background bar */}
+              <div className="relative bg-gradient-to-r from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl overflow-hidden">
+                {/* Decorative circles */}
+                <div className="absolute -top-10 -left-10 w-32 h-32 bg-blue-400/30 rounded-full" />
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-400/30 rounded-full" />
+                
+                {/* Stats content */}
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 px-8 py-12 md:py-16">
+                  {/* Stat 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center"
+                  >
+                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
+                      3400+
+                    </div>
+                    <div className="font-fredoka text-lg md:text-xl text-white/90">
+                      Beds Created
+                    </div>
+                  </motion.div>
+
+                  {/* Stat 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-center"
+                  >
+                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
+                      800+
+                    </div>
+                    <div className="font-fredoka text-lg md:text-xl text-white/90">
+                      Animals Rescued
+                    </div>
+                  </motion.div>
+
+                  {/* Stat 3 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-center"
+                  >
+                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
+                      100+
+                    </div>
+                    <div className="font-fredoka text-lg md:text-xl text-white/90">
+                      Water Pots
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Decorative animal images on corners */}
+              <div className="absolute -top-8 -left-8 w-24 h-24 rounded-full bg-yellow-400 overflow-hidden shadow-xl hidden md:block">
+                <Image
+                  src="/dog1.png"
+                  alt="Dog"
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-yellow-400 overflow-hidden shadow-xl hidden md:block">
+                <Image
+                  src="/dog2.png"
+                  alt="Dog"
+                  fill
+                  sizes="112px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-background py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
@@ -291,6 +380,7 @@ export default function Home() {
                           src={item.image}
                           alt={item.alt}
                           fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover transition duration-700 group-hover:scale-105"
                         />
                       </div>
@@ -372,7 +462,7 @@ export default function Home() {
                     playsInline
                     preload="metadata"
                   >
-                    <source src="/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4" type="video/mp4" />
+                    <source src="/Images/WhatsApp Video 2026-04-11 at 20.21.12.mp4" type="video/mp4" />
                   </video>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                 </div>
@@ -424,8 +514,7 @@ export default function Home() {
           </div>
         </section>
 
-        <UpcomingEventsSection />
-        <BlogCarousel />
+        <PastCampaignsSection />
         <FoundingTeamSection />
 
         <section className="bg-background py-20 sm:py-24">

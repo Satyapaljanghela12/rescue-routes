@@ -15,7 +15,7 @@ declare global {
 const membershipTiers = [
   {
     id: "student",
-    name: "Student Membership",
+    name: "Student Rescue Circle",
     price: 500,
     icon: Award,
     color: "orange",
@@ -28,7 +28,7 @@ const membershipTiers = [
   },
   {
     id: "silver",
-    name: "Silver Membership",
+    name: "Silver Rescue Circle",
     price: 1000,
     icon: Star,
     color: "gray",
@@ -42,7 +42,7 @@ const membershipTiers = [
   },
   {
     id: "golden",
-    name: "Golden Membership",
+    name: "Golden Rescue Circle",
     price: 2500,
     icon: Gift,
     color: "yellow",
@@ -56,7 +56,7 @@ const membershipTiers = [
   },
   {
     id: "platinum",
-    name: "Platinum Membership",
+    name: "Platinum Rescue Circle",
     price: 5000,
     icon: Crown,
     color: "purple",
@@ -72,7 +72,7 @@ const membershipTiers = [
   },
   {
     id: "lifetime",
-    name: "Lifetime Membership",
+    name: "Lifetime Rescue Circle",
     price: 10000,
     icon: Crown,
     color: "orange",

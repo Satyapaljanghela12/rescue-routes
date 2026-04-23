@@ -43,6 +43,15 @@ a {
     text-wrap: balance;
   }
   
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
   @keyframes scroll {
     0% {
       transform: translateX(0);

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, MapPin, X } from "lucide-react";
-import Image from "next/image";
 
 type NotificationType = "donation" | "rescue" | "adoption";
 
@@ -14,89 +13,115 @@ interface Notification {
   location?: string;
   amount?: string;
   name?: string;
-  image?: string;
   timestamp: Date;
 }
 
-// Sample data - in production, this would come from your database/API
-const sampleNotifications: Omit<Notification, "id" | "timestamp">[] = [
-  {
-    type: "donation",
-    message: "donated",
-    amount: "₹500",
-    name: "Priya Sharma",
-  },
-  {
-    type: "rescue",
-    message: "rescued",
-    location: "Bhopal, MP",
-    name: "Street Dog",
-  },
-  {
-    type: "donation",
-    message: "donated",
-    amount: "₹1,000",
-    name: "Rahul Verma",
-  },
-  {
-    type: "rescue",
-    message: "rescued",
-    location: "Indore, MP",
-    name: "Injured Cat",
-  },
-  {
-    type: "adoption",
-    message: "adopted",
-    name: "Bruno",
-    location: "Bhopal, MP",
-  },
-  {
-    type: "donation",
-    message: "donated",
-    amount: "₹2,500",
-    name: "Anjali Patel",
-  },
-  {
-    type: "rescue",
-    message: "rescued",
-    location: "Jabalpur, MP",
-    name: "Puppy",
-  },
-  {
-    type: "donation",
-    message: "donated",
-    amount: "₹750",
-    name: "Vikram Singh",
-  },
-];
-
 export default function RealtimeNotifications() {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [currentNotification, setCurrentNotification] = useState<Notification | null>(null);
+  const [lastChecked, setLastChecked] = useState<Date>(new Date());
 
   useEffect(() => {
-    // Simulate real-time notifications
-    const interval = setInterval(() => {
-      // Pick a random notification from sample data
-      const randomNotif = sampleNotifications[Math.floor(Math.random() * sampleNotifications.length)];
-      
-      const newNotification: Notification = {
-        ...randomNotif,
-        id: Math.random().toString(36).substr(2, 9),
-        timestamp: new Date(),
-      };
+    // Check for new notifications every 10 seconds
+    const interval = setInterval(async () => {
+      try {
+        // Fetch recent donations
+        const donationsRes = await fetch('/api/donations');
+        const donationsData = await donationsRes.json();
+        
+        if (donationsData.success && donationsData.donations.length > 0) {
+          const recentDonations = donationsData.donations
+            .filter((d: any) => new Date(d.createdAt) > lastChecked)
+            .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          
+          if (recentDonations.length > 0) {
+            const donation = recentDonations[0];
+            const newNotification: Notification = {
+              id: donation._id,
+              type: "donation",
+              message: "donated",
+              amount: `₹${donation.amount}`,
+              name: donation.name || "Anonymous",
+              timestamp: new Date(donation.createdAt),
+            };
+            
+            setCurrentNotification(newNotification);
+            setLastChecked(new Date());
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+              setCurrentNotification(null);
+            }, 5000);
+            return;
+          }
+        }
 
-      setCurrentNotification(newNotification);
-      setNotifications(prev => [newNotification, ...prev].slice(0, 10)); // Keep last 10
+        // Fetch recent rescue cases
+        const rescueRes = await fetch('/api/rescue-cases');
+        const rescueData = await rescueRes.json();
+        
+        if (rescueData.success && rescueData.cases.length > 0) {
+          const recentRescues = rescueData.cases
+            .filter((r: any) => new Date(r.createdAt) > lastChecked && r.status === 'Resolved')
+            .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          
+          if (recentRescues.length > 0) {
+            const rescue = recentRescues[0];
+            const newNotification: Notification = {
+              id: rescue._id,
+              type: "rescue",
+              message: "rescued",
+              location: rescue.location || "Unknown location",
+              name: rescue.animalType || "Animal",
+              timestamp: new Date(rescue.createdAt),
+            };
+            
+            setCurrentNotification(newNotification);
+            setLastChecked(new Date());
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+              setCurrentNotification(null);
+            }, 5000);
+            return;
+          }
+        }
 
-      // Auto-hide after 5 seconds
-      setTimeout(() => {
-        setCurrentNotification(null);
-      }, 5000);
-    }, 8000); // Show new notification every 8 seconds
+        // Fetch recent adoptions
+        const adoptionsRes = await fetch('/api/adoptions');
+        const adoptionsData = await adoptionsRes.json();
+        
+        if (adoptionsData.success && adoptionsData.adoptions.length > 0) {
+          const recentAdoptions = adoptionsData.adoptions
+            .filter((a: any) => new Date(a.updatedAt) > lastChecked && a.status === 'Adopted')
+            .sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+          
+          if (recentAdoptions.length > 0) {
+            const adoption = recentAdoptions[0];
+            const newNotification: Notification = {
+              id: adoption._id,
+              type: "adoption",
+              message: "adopted",
+              name: adoption.animalName || "Pet",
+              location: "Bhopal, MP",
+              timestamp: new Date(adoption.updatedAt),
+            };
+            
+            setCurrentNotification(newNotification);
+            setLastChecked(new Date());
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+              setCurrentNotification(null);
+            }, 5000);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    }, 10000); // Check every 10 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [lastChecked]);
 
   const handleClose = () => {
     setCurrentNotification(null);

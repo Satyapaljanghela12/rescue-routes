@@ -151,12 +151,15 @@ export default function StoriesPage() {
                           />
                         </div>
 
-                        {/* Cute badge with story number */}
-                        <div className={`absolute ${index % 2 === 0 ? '-bottom-6 -right-6' : '-bottom-6 -left-6'} bg-gradient-to-br from-primary to-orange-600 rounded-3xl px-6 py-4 shadow-2xl transform ${index % 2 === 0 ? 'rotate-12' : '-rotate-12'}`}>
-                          <div className="text-center">
-                            <div className="font-fredoka text-white text-sm">Story</div>
-                            <div className="font-poetsen text-white text-3xl leading-none">#{index + 1}</div>
-                          </div>
+                        {/* Cute badge with paw icon */}
+                        <div className={`absolute ${index % 2 === 0 ? '-bottom-6 -right-6' : '-bottom-6 -left-6'} bg-[#2563EB] rounded-3xl p-5 shadow-2xl transform ${index % 2 === 0 ? 'rotate-12' : '-rotate-12'}`}>
+                          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+                            <circle cx="12" cy="16" r="3" />
+                            <circle cx="8" cy="12" r="2" />
+                            <circle cx="16" cy="12" r="2" />
+                            <circle cx="10" cy="8" r="1.5" />
+                            <circle cx="14" cy="8" r="1.5" />
+                          </svg>
                         </div>
 
                         {/* Floating paws */}
@@ -234,57 +237,6 @@ export default function StoriesPage() {
               ))}
             </div>
 
-          </div>
-        </section>
-
-        {/* Emotional Impact */}
-        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
-          {/* Decorative paw prints background */}
-          <div className="absolute inset-0 opacity-5">
-            {[...Array(8)].map((_, i) => (
-              <svg
-                key={i}
-                width="100"
-                height="100"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="text-primary absolute"
-                style={{
-                  top: `${Math.random() * 80 + 10}%`,
-                  left: `${Math.random() * 80 + 10}%`,
-                  transform: `rotate(${Math.random() * 360}deg)`,
-                }}
-              >
-                <circle cx="12" cy="16" r="3" />
-                <circle cx="8" cy="12" r="2" />
-                <circle cx="16" cy="12" r="2" />
-                <circle cx="10" cy="8" r="1.5" />
-                <circle cx="14" cy="8" r="1.5" />
-              </svg>
-            ))}
-          </div>
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-5xl relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center bg-white rounded-[3rem] p-12 md:p-16 shadow-2xl border-4 border-gray-100"
-            >
-              <div className="inline-block bg-primary/10 px-6 py-2 rounded-full mb-6">
-                <span className="font-fredoka text-primary text-lg">Our Impact</span>
-              </div>
-              
-              <h2 className="font-fredoka text-4xl md:text-5xl mb-8 text-primary">
-                Every Story Matters
-              </h2>
-              
-              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Each rescue is more than saving an animal — it's restoring hope, healing pain, 
-                and giving life another chance.
-              </p>
-            </motion.div>
           </div>
         </section>
 

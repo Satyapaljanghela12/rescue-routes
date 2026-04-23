@@ -11,24 +11,24 @@ const founder = {
 
 const interns = [
   {
-    name: "Anant Verma",
-    role: "Marketing Intern",
-    image: "/Interns/Anant.jpeg"
+    name: "Kausiki",
+    role: "Team Member",
+    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.17.jpeg"
   },
   {
-    name: "Aryan Khushwaha",
-    role: "Operations Intern",
-    image: "/Interns/Aryan.jpeg"
+    name: "Sarvang",
+    role: "Team Member",
+    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.44.jpeg"
   },
   {
-    name: "Harshvardhan Singh",
-    role: "Marketing Intern",
-    image: "/Interns/Harshvardhan.jpeg"
+    name: "Vinayak",
+    role: "Team Member",
+    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.50.jpeg"
   },
   {
-    name: "Vaibhavi Tiwari",
-    role: "Operations Intern",
-    image: "/Interns/Vaibhavi.jpeg"
+    name: "Suryansha",
+    role: "Team Member",
+    image: "/Core members/WhatsApp Image 2026-04-22 at 14.13.18.jpeg"
   }
 ];
 
@@ -68,7 +68,7 @@ export default function FoundingTeamSection() {
           {/* Interns Grid - 2x2 on Right */}
           <div className="flex flex-col">
             <div className="grid grid-cols-2 gap-3 flex-1">
-              {interns.map((intern) => (
+              {interns.map((intern, index) => (
                 <article
                   key={intern.name}
                   className="overflow-hidden rounded-[1.5rem] border border-black/10 bg-surface shadow-[0_12px_40px_rgba(90,55,32,0.06)] flex flex-col"
@@ -79,11 +79,7 @@ export default function FoundingTeamSection() {
                       alt={intern.name} 
                       fill 
                       sizes="(max-width: 768px) 50vw, 300px" 
-                      className={`object-cover ${
-                        intern.name === "Harshvardhan Singh" || intern.name === "Aryan Khushwaha" 
-                          ? "object-[center_20%]" 
-                          : "object-top"
-                      }`}
+                      className={`object-cover ${index === 0 ? 'object-center' : 'object-top'}`}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/20 to-transparent" />
                   </div>
