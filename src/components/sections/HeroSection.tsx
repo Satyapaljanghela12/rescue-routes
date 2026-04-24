@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PawPrint, X, CheckCircle, Heart, Home, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeroSection() {
   const [showAdoptModal, setShowAdoptModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [formData, setFormData] = useState({
     applicantName: "",
     email: "",
@@ -68,10 +69,39 @@ export default function HeroSection() {
       setLoading(false);
     }
   };
-  return (
-    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-white">
 
-      <div className="container mx-auto px-4 md:px-6">
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.error("Video autoplay failed:", err);
+      });
+    }
+  }, []);
+  return (
+    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen bg-gray-900">
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
+          aria-label="Background video showing rescue work"
+          src="/Camapigns/hero.mp4"
+          onLoadedData={() => console.log('Video loaded successfully')}
+          onError={(e) => console.error('Video error:', e)}
+          onCanPlay={() => console.log('Video can play')}
+        >
+          Your browser does not support the video tag.
+        </video>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
           {/* Left Content */}
@@ -87,16 +117,16 @@ export default function HeroSection() {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-poetsen tracking-tight mt-2 lg:mt-4 leading-tight">
-              <span className="text-gray-800">Saving Lives</span>
+              <span className="text-white drop-shadow-lg">Saving Lives</span>
               <br />
-              <span className="text-primary">
+              <span className="text-primary drop-shadow-lg">
                 One Rescue
               </span>
               <br />
-              <span className="text-gray-800">at a Time.</span>
+              <span className="text-white drop-shadow-lg">at a Time.</span>
             </h1>
             
-            <p className="font-sans text-base md:text-lg text-gray-600 max-w-lg leading-relaxed mt-4">
+            <p className="font-sans text-base md:text-lg text-white max-w-lg leading-relaxed mt-4 drop-shadow-md">
               Rescue Routes rescues injured and abandoned animals, providing care, shelter, and love. Join our mission to create a compassionate world for all.
             </p>
             
@@ -117,56 +147,35 @@ export default function HeroSection() {
 
             {/* Registration Numbers */}
             <div className="mt-8 space-y-2">
-              <p className="font-poppins text-xs md:text-sm text-gray-500">
+              <p className="font-poppins text-xs md:text-sm text-white/90 drop-shadow">
                 Registration No.: HI/01/01/01/33445/18
               </p>
-              <p className="font-poppins text-xs md:text-sm text-gray-500">
+              <p className="font-poppins text-xs md:text-sm text-white/90 drop-shadow">
                 NITI Ayog/NGO Registration No.: MP/2018/0188360
               </p>
             </div>
           </motion.div>
 
-          {/* Right Content / Image Area */}
+          {/* Right Content / Floating Paw Print */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative lg:h-[600px] flex flex-col justify-center items-center gap-3"
+            className="relative lg:h-[600px] flex flex-col justify-center items-center"
           >
-            <div className="relative w-full max-w-lg xl:max-w-xl aspect-square mx-auto overflow-hidden rounded-3xl shadow-2xl">
-              <video
-                src="/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
+            {/* Floating Custom Paw Print */}
+            <motion.div
+              animate={{ y: [-10, 10, -10], rotate: [-5, 5, -5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80"
+            >
+              <Image
+                src="/Lion_King_-_orange_paw_print-removebg-preview 9.png"
+                alt="Orange Paw Print Decoration"
+                fill
+                className="object-contain drop-shadow-2xl"
               />
-              
-              {/* Floating Custom Paw Print */}
-              <motion.div
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-6 right-4 md:top-12 md:right-12 xl:right-16 w-16 h-16 md:w-28 md:h-28 z-20"
-              >
-                <Image
-                  src="/Lion_King_-_orange_paw_print-removebg-preview 9.png"
-                  alt="Orange Paw Print Decoration"
-                  fill
-                  className="object-contain drop-shadow-sm"
-                />
-              </motion.div>
-            </div>
-            
-            {/* Registration Numbers */}
-            <div className="text-center space-y-1">
-              <p className="text-gray-400 text-sm font-medium tracking-wide">
-                Registration No.: HI/01/01/01/33445/18
-              </p>
-              <p className="text-gray-400 text-sm font-medium tracking-wide">
-                NITI Ayog/NGO Registration No.: MP/2018/0188360
-              </p>
-            </div>
+            </motion.div>
           </motion.div>
           
         </div>

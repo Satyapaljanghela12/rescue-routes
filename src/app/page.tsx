@@ -26,7 +26,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import DonationNotification from "@/components/DonationNotification";
 import SocialMediaPopup from "@/components/SocialMediaPopup";
 
-const heroVideo = "/Herovideos/Video Project 2.mp4";
+const heroVideo = "/Camapigns/hero.mp4";
 
 const galleryImages = [
   {
@@ -170,14 +170,14 @@ export default function Home() {
             playsInline
             preload="auto"
           >
-            <source src="/Herovideos/Video Project 2.mp4" type="video/mp4" />
+            <source src="/Camapigns/hero.mp4" type="video/mp4" />
           </video>
           
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8 z-10">
+          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-36 pb-16 sm:px-6 lg:px-8 z-10">
             <div className="max-w-3xl">
               {/* Text content */}
               <div className="text-white">
