@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Users, Calendar, Megaphone } from "lucide-react";
+import { Heart, Users, Calendar, Megaphone, PawPrint } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Link from "next/link";
@@ -19,39 +19,50 @@ export default function VolunteersPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full overflow-hidden pt-20">
+      <main className="flex-1 w-full overflow-hidden">
         
-        {/* Hero Section - Clean & Centered (No Image) */}
-        <section className="py-20 md:py-32 bg-white relative overflow-hidden">
-          {/* Background Video */}
-          <div className="absolute inset-0">
-            <video
-              className="absolute inset-0 h-full w-full object-cover opacity-15"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-            >
-              <source src="/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.15.mp4" type="video/mp4" />
-            </video>
-          </div>
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex items-end overflow-hidden">
+          {/* bg image */}
+          <Image
+            src="/new/WhatsApp Image 2026-04-24 at 00.13.16.jpeg"
+            alt="Join Our Rescue Family"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          <div className="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
+          <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
+              transition={{ duration: 0.9 }}
+              className="max-w-2xl"
             >
-              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-8 leading-tight text-primary">
-                Join Our Rescue Family
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md mb-7">
+                <PawPrint size={14} />
+                Volunteer With Us
+              </span>
+              <h1 className="font-heading text-6xl sm:text-7xl lg:text-[5.5rem] text-white leading-[1.0] mb-7">
+                Join Our<br />
+                <span className="text-secondary">Rescue Family</span>
               </h1>
-              
-              <p className="font-poppins text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                At Rescue Routes, every volunteer plays a vital role in saving lives, providing care, and spreading hope. 
-                Whether you have a few hours or want to be deeply involved, your compassion makes all the difference.
+              <p className="font-poppins text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                At Rescue Routes, every volunteer plays a vital role in saving lives, providing care, and spreading hope. Your compassion makes all the difference.
               </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/signup"
+                  className="rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-primary-deep">
+                  Sign Up Now
+                </Link>
+                <Link href="/campaigns"
+                  className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white hover:text-black">
+                  View Campaigns
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -485,7 +496,7 @@ export default function VolunteersPage() {
                       alt={volunteer.name}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover object-top group-hover:scale-110 transition-transform duration-500"
+                      className={`object-cover ${volunteer.name === "Harshvardhan Singh" ? "object-center" : "object-top"} group-hover:scale-110 transition-transform duration-500`}
                     />
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

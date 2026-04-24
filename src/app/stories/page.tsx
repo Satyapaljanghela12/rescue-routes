@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Heart, PawPrint } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
@@ -65,38 +65,47 @@ export default function StoriesPage() {
       <main className="flex-1 w-full overflow-hidden pt-20">
         
         {/* Hero Section */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src="/Images/WhatsApp Image 2026-04-11 at 20.21.14 (1).jpeg"
-              alt="Stories hero background"
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-white/80" />
-          </div>
+        <section className="relative min-h-[90vh] flex items-end overflow-hidden">
+          {/* bg image */}
+          <Image
+            src="/Images/WhatsApp Image 2026-04-11 at 20.21.14 (1).jpeg"
+            alt="Stories of Hope & Recovery"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          {/* Decorative elements */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
+          <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
+              transition={{ duration: 0.9 }}
+              className="max-w-2xl"
             >
-              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-primary">
-                Stories of Hope & Recovery
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md mb-7">
+                <PawPrint size={14} />
+                Rescue Stories
+              </span>
+              <h1 className="font-heading text-6xl sm:text-7xl lg:text-[5.5rem] text-white leading-[1.0] mb-7">
+                Stories of<br />
+                <span className="text-secondary">Hope & Recovery</span>
               </h1>
-              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Behind every rescue is a life that was once struggling to survive. These stories reflect 
-                courage, care, and the power of compassion.
+              <p className="font-poppins text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                Behind every rescue is a life that was once struggling to survive. These stories reflect courage, care, and the power of compassion.
               </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/donate"
+                  className="rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-primary-deep">
+                  Support Their Journey
+                </Link>
+                <Link href="/volunteers"
+                  className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white hover:text-black">
+                  Join the Mission
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -151,15 +160,9 @@ export default function StoriesPage() {
                           />
                         </div>
 
-                        {/* Cute badge with paw icon */}
-                        <div className={`absolute ${index % 2 === 0 ? '-bottom-6 -right-6' : '-bottom-6 -left-6'} bg-[#2563EB] rounded-3xl p-5 shadow-2xl transform ${index % 2 === 0 ? 'rotate-12' : '-rotate-12'}`}>
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" className="text-white">
-                            <circle cx="12" cy="16" r="3" />
-                            <circle cx="8" cy="12" r="2" />
-                            <circle cx="16" cy="12" r="2" />
-                            <circle cx="10" cy="8" r="1.5" />
-                            <circle cx="14" cy="8" r="1.5" />
-                          </svg>
+                        {/* Simple badge with dog emoji */}
+                        <div className={`absolute ${index % 2 === 0 ? '-bottom-6 -right-6' : '-bottom-6 -left-6'} bg-[#2563EB] rounded-3xl px-6 py-4 shadow-2xl transform ${index % 2 === 0 ? 'rotate-12' : '-rotate-12'}`}>
+                          <span className="text-3xl">🐕</span>
                         </div>
 
                         {/* Floating paws */}
@@ -205,17 +208,9 @@ export default function StoriesPage() {
                             {story.description}
                           </p>
 
-                          {/* Decorative paw trail */}
-                          <div className="absolute bottom-4 right-4 flex gap-2 opacity-10">
-                            {[...Array(3)].map((_, i) => (
-                              <svg key={i} width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-primary" style={{ transform: `scale(${1 - i * 0.2})` }}>
-                                <circle cx="12" cy="16" r="3" />
-                                <circle cx="8" cy="12" r="2" />
-                                <circle cx="16" cy="12" r="2" />
-                                <circle cx="10" cy="8" r="1.5" />
-                                <circle cx="14" cy="8" r="1.5" />
-                              </svg>
-                            ))}
+                          {/* Simple line separator */}
+                          <div className="absolute bottom-4 right-4 opacity-20">
+                            <span className="text-2xl">🐕</span>
                           </div>
                         </div>
                       </div>
@@ -223,13 +218,17 @@ export default function StoriesPage() {
 
                   </div>
 
-                  {/* Cute connecting element */}
+                  {/* Simple paw separator */}
                   {index < stories.length - 1 && (
-                    <div className="flex justify-center my-12">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    <div className="flex justify-center my-16">
+                      <div className="text-primary/20">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                          <circle cx="12" cy="16" r="3" />
+                          <circle cx="8" cy="12" r="2" />
+                          <circle cx="16" cy="12" r="2" />
+                          <circle cx="10" cy="8" r="1.5" />
+                          <circle cx="14" cy="8" r="1.5" />
+                        </svg>
                       </div>
                     </div>
                   )}

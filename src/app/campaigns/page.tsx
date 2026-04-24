@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PawPrint, Stethoscope, Home, Droplet, Shield, CalendarDays } from "lucide-react";
+import { PawPrint, Stethoscope, Home, Droplet, Shield, CalendarDays, MapPin, Users } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
@@ -110,203 +110,55 @@ export default function CampaignsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full overflow-hidden pt-20">
+      <main className="flex-1 w-full overflow-hidden">
         
         {/* Hero Section */}
-        <section className="py-16 md:py-24 relative overflow-hidden bg-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg"
-              alt="Campaigns hero"
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-white/60" />
-          </div>
+        <section className="relative min-h-[90vh] flex items-end overflow-hidden">
+          {/* bg image */}
+          <Image
+            src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg"
+            alt="Support Our Campaigns"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          {/* Decorative elements */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
-          
-          <div className="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
+          <div className="relative z-10 w-full px-6 pb-20 pt-40 sm:px-10 lg:px-20 max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
+              transition={{ duration: 0.9 }}
+              className="max-w-2xl"
             >
-              <h1 className="font-fredoka text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-primary">
-                Support Our Campaigns
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md mb-7">
+                <PawPrint size={14} />
+                Our Campaigns
+              </span>
+              <h1 className="font-heading text-6xl sm:text-7xl lg:text-[5.5rem] text-white leading-[1.0] mb-7">
+                Support Our<br />
+                <span className="text-secondary">Mission</span>
               </h1>
-              <p className="font-poppins text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Our campaigns are focused on rescuing, treating, and protecting animals in need. 
-                Your support helps us bring care, safety, and hope to those who cannot ask for it.
+              <p className="font-poppins text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                Our campaigns are focused on rescuing, treating, and protecting animals in need. Your support helps us bring care, safety, and hope to those who cannot ask for it.
               </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/donate"
+                  className="rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-primary-deep">
+                  Donate Now
+                </Link>
+                <Link href="/volunteers"
+                  className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white hover:text-black">
+                  Become a Volunteer
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Past Campaigns Section */}
-        <section className="py-16 md:py-24 bg-gray-50">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-4">
-                Our Journey
-              </p>
-              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
-                Past Campaigns
-              </h2>
-              <p className="font-poppins text-lg text-gray-600 max-w-3xl mx-auto">
-                Throughout all operations, we remain committed to community education regarding sterilization (ABC programs) and the critical importance of Rabies prevention to ensure a safe environment for both humans and animals.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              {[
-                {
-                  title: "Adoption Mega-Camp",
-                  date: "December 27–28, 2025",
-                  description: "Organized in collaboration with the Ram Astha Mission",
-                  impact: [
-                    "55 puppies participated",
-                    "22 successful adoptions",
-                    "Partnered with Nagar Nigam for on-site pet license registration and rabies vaccinations"
-                  ],
-                  image: "/Camapigns/27-28dec.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Winter Bed Drive",
-                  date: "November 27, 2025",
-                  description: "Providing warmth for street dogs during harsh winter",
-                  impact: [
-                    "Produced 1,000 Boribeds (stubble-filled sacks)",
-                    "Partnership with Parwati Sewa Foundation"
-                  ],
-                  image: "/Camapigns/Winterbeddrive.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Water Pot Drive",
-                  date: "May 4, 2025",
-                  description: "Ensuring stray animals have access to clean drinking water during summer heat",
-                  impact: [
-                    "Distributed 100 water pots across the city"
-                  ],
-                  image: "/Camapigns/WaterPotDrive.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Year-End Adoption Camp",
-                  date: "December 28–29, 2024",
-                  description: "Continued efforts in finding forever homes for local strays",
-                  impact: [
-                    "60 puppies participated",
-                    "18 successful adoptions"
-                  ],
-                  image: "/Camapigns/yearend.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Annual Bed Drive",
-                  date: "December 1, 2024",
-                  description: "Scaled up production to create protective beds for street animals",
-                  impact: [
-                    "Created approximately 800 protective beds using stubble and sacks"
-                  ],
-                  image: "/Camapigns/Annualbeddrive.jpg",
-                  objectPosition: "object-center"
-                },
-                {
-                  title: "New Year Adoption Drive",
-                  date: "January 27–28, 2024",
-                  description: "Location: 10 Number Market",
-                  impact: [
-                    "50 puppies participated",
-                    "21 successful adoptions"
-                  ],
-                  image: "/Camapigns/Adoptiondrive.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Adoption Camp at Olivers",
-                  date: "December 25, 2023",
-                  description: "Location: 10 Number",
-                  impact: [
-                    "20 puppies participated",
-                    "3 successful adoptions"
-                  ],
-                  image: "/Camapigns/adoptionolivers.jpg",
-                  objectPosition: "object-top"
-                },
-                {
-                  title: "Foundation Bed Drive",
-                  date: "December 1, 2023",
-                  description: "Initial winter drive for street dogs",
-                  impact: [
-                    "Created 600 beds using boris (sacks) and bhusa (stubble)"
-                  ],
-                  image: "/Camapigns/foundationbed.jpg",
-                  objectPosition: "object-top"
-                }
-              ].map((campaign, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-[2rem] shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 overflow-hidden"
-                >
-                  <div className="relative h-56 overflow-hidden">
-                    <Image
-                      src={campaign.image}
-                      alt={campaign.title}
-                      fill
-                      className={`object-cover ${campaign.objectPosition}`}
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/28 to-transparent" />
-                  </div>
-
-                  <div className="p-6">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-[#fac602]/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-                      <CalendarDays className="h-4 w-4" />
-                      {campaign.date}
-                    </div>
-
-                    <h3 className="font-fredoka text-2xl leading-tight text-primary mb-3">
-                      {campaign.title}
-                    </h3>
-                    <p className="text-sm font-poppins leading-7 text-foreground/72 mb-4">
-                      {campaign.description}
-                    </p>
-
-                    <div className="space-y-2">
-                      {campaign.impact.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2">
-                          <PawPrint className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                          <p className="text-xs font-poppins leading-6 text-foreground/68">
-                            {item}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Campaign Grid */}
+        {/* Campaign Grid - Active Campaigns */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
             
@@ -359,20 +211,47 @@ export default function CampaignsPage() {
                       <h3 className="font-fredoka text-2xl mb-3 text-primary">
                         {campaign.title}
                       </h3>
+
+                      {/* Location */}
+                      {campaign.address && (
+                        <div className="flex items-center gap-2 mb-3">
+                          <MapPin className="h-4 w-4 text-secondary flex-shrink-0" />
+                          <p className="text-sm font-poppins text-foreground/70">
+                            {campaign.address}
+                          </p>
+                        </div>
+                      )}
                       
                       <p className="font-poppins text-sm text-gray-700 leading-relaxed mb-4">
                         {campaign.description}
                       </p>
+
+                      {/* Campaign Dates */}
+                      <div className="flex items-center gap-2 mb-4 text-xs text-gray-600">
+                        <CalendarDays className="h-4 w-4" />
+                        <span>{new Date(campaign.startDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} - {new Date(campaign.endDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                      </div>
                       
-                      <Link
-                        href="/donate"
-                        className="inline-flex items-center font-fredoka text-primary hover:text-orange-600 transition-colors"
-                      >
-                        Donate Now
-                        <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
+                      <div className="flex justify-between items-center gap-3">
+                        <Link
+                          href="/donate"
+                          className="inline-flex items-center font-fredoka text-primary hover:text-orange-600 transition-colors text-sm"
+                        >
+                          Donate Now
+                          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                        <Link
+                          href="/volunteers"
+                          className="inline-flex items-center font-fredoka text-primary hover:text-orange-600 transition-colors text-sm"
+                        >
+                          Become a Volunteer
+                          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
 
                     {/* Paw decoration */}
@@ -389,6 +268,193 @@ export default function CampaignsPage() {
                 </motion.div>
               );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Past Campaigns Section */}
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-4">
+                Our Journey
+              </p>
+              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
+                Past Campaigns
+              </h2>
+              <p className="font-poppins text-lg text-gray-600 max-w-3xl mx-auto">
+                Throughout all operations, we remain committed to community education regarding sterilization (ABC programs) and the critical importance of Rabies prevention to ensure a safe environment for both humans and animals.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  title: "Adoption Mega-Camp",
+                  date: "December 27–28, 2025",
+                  description: "Community outreach for finding forever homes",
+                  impact: [
+                    "55 puppies participated",
+                    "22 successful adoptions",
+                    "Pet license registration & rabies vaccinations"
+                  ],
+                  organization: "Ram Astha Mission & Nagar Nigam",
+                  image: "/Camapigns/27-28dec.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Winter Bed Drive",
+                  date: "November 27, 2025",
+                  description: "Providing warmth for street dogs during harsh winter",
+                  impact: [
+                    "1,000 Boribeds produced",
+                    "Stubble-filled sacks distributed"
+                  ],
+                  organization: "Parwati Sewa Foundation",
+                  image: "/Camapigns/Winterbeddrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Water Pot Drive",
+                  date: "May 4, 2025",
+                  description: "Summer relief for stray animals",
+                  impact: [
+                    "100 water pots distributed",
+                    "City-wide coverage"
+                  ],
+                  image: "/Camapigns/WaterPotDrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Year-End Adoption Camp",
+                  date: "December 28–29, 2024",
+                  description: "Finding forever homes for local strays",
+                  impact: [
+                    "60 puppies participated",
+                    "18 successful adoptions"
+                  ],
+                  image: "/Camapigns/yearend.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Annual Bed Drive",
+                  date: "December 1, 2024",
+                  description: "Scaled up production for winter protection",
+                  impact: [
+                    "800 protective beds created",
+                    "Stubble and sacks used"
+                  ],
+                  image: "/Camapigns/Annualbeddrive.jpg",
+                  objectPosition: "object-center"
+                },
+                {
+                  title: "New Year Adoption Drive",
+                  date: "January 27–28, 2024",
+                  location: "10 Number Market",
+                  description: "Community adoption event",
+                  impact: [
+                    "50 puppies participated",
+                    "21 successful adoptions"
+                  ],
+                  image: "/Camapigns/Adoptiondrive.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Adoption Camp at Olivers",
+                  date: "December 25, 2023",
+                  location: "10 Number",
+                  description: "Holiday adoption initiative",
+                  impact: [
+                    "20 puppies participated",
+                    "3 successful adoptions"
+                  ],
+                  image: "/Camapigns/adoptionolivers.jpg",
+                  objectPosition: "object-top"
+                },
+                {
+                  title: "Foundation Bed Drive",
+                  date: "December 1, 2023",
+                  description: "Initial winter drive for street dogs",
+                  impact: [
+                    "600 beds created",
+                    "Boris (sacks) and bhusa (stubble) used"
+                  ],
+                  image: "/Camapigns/foundationbed.jpg",
+                  objectPosition: "object-top"
+                }
+              ].map((campaign, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-[2rem] shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 overflow-hidden"
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={campaign.image}
+                      alt={campaign.title}
+                      fill
+                      className={`object-cover ${campaign.objectPosition}`}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/28 to-transparent" />
+                  </div>
+
+                  <div className="p-6">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[#fac602]/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
+                      <CalendarDays className="h-4 w-4" />
+                      {campaign.date}
+                    </div>
+
+                    <h3 className="font-fredoka text-2xl leading-tight text-primary mb-3">
+                      {campaign.title}
+                    </h3>
+
+                    {/* Location */}
+                    {campaign.location && (
+                      <div className="flex items-center gap-2 mb-3">
+                        <MapPin className="h-4 w-4 text-secondary flex-shrink-0" />
+                        <p className="text-sm font-poppins text-foreground/70">
+                          {campaign.location}
+                        </p>
+                      </div>
+                    )}
+
+                    <p className="text-sm font-poppins leading-6 text-foreground/72 mb-4">
+                      {campaign.description}
+                    </p>
+
+                    {/* Impact Numbers */}
+                    <div className="space-y-2 mb-4">
+                      {campaign.impact.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <PawPrint className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <p className="text-xs font-poppins leading-5 text-foreground/68 font-medium">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Organization Collaboration */}
+                    {campaign.organization && (
+                      <div className="flex items-start gap-2 pt-3 border-t border-gray-100">
+                        <Users className="h-4 w-4 text-secondary mt-0.5 flex-shrink-0" />
+                        <p className="text-xs font-poppins text-foreground/60">
+                          <span className="font-semibold">Collaboration:</span> {campaign.organization}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

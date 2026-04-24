@@ -20,7 +20,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, description, targetAmount, startDate, endDate, image } = body;
+    const { title, description, targetAmount, startDate, endDate, address, image } = body;
 
     if (!title || !description || !targetAmount || !startDate || !endDate) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
@@ -36,6 +36,7 @@ export async function POST(request: Request) {
       raisedAmount: 0,
       startDate,
       endDate,
+      address: address || "",
       image: image || "/About1.jpg",
       createdAt: new Date(),
     };
@@ -88,7 +89,7 @@ export async function PUT(request: Request) {
     }
 
     const body = await request.json();
-    const { title, description, targetAmount, startDate, endDate, image } = body;
+    const { title, description, targetAmount, startDate, endDate, address, image } = body;
 
     if (!title || !description || !targetAmount || !startDate || !endDate) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
@@ -103,6 +104,7 @@ export async function PUT(request: Request) {
       targetAmount: Number(targetAmount),
       startDate,
       endDate,
+      address: address || "",
       image: image || "/About1.jpg",
       updatedAt: new Date(),
     };

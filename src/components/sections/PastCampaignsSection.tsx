@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, PawPrint, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarDays, PawPrint, ChevronLeft, ChevronRight, MapPin, Users } from "lucide-react";
 import { useState, useRef } from "react";
 
 type PastCampaign = {
   title: string;
   date: string;
+  location?: string;
   description: string;
   impact: string[];
+  organization?: string;
   image: string;
 };
 
@@ -17,12 +19,13 @@ const pastCampaigns: PastCampaign[] = [
   {
     title: "Adoption Mega-Camp",
     date: "December 27–28, 2025",
-    description: "Organized in collaboration with the Ram Astha Mission",
+    description: "Community outreach for finding forever homes",
     impact: [
       "55 puppies participated",
       "22 successful adoptions",
-      "Partnered with Nagar Nigam for on-site pet license registration and rabies vaccinations"
+      "Pet license registration & rabies vaccinations"
     ],
+    organization: "Ram Astha Mission & Nagar Nigam",
     image: "/Camapigns/27-28dec.jpg"
   },
   {
@@ -30,24 +33,26 @@ const pastCampaigns: PastCampaign[] = [
     date: "November 27, 2025",
     description: "Providing warmth for street dogs during harsh winter",
     impact: [
-      "Produced 1,000 Boribeds (stubble-filled sacks)",
-      "Partnership with Parwati Sewa Foundation"
+      "1,000 Boribeds produced",
+      "Stubble-filled sacks distributed"
     ],
+    organization: "Parwati Sewa Foundation",
     image: "/Camapigns/Winterbeddrive.jpg"
   },
   {
     title: "Water Pot Drive",
     date: "May 4, 2025",
-    description: "Ensuring stray animals have access to clean drinking water during summer heat",
+    description: "Summer relief for stray animals",
     impact: [
-      "Distributed 100 water pots across the city"
+      "100 water pots distributed",
+      "City-wide coverage"
     ],
     image: "/Camapigns/WaterPotDrive.jpg"
   },
   {
     title: "Year-End Adoption Camp",
     date: "December 28–29, 2024",
-    description: "Continued efforts in finding forever homes for local strays",
+    description: "Finding forever homes for local strays",
     impact: [
       "60 puppies participated",
       "18 successful adoptions"
@@ -57,16 +62,18 @@ const pastCampaigns: PastCampaign[] = [
   {
     title: "Annual Bed Drive",
     date: "December 1, 2024",
-    description: "Scaled up production to create protective beds for street animals",
+    description: "Scaled up production for winter protection",
     impact: [
-      "Created approximately 800 protective beds using stubble and sacks"
+      "800 protective beds created",
+      "Stubble and sacks used"
     ],
     image: "/Camapigns/Annualbeddrive.jpg"
   },
   {
     title: "New Year Adoption Drive",
     date: "January 27–28, 2024",
-    description: "Location: 10 Number Market",
+    location: "10 Number Market",
+    description: "Community adoption event",
     impact: [
       "50 puppies participated",
       "21 successful adoptions"
@@ -76,7 +83,8 @@ const pastCampaigns: PastCampaign[] = [
   {
     title: "Adoption Camp at Olivers",
     date: "December 25, 2023",
-    description: "Location: 10 Number",
+    location: "10 Number",
+    description: "Holiday adoption initiative",
     impact: [
       "20 puppies participated",
       "3 successful adoptions"
@@ -88,7 +96,8 @@ const pastCampaigns: PastCampaign[] = [
     date: "December 1, 2023",
     description: "Initial winter drive for street dogs",
     impact: [
-      "Created 600 beds using boris (sacks) and bhusa (stubble)"
+      "600 beds created",
+      "Boris (sacks) and bhusa (stubble) used"
     ],
     image: "/Camapigns/foundationbed.jpg"
   }
@@ -185,28 +194,50 @@ export default function PastCampaignsSection() {
                 </div>
 
                 <div className="p-7">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-[#fac602]/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[#fac602]/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
                     <CalendarDays className="h-4 w-4" />
                     {campaign.date}
                   </div>
 
-                  <h3 className="mt-5 font-fredoka text-3xl leading-tight text-foreground">
+                  <h3 className="font-fredoka text-2xl leading-tight text-foreground mb-3">
                     {campaign.title}
                   </h3>
-                  <p className="mt-3 text-sm font-poppins leading-7 text-foreground/72">
+
+                  {/* Location */}
+                  {campaign.location && (
+                    <div className="flex items-center gap-2 mb-3">
+                      <MapPin className="h-4 w-4 text-secondary flex-shrink-0" />
+                      <p className="text-sm font-poppins text-foreground/70">
+                        {campaign.location}
+                      </p>
+                    </div>
+                  )}
+
+                  <p className="text-sm font-poppins leading-6 text-foreground/72 mb-4">
                     {campaign.description}
                   </p>
 
-                  <div className="mt-5 space-y-2">
+                  {/* Impact Numbers */}
+                  <div className="space-y-2 mb-4">
                     {campaign.impact.map((item, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        <PawPrint className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                        <p className="text-xs font-poppins leading-6 text-foreground/68">
+                        <PawPrint className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                        <p className="text-xs font-poppins leading-5 text-foreground/68 font-medium">
                           {item}
                         </p>
                       </div>
                     ))}
                   </div>
+
+                  {/* Organization Collaboration */}
+                  {campaign.organization && (
+                    <div className="flex items-start gap-2 pt-3 border-t border-gray-100">
+                      <Users className="h-4 w-4 text-secondary mt-0.5 flex-shrink-0" />
+                      <p className="text-xs font-poppins text-foreground/60">
+                        <span className="font-semibold">Collaboration:</span> {campaign.organization}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

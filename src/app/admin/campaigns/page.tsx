@@ -33,6 +33,7 @@ export default function CampaignsPage() {
     targetAmount: "",
     startDate: "",
     endDate: "",
+    address: "",
     image: "/About1.png",
   });
 
@@ -141,6 +142,7 @@ export default function CampaignsPage() {
           targetAmount: "",
           startDate: "",
           endDate: "",
+          address: "",
           image: "/About1.png",
         });
         setImagePreview("");
@@ -165,6 +167,7 @@ export default function CampaignsPage() {
       targetAmount: campaign.targetAmount.toString(),
       startDate: campaign.startDate.split('T')[0],
       endDate: campaign.endDate.split('T')[0],
+      address: campaign.address || "",
       image: campaign.image,
     });
     setImagePreview(campaign.image);
@@ -198,6 +201,7 @@ export default function CampaignsPage() {
                   targetAmount: "",
                   startDate: "",
                   endDate: "",
+                  address: "",
                   image: "/About1.png",
                 });
                 setImagePreview("");
@@ -267,6 +271,14 @@ export default function CampaignsPage() {
                       </span>
                     </div>
                   </div>
+
+                  {/* Address */}
+                  {campaign.address && (
+                    <div className="mb-4">
+                      <span className="font-poppins text-xs text-gray-600">Location: </span>
+                      <span className="font-poppins text-xs text-gray-800">{campaign.address}</span>
+                    </div>
+                  )}
 
                   {/* Donation Info */}
                   <div className="mb-4">
@@ -398,6 +410,20 @@ export default function CampaignsPage() {
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
                       />
                     </div>
+                  </div>
+
+                  {/* Address */}
+                  <div>
+                    <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
+                      Campaign Address
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.address}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
+                      placeholder="e.g., 123 Main Street, City, State"
+                    />
                   </div>
 
                   {/* Image Upload */}

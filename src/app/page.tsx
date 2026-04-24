@@ -11,6 +11,10 @@ import {
   Plus,
   ShieldPlus,
   Stethoscope,
+  Ambulance,
+  Heart,
+  HomeIcon,
+  Utensils,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -19,8 +23,10 @@ import PastCampaignsSection from "@/components/sections/PastCampaignsSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import RealtimeNotifications from "@/components/RealtimeNotifications";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DonationNotification from "@/components/DonationNotification";
+import SocialMediaPopup from "@/components/SocialMediaPopup";
 
-const heroVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.16.mp4";
+const heroVideo = "/Herovideos/Video Project 2.mp4";
 
 const galleryImages = [
   {
@@ -65,10 +71,22 @@ const whyRescueMattersImages = [
 const whyRescueMattersVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.15 (1).mp4";
 
 const whyRescueMattersPoints = [
-  "Stray animals are often hit by vehicles and left injured on the street without immediate help and medical care. Our rapid response team is their only hope.",
-  "Systematic sterilization drives help humanely manage street animal populations and prevent future suffering caused by uncontrolled overpopulation.",
-  "We give shelter and emotional healing to pets abandoned by their owners, offering the care, protection, and love they lost.",
-  "Nutritional rehabilitation programs support severely malnourished rescues who have survived for weeks without a stable source of food.",
+  {
+    text: "Rapid response for injured street animals hit by vehicles",
+    icon: Ambulance,
+  },
+  {
+    text: "Humane sterilization to prevent overpopulation and suffering",
+    icon: Stethoscope,
+  },
+  {
+    text: "Shelter and healing for abandoned pets who lost their homes",
+    icon: HomeIcon,
+  },
+  {
+    text: "Nutritional support for severely malnourished rescues",
+    icon: Utensils,
+  },
 ];
 
 const focusAreas = [
@@ -104,7 +122,7 @@ const programsShowcase = [
     description:
       "We’re on the ground for street animals in distress, providing immediate first aid and survival care.",
     mediaType: "video" as const,
-    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.13.mp4",
+    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.14.mp4",
     alt: "Emergency rescue operation",
   },
   {
@@ -120,7 +138,7 @@ const programsShowcase = [
     description:
       "Humane sterilization programs to ensure fewer animals are born into hardship on the streets.",
     mediaType: "image" as const,
-    src: "/new/WhatsApp Image 2026-04-24 at 00.13.13.jpeg",
+    src: "/Images/population.jpg",
     alt: "Animal welfare population care effort",
   },
   {
@@ -128,7 +146,7 @@ const programsShowcase = [
     description:
       "Free rabies shots and vaccinations because every life deserves protection and health.",
     mediaType: "video" as const,
-    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.14.mp4",
+    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.13.mp4",
     alt: "Health and safety support for animals",
   },
 ];
@@ -139,11 +157,29 @@ export default function Home() {
       <Navbar />
       <RealtimeNotifications />
       <WhatsAppButton />
+      <DonationNotification />
+      <SocialMediaPopup />
       <main className="flex-1 overflow-hidden bg-background text-foreground">
-        <section className="relative isolate min-h-[88vh] overflow-hidden bg-gradient-to-br from-cyan-200 via-blue-300 to-yellow-200">
-          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8">
-            <div className="grid w-full lg:grid-cols-2 gap-12 items-start">
-              {/* Left side - Text content */}
+        <section className="relative isolate min-h-[88vh] overflow-hidden">
+          {/* Background Video */}
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/Herovideos/Video Project 2.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+          <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8 z-10">
+            <div className="max-w-3xl">
+              {/* Text content */}
               <div className="text-white">
                 <h1 className="font-heading text-5xl font-semibold leading-tight sm:text-6xl lg:text-7xl drop-shadow-lg">
                   Build a kinder path for every stray, injured, and abandoned life.
@@ -174,35 +210,6 @@ export default function Home() {
                   <p className="text-xs sm:text-sm text-white/80 font-poppins">
                     NITI Ayog/NGO Registration No.: MP/2018/0188360
                   </p>
-                </div>
-              </div>
-
-              {/* Right side - Video frame with animals */}
-              <div className="relative hidden lg:block">
-                {/* White phone/tablet frame */}
-                <div className="relative mx-auto w-full max-w-sm">
-                  <div className="relative rounded-[3rem] bg-white p-3 shadow-2xl">
-                    {/* Video inside frame - height matches text content */}
-                    <div className="relative h-[500px] overflow-hidden rounded-[2.5rem] bg-gray-100">
-                      <video
-                        className="absolute inset-0 h-full w-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                      >
-                        <source src={heroVideo} type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
-                  
-                  {/* "Every soul matters!" badge */}
-                  <div className="absolute -bottom-4 -right-4 rounded-2xl bg-primary px-6 py-3 shadow-lg">
-                    <p className="font-fredoka text-sm font-bold text-white">
-                      Every soul<br />matters!
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -252,7 +259,7 @@ export default function Home() {
                 alt="Hindi compassion message"
                 width={360}
                 height={120}
-                style={{ filter: 'sepia(1) saturate(3) hue-rotate(180deg) brightness(0.6)' }}
+                style={{ filter: 'brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(1745%) hue-rotate(207deg) brightness(95%) contrast(92%)' }}
                 className="h-auto w-auto max-w-full object-contain opacity-95"
               />
               <h2 className="max-w-4xl font-fredoka text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
@@ -290,8 +297,8 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">3400+</h4>
-                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Beds Created</p>
+                <h4 className="font-heading text-6xl text-white mb-2">+3400</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Beds Installed</p>
               </motion.div>
 
               {/* Stat 2 */}
@@ -302,8 +309,8 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.15 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">830+</h4>
-                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Animals Rescued</p>
+                <h4 className="font-heading text-6xl text-white mb-2">+1400</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Animals Rescued/Adopted</p>
               </motion.div>
 
               {/* Stat 3 */}
@@ -314,8 +321,8 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">100+</h4>
-                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Water Pots</p>
+                <h4 className="font-heading text-6xl text-white mb-2">+700</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Community Strays Sterilized</p>
               </motion.div>
             </div>
           </div>
@@ -377,13 +384,13 @@ export default function Home() {
                 <div className="mt-8 space-y-4">
                   {whyRescueMattersPoints.map((point) => (
                     <div
-                      key={point}
+                      key={point.text}
                       className="flex items-start gap-4 rounded-[1.6rem] border border-white/35 bg-white/45 px-5 py-4 shadow-[0_14px_40px_rgba(90,55,32,0.08)] backdrop-blur-md"
                     >
                       <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#bad701]/18 text-primary">
-                        <PawPrint className="h-4 w-4" />
+                        <point.icon className="h-4 w-4" />
                       </div>
-                      <p className="text-sm leading-7 text-foreground/78">{point}</p>
+                      <p className="text-sm leading-7 text-foreground/78">{point.text}</p>
                     </div>
                   ))}
                 </div>
@@ -459,7 +466,7 @@ export default function Home() {
                           <source src={program.src} type="video/mp4" />
                         </video>
                       ) : (
-                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
+                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-center" />
                       )}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                     </div>
