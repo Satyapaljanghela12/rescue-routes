@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 const founder = {
-  name: "Sneha Sharma",
+  name: "Sneha Saxena",
   role: "Founder & Director",
   image: "/sneha2.png",
   description: "Sneha Sharma founded Rescue Routes with a vision to create a compassionate community for street animals. With years of experience in animal welfare, she leads our mission to provide comprehensive care and find loving homes for rescued animals."
@@ -11,23 +11,23 @@ const founder = {
 
 const interns = [
   {
-    name: "Kausiki",
-    role: "Team Member",
+    name: "Kaushiki Tiwari",
+    role: "Core Member",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.17.jpeg"
   },
   {
-    name: "Sarvang",
-    role: "Team Member",
+    name: "Sarvang Sharma",
+    role: "Core Member",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.44.jpeg"
   },
   {
-    name: "Vinayak",
-    role: "Team Member",
+    name: "Vinayak Awasthi",
+    role: "Core Member",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.50.jpeg"
   },
   {
-    name: "Suryansha",
-    role: "Team Member",
+    name: "Suryansha Singh Bundela",
+    role: "Core Member",
     image: "/Core members/WhatsApp Image 2026-04-22 at 14.13.18.jpeg"
   }
 ];

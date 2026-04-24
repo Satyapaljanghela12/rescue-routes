@@ -112,7 +112,7 @@ const programsShowcase = [
     description:
       "A safe, temporary haven for recovery, preparing every animal for their loving forever family.",
     mediaType: "image" as const,
-    src: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.17%20(1).jpeg",
+    src: "/new/WhatsApp Image 2026-04-24 at 00.13.11.jpeg",
     alt: "Animal healing and shelter support",
   },
   {
@@ -120,7 +120,7 @@ const programsShowcase = [
     description:
       "Humane sterilization programs to ensure fewer animals are born into hardship on the streets.",
     mediaType: "image" as const,
-    src: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.10.jpeg",
+    src: "/new/WhatsApp Image 2026-04-24 at 00.13.13.jpeg",
     alt: "Animal welfare population care effort",
   },
   {
@@ -267,86 +267,56 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="relative py-12 overflow-hidden">
+        <section className="relative py-20 overflow-hidden bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="relative">
-              {/* Blue rounded background bar */}
-              <div className="relative bg-gradient-to-r from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl overflow-hidden">
-                {/* Decorative circles */}
-                <div className="absolute -top-10 -left-10 w-32 h-32 bg-blue-400/30 rounded-full" />
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-400/30 rounded-full" />
-                
-                {/* Stats content */}
-                <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 px-8 py-12 md:py-16">
-                  {/* Stat 1 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center"
-                  >
-                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
-                      3400+
-                    </div>
-                    <div className="font-fredoka text-lg md:text-xl text-white/90">
-                      Beds Created
-                    </div>
-                  </motion.div>
+            <div className="text-center mb-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-4">
+                By The Numbers
+              </p>
+              <h2 className="font-fredoka text-4xl md:text-5xl text-primary mb-4">
+                Lives Transformed
+              </h2>
+              <p className="font-poppins text-gray-600 text-lg max-w-2xl mx-auto">
+                Through continuous efforts and community support, we have created meaningful change.
+              </p>
+            </div>
 
-                  {/* Stat 2 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
-                      800+
-                    </div>
-                    <div className="font-fredoka text-lg md:text-xl text-white/90">
-                      Animals Rescued
-                    </div>
-                  </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Stat 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
+              >
+                <h4 className="font-heading text-6xl text-white mb-2">3400+</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Beds Created</p>
+              </motion.div>
 
-                  {/* Stat 3 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-center"
-                  >
-                    <div className="font-heading text-5xl md:text-6xl font-bold text-white mb-2">
-                      100+
-                    </div>
-                    <div className="font-fredoka text-lg md:text-xl text-white/90">
-                      Water Pots
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
+              {/* Stat 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
+              >
+                <h4 className="font-heading text-6xl text-white mb-2">830+</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Animals Rescued</p>
+              </motion.div>
 
-              {/* Decorative animal images on corners */}
-              <div className="absolute -top-8 -left-8 w-24 h-24 rounded-full bg-yellow-400 overflow-hidden shadow-xl hidden md:block">
-                <Image
-                  src="/dog1.png"
-                  alt="Dog"
-                  fill
-                  sizes="96px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-yellow-400 overflow-hidden shadow-xl hidden md:block">
-                <Image
-                  src="/dog2.png"
-                  alt="Dog"
-                  fill
-                  sizes="112px"
-                  className="object-cover"
-                />
-              </div>
+              {/* Stat 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
+              >
+                <h4 className="font-heading text-6xl text-white mb-2">100+</h4>
+                <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Water Pots</p>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -489,7 +459,7 @@ export default function Home() {
                           <source src={program.src} type="video/mp4" />
                         </video>
                       ) : (
-                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
+                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
                       )}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                     </div>
