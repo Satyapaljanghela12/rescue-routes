@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, X, Check, Plus, Minus, CreditCard, Banknote, ArrowRight, Package } from "lucide-react";
+import { ShoppingBag, X, Check, Plus, Minus, CreditCard, Banknote, ArrowRight, Package, ChevronLeft, ChevronRight, Play, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 declare global {
   interface Window {
@@ -15,8 +17,15 @@ declare global {
   }
 }
 
+interface MediaItem {
+  type: "image" | "video";
+  url: string;
+}
+
 export default function StorePage() {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
+  const { addToCart } = useCart();
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
@@ -24,6 +33,12 @@ export default function StorePage() {
   const [showBillModal, setShowBillModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [showCartSuccess, setShowCartSuccess] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [selectedImageProduct, setSelectedImageProduct] = useState<any>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [actionType, setActionType] = useState<"cart" | "buy">("buy");
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [formData, setFormData] = useState({
@@ -66,10 +81,54 @@ export default function StorePage() {
   };
 
   const handleBuyNow = (product: any) => {
+    if (!isAuthenticated) {
+      setActionType("buy");
+      setShowLoginPrompt(true);
+      return;
+    }
     setSelectedProduct(product);
     setQuantity(1);
     setSelectedSize("");
     setShowModal(true);
+  };
+
+  const handleAddToCart = (product: any) => {
+    if (!isAuthenticated) {
+      setActionType("cart");
+      setShowLoginPrompt(true);
+      return;
+    }
+    setSelectedProduct(product);
+    setQuantity(1);
+    setSelectedSize("");
+    setShowModal(true);
+  };
+
+  const handleAddToCartSubmit = () => {
+    if (!selectedSize) {
+      alert("Please select a size");
+      return;
+    }
+
+    const media: MediaItem[] = selectedProduct.media || [{ type: "image", url: selectedProduct.image }];
+    const mainImage = media.find(m => m.type === "image")?.url || media[0].url;
+
+    addToCart({
+      productId: selectedProduct._id,
+      title: selectedProduct.title,
+      price: selectedProduct.price,
+      image: mainImage,
+      quantity,
+      size: selectedSize,
+    });
+
+    setShowModal(false);
+    setShowCartSuccess(true);
+    
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      setShowCartSuccess(false);
+    }, 3000);
   };
 
   const handleProceedToBill = (e: React.FormEvent) => {
@@ -223,6 +282,135 @@ export default function StorePage() {
 
   const totalAmount = selectedProduct ? selectedProduct.price * quantity : 0;
 
+  // Product Card Component with Carousel
+  const ProductCard = ({ product, index }: { product: any; index: number }) => {
+    const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+    const media: MediaItem[] = product.media || [{ type: "image", url: product.image }];
+
+    const nextMedia = () => {
+      setCurrentMediaIndex((prev) => (prev + 1) % media.length);
+    };
+
+    const prevMedia = () => {
+      setCurrentMediaIndex((prev) => (prev - 1 + media.length) % media.length);
+    };
+
+    const handleImageClick = () => {
+      setSelectedImageProduct(product);
+      setCurrentImageIndex(currentMediaIndex);
+      setShowImageModal(true);
+    };
+
+    return (
+      <motion.div
+        key={product._id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1 }}
+        whileHover={{ y: -8 }}
+        className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all"
+      >
+        <div className="relative h-64 bg-gray-100 group cursor-pointer" onClick={handleImageClick}>
+          {/* Media Display */}
+          {media[currentMediaIndex].type === "image" ? (
+            <Image
+              src={media[currentMediaIndex].url}
+              alt={product.title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <video
+              src={media[currentMediaIndex].url}
+              className="w-full h-full object-cover"
+              loop
+              muted
+              playsInline
+              autoPlay
+            />
+          )}
+
+          {/* Carousel Controls */}
+          {media.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevMedia();
+                }}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextMedia();
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                {media.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentMediaIndex(idx);
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      idx === currentMediaIndex
+                        ? "bg-white w-6"
+                        : "bg-white/50 hover:bg-white/75"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Media Type Badge */}
+          {media[currentMediaIndex].type === "video" && (
+            <div className="absolute top-2 right-2 px-2 py-1 bg-black/60 text-white text-xs rounded flex items-center gap-1">
+              <Play className="w-3 h-3" />
+              Video
+            </div>
+          )}
+        </div>
+        <div className="p-6">
+          <h3 className="font-poppins text-lg font-semibold text-gray-800 mb-2">
+            {product.title}
+          </h3>
+          <p className="font-poppins text-2xl font-bold text-primary mb-3">
+            ₹{product.price.toLocaleString()}
+          </p>
+          <p className="font-poppins text-sm text-gray-600 mb-4 line-clamp-2">
+            {product.description}
+          </p>
+          <div className="flex gap-3">
+            <button
+              onClick={() => handleAddToCart(product)}
+              className="flex-1 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-800 font-poppins font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 text-sm"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              Add to Cart
+            </button>
+            <button
+              onClick={() => handleBuyNow(product)}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-poppins font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 text-sm shadow-md"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
   return (
     <>
       <Navbar />
@@ -233,21 +421,12 @@ export default function StorePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center justify-center gap-3 mb-4"
+              className="flex items-center justify-center gap-3 mb-4"
             >
-              <div className="flex items-center gap-3">
-                <ShoppingBag className="w-12 h-12" />
-                <h1 className="font-poetsen text-5xl md:text-6xl">
-                  Merchandise Store
-                </h1>
-              </div>
-              <Link
-                href="/my-orders"
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-poppins font-semibold px-6 py-2.5 rounded-lg transition-all flex items-center gap-2 border border-white/30"
-              >
-                <Package className="w-4 h-4" />
-                My Orders
-              </Link>
+              <ShoppingBag className="w-12 h-12" />
+              <h1 className="font-poetsen text-5xl md:text-6xl">
+                Merchandise Store
+              </h1>
             </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -263,7 +442,7 @@ export default function StorePage() {
               transition={{ delay: 0.2 }}
               className="font-poppins text-sm md:text-base max-w-xl mx-auto mt-2 opacity-80"
             >
-              Every purchase helps us rescue and care for animals in need 🐾
+              Every purchase helps us rescue and care for animals in need
             </motion.p>
           </div>
         </div>
@@ -277,41 +456,7 @@ export default function StorePage() {
           ) : products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map((product, index) => (
-                <motion.div
-                  key={product._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all"
-                >
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-poppins text-lg font-semibold text-gray-800 mb-2">
-                      {product.title}
-                    </h3>
-                    <p className="font-poppins text-2xl font-bold text-primary mb-3">
-                      ₹{product.price.toLocaleString()}
-                    </p>
-                    <p className="font-poppins text-sm text-gray-600 mb-4 line-clamp-2">
-                      {product.description}
-                    </p>
-                    <button
-                      onClick={() => handleBuyNow(product)}
-                      className="w-full bg-primary hover:bg-orange-600 text-white font-poppins font-semibold py-3 rounded-lg transition-all flex items-center justify-center gap-2"
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                      Buy Now
-                    </button>
-                  </div>
-                </motion.div>
+                <ProductCard key={product._id} product={product} index={index} />
               ))}
             </div>
           ) : (
@@ -580,14 +725,25 @@ export default function StorePage() {
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={!selectedSize}
-                    className="w-full bg-primary hover:bg-orange-600 text-white font-poppins font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    Proceed to Review
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={handleAddToCartSubmit}
+                      disabled={!selectedSize}
+                      className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-poppins font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <ShoppingCart className="w-5 h-5" />
+                      Add to Cart
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={!selectedSize}
+                      className="flex-1 bg-primary hover:bg-orange-600 text-white font-poppins font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Buy Now
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
                   {!selectedSize && (
                     <p className="text-center text-sm text-red-600 font-poppins">
                       Please select a size to continue
@@ -806,6 +962,257 @@ export default function StorePage() {
                       🐾
                     </motion.div>
                   ))}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Login Prompt Modal */}
+        <AnimatePresence>
+          {showLoginPrompt && (
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 text-center"
+              >
+                <div className="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <ShoppingBag className="w-8 h-8 text-primary" />
+                </div>
+                
+                <h3 className="font-poppins text-2xl font-bold text-gray-800 mb-2">
+                  {actionType === "cart" ? "Login to Add to Cart" : "Login to Continue"}
+                </h3>
+                <p className="font-poppins text-gray-600 mb-6">
+                  Please login or create an account to {actionType === "cart" ? "add items to your cart" : "purchase products"}
+                </p>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowLoginPrompt(false)}
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-poppins font-semibold py-3 rounded-lg transition-all"
+                  >
+                    Cancel
+                  </button>
+                  <Link
+                    href="/login"
+                    className="flex-1 bg-primary hover:bg-orange-600 text-white font-poppins font-semibold py-3 rounded-lg transition-all text-center"
+                  >
+                    Login
+                  </Link>
+                </div>
+                
+                <p className="font-poppins text-sm text-gray-600 mt-4">
+                  Don't have an account?{" "}
+                  <Link href="/signup" className="text-primary font-semibold hover:underline">
+                    Sign Up
+                  </Link>
+                </p>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Cart Success Popup - Flipkart Style */}
+        <AnimatePresence>
+          {showCartSuccess && selectedProduct && (
+            <motion.div
+              initial={{ opacity: 0, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 300 }}
+              className="fixed top-24 right-4 z-50 bg-white rounded-xl shadow-2xl border-2 border-green-500 max-w-sm w-full"
+            >
+              <div className="p-4">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-poppins text-lg font-bold text-gray-800 mb-1">
+                      Added to Cart!
+                    </h3>
+                    <p className="font-poppins text-sm text-gray-600">
+                      {selectedProduct.title} ({selectedSize})
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShowCartSuccess(false)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="flex gap-2">
+                  <Link
+                    href="/user/dashboard"
+                    onClick={() => setShowCartSuccess(false)}
+                    className="flex-1 bg-white border-2 border-primary text-primary font-poppins font-semibold py-2.5 rounded-lg transition-all hover:bg-orange-50 text-center"
+                  >
+                    View Cart ({cartCount})
+                  </Link>
+                  <Link
+                    href="/checkout"
+                    onClick={() => setShowCartSuccess(false)}
+                    className="flex-1 bg-primary text-white font-poppins font-semibold py-2.5 rounded-lg transition-all hover:bg-orange-600 text-center"
+                  >
+                    Checkout
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Image Lightbox Modal */}
+        <AnimatePresence>
+          {showImageModal && selectedImageProduct && (
+            <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="relative max-w-7xl w-full h-[90vh] bg-white rounded-xl overflow-hidden shadow-2xl"
+              >
+                {/* Close Button */}
+                <button
+                  onClick={() => setShowImageModal(false)}
+                  className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg"
+                >
+                  <X className="w-6 h-6 text-gray-800" />
+                </button>
+
+                <div className="flex flex-col md:flex-row h-full">
+                  {/* Image Section */}
+                  <div className="flex-1 relative bg-gray-100 flex items-center justify-center p-4 md:p-8 min-h-[400px] md:min-h-[600px]">
+                    {(() => {
+                      const media: MediaItem[] = selectedImageProduct.media || [{ type: "image", url: selectedImageProduct.image }];
+                      const currentMedia = media[currentImageIndex];
+                      
+                      return currentMedia.type === "image" ? (
+                        <div className="relative w-full h-full max-h-[600px]">
+                          <Image
+                            src={currentMedia.url}
+                            alt={selectedImageProduct.title}
+                            fill
+                            className="object-contain"
+                            priority
+                          />
+                        </div>
+                      ) : (
+                        <video
+                          src={currentMedia.url}
+                          className="max-w-full max-h-[600px] w-auto h-auto"
+                          controls
+                          autoPlay
+                          loop
+                        />
+                      );
+                    })()}
+
+                    {/* Navigation Arrows */}
+                    {(() => {
+                      const media: MediaItem[] = selectedImageProduct.media || [{ type: "image", url: selectedImageProduct.image }];
+                      return media.length > 1 && (
+                        <>
+                          <button
+                            onClick={() => setCurrentImageIndex((prev) => (prev - 1 + media.length) % media.length)}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg"
+                          >
+                            <ChevronLeft className="w-6 h-6 text-gray-800" />
+                          </button>
+                          <button
+                            onClick={() => setCurrentImageIndex((prev) => (prev + 1) % media.length)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg"
+                          >
+                            <ChevronRight className="w-6 h-6 text-gray-800" />
+                          </button>
+                        </>
+                      );
+                    })()}
+                  </div>
+
+                  {/* Product Info Section */}
+                  <div className="w-full md:w-96 p-6 overflow-y-auto">
+                    <h2 className="font-poppins text-2xl font-bold text-gray-800 mb-3">
+                      {selectedImageProduct.title}
+                    </h2>
+                    <p className="font-poppins text-3xl font-bold text-primary mb-4">
+                      ₹{selectedImageProduct.price.toLocaleString()}
+                    </p>
+                    <p className="font-poppins text-gray-600 mb-6">
+                      {selectedImageProduct.description}
+                    </p>
+
+                    {/* Thumbnail Gallery */}
+                    {(() => {
+                      const media: MediaItem[] = selectedImageProduct.media || [{ type: "image", url: selectedImageProduct.image }];
+                      return media.length > 1 && (
+                        <div className="mb-6">
+                          <p className="font-poppins text-sm font-semibold text-gray-700 mb-2">
+                            All Images ({media.length})
+                          </p>
+                          <div className="grid grid-cols-4 gap-2">
+                            {media.map((item, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => setCurrentImageIndex(idx)}
+                                className={`relative h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all ${
+                                  idx === currentImageIndex
+                                    ? "border-primary"
+                                    : "border-transparent hover:border-gray-300"
+                                }`}
+                              >
+                                {item.type === "image" ? (
+                                  <Image
+                                    src={item.url}
+                                    alt={`Thumbnail ${idx + 1}`}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                ) : (
+                                  <div className="relative w-full h-full">
+                                    <video
+                                      src={item.url}
+                                      className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                      <Play className="w-6 h-6 text-white" />
+                                    </div>
+                                  </div>
+                                )}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })()}
+
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => {
+                          setShowImageModal(false);
+                          handleAddToCart(selectedImageProduct);
+                        }}
+                        className="flex-1 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-800 font-poppins font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2"
+                      >
+                        <ShoppingCart className="w-5 h-5" />
+                        Add to Cart
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowImageModal(false);
+                          handleBuyNow(selectedImageProduct);
+                        }}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-poppins font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md"
+                      >
+                        <ShoppingBag className="w-5 h-5" />
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>

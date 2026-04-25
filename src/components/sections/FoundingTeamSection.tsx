@@ -12,22 +12,22 @@ const founder = {
 const interns = [
   {
     name: "Kaushiki Tiwari",
-    role: "Core Member",
+    role: "Creative Director",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.17.jpeg"
   },
   {
     name: "Sarvang Sharma",
-    role: "Core Member",
+    role: "Influencer and Partnership Lead",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.44.jpeg"
   },
   {
     name: "Vinayak Awasthi",
-    role: "Core Member",
+    role: "Marketing Lead",
     image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.50.jpeg"
   },
   {
     name: "Suryansha Singh Bundela",
-    role: "Core Member",
+    role: "Operations Manager",
     image: "/Core members/WhatsApp Image 2026-04-22 at 14.13.18.jpeg"
   }
 ];

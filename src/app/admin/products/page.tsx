@@ -2,10 +2,15 @@
 
 import Sidebar from "@/components/admin/Sidebar";
 import TopNav from "@/components/admin/TopNav";
-import { Plus, Edit, Trash2, X, Package, Upload, Image as ImageIcon } from "lucide-react";
+import { Plus, Edit, Trash2, X, Package, Upload, Image as ImageIcon, Video, Play } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+
+interface MediaItem {
+  type: "image" | "video";
+  url: string;
+}
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -15,6 +20,7 @@ export default function ProductsPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>("");
+  const [media, setMedia] = useState<MediaItem[]>([]);
   const [formData, setFormData] = useState({
     title: "",
     price: "",
@@ -50,6 +56,7 @@ export default function ProductsPage() {
         image: product.image,
       });
       setImagePreview(product.image);
+      setMedia(product.media || [{ type: "image", url: product.image }]);
     } else {
       setEditingProduct(null);
       setFormData({
@@ -59,45 +66,75 @@ export default function ProductsPage() {
         image: "/dog1.png",
       });
       setImagePreview("");
+      setMedia([]);
     }
     setShowModal(true);
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Check file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image size should be less than 5MB");
+  const handleMediaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    Array.from(files).forEach((file) => {
+      // Check file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`${file.name} is too large. Max size is 10MB`);
         return;
       }
 
       // Check file type
-      if (!file.type.startsWith("image/")) {
-        alert("Please upload an image file");
+      const isImage = file.type.startsWith("image/");
+      const isVideo = file.type.startsWith("video/");
+      
+      if (!isImage && !isVideo) {
+        alert(`${file.name} is not a valid image or video file`);
         return;
       }
 
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result as string;
-        setFormData({ ...formData, image: base64String });
-        setImagePreview(base64String);
+        const newMediaItem: MediaItem = {
+          type: isImage ? "image" : "video",
+          url: base64String,
+        };
+        
+        setMedia((prev) => [...prev, newMediaItem]);
+        
+        // Set first image as preview and main image for backward compatibility
+        if (media.length === 0 && isImage) {
+          setFormData({ ...formData, image: base64String });
+          setImagePreview(base64String);
+        }
       };
       reader.readAsDataURL(file);
-    }
+    });
+  };
+
+  const removeMediaItem = (index: number) => {
+    setMedia((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (media.length === 0) {
+      alert("Please add at least one image or video");
+      return;
+    }
+    
     setSubmitting(true);
 
     try {
       const url = "/api/products";
       const method = editingProduct ? "PATCH" : "POST";
+      
+      // Use first image as main image for backward compatibility
+      const mainImage = media.find(m => m.type === "image")?.url || media[0].url;
+      
       const body = editingProduct
-        ? { ...formData, productId: editingProduct._id }
-        : formData;
+        ? { ...formData, image: mainImage, media, productId: editingProduct._id }
+        : { ...formData, image: mainImage, media };
 
       const response = await fetch(url, {
         method,
@@ -325,18 +362,46 @@ export default function ProductsPage() {
 
                 <div>
                   <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
-                    Product Image
+                    Product Images & Videos
                   </label>
                   
-                  {/* Image Preview */}
-                  {imagePreview && (
-                    <div className="mb-4 relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
-                      <Image
-                        src={imagePreview}
-                        alt="Preview"
-                        fill
-                        className="object-cover"
-                      />
+                  {/* Media Gallery */}
+                  {media.length > 0 && (
+                    <div className="mb-4 grid grid-cols-3 gap-3">
+                      {media.map((item, index) => (
+                        <div key={index} className="relative group">
+                          <div className="relative w-full h-32 bg-gray-100 rounded-lg overflow-hidden">
+                            {item.type === "image" ? (
+                              <Image
+                                src={item.url}
+                                alt={`Media ${index + 1}`}
+                                fill
+                                className="object-cover"
+                              />
+                            ) : (
+                              <div className="relative w-full h-full">
+                                <video
+                                  src={item.url}
+                                  className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                  <Play className="w-8 h-8 text-white" />
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeMediaItem(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                          <div className="absolute bottom-1 left-1 px-2 py-0.5 bg-black/60 text-white text-xs rounded">
+                            {item.type === "image" ? "Image" : "Video"}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
 
@@ -346,38 +411,20 @@ export default function ProductsPage() {
                       <div className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-orange-50 transition-all">
                         <Upload className="w-5 h-5 text-gray-600" />
                         <span className="font-poppins text-sm font-medium text-gray-700">
-                          Upload from Computer
+                          Upload Images/Videos
                         </span>
                       </div>
                       <input
                         type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
+                        accept="image/*,video/*"
+                        multiple
+                        onChange={handleMediaUpload}
                         className="hidden"
                       />
                     </label>
                   </div>
                   <p className="font-poppins text-xs text-gray-500 mt-2">
-                    Supported formats: JPG, PNG, GIF (Max 5MB)
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
-                    Or use Image Path
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.image.startsWith('data:') ? '' : formData.image}
-                    onChange={(e) => {
-                      setFormData({ ...formData, image: e.target.value });
-                      setImagePreview(e.target.value);
-                    }}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
-                    placeholder="/dog1.png"
-                  />
-                  <p className="font-poppins text-xs text-gray-500 mt-1">
-                    Use images from /public folder (e.g., /dog1.png, /dog2.png)
+                    Supported: JPG, PNG, GIF, MP4, WebM (Max 10MB per file)
                   </p>
                 </div>
 

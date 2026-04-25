@@ -97,7 +97,8 @@ export default function MembershipPage() {
     state: "",
     city: "",
     address: "",
-    pincode: ""
+    pincode: "",
+    panCard: ""
   });
   const [loading, setLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -234,7 +235,8 @@ export default function MembershipPage() {
                 state: "",
                 city: "",
                 address: "",
-                pincode: ""
+                pincode: "",
+                panCard: ""
               });
             } else {
               alert("Failed to save membership data");
@@ -299,7 +301,7 @@ export default function MembershipPage() {
         <div className="container mx-auto px-4 py-16">
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <div>
-              <h2 className="font-fredoka text-3xl text-gray-800 mb-6">Choose Your Membership</h2>
+              <h2 className="font-fredoka text-3xl text-gray-800 mb-6">Become a Supporter</h2>
               
               <div className="space-y-4">
                 {membershipTiers.map((tier) => {
@@ -463,6 +465,27 @@ export default function MembershipPage() {
                     required
                   />
 
+                  <input
+                    type="text"
+                    placeholder="PAN Card Number (Optional)"
+                    value={formData.panCard}
+                    onChange={(e) => setFormData({ ...formData, panCard: e.target.value.toUpperCase() })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
+                    maxLength={10}
+                  />
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
+                    <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <div>
+                      <p className="font-poppins text-sm font-semibold text-blue-900 mb-1">Your Data is Secure</p>
+                      <p className="font-poppins text-xs text-blue-800">
+                        Your personal details and PAN information are encrypted and securely stored. We use this information solely for tax relaxation purposes and issuing 80G certificates.
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="pt-4">
                     <div className="flex items-center justify-between mb-4 p-4 bg-orange-50 rounded-lg">
                       <span className="font-poppins text-gray-700">Selected Plan:</span>
@@ -503,14 +526,14 @@ export default function MembershipPage() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                 <p className="font-poppins text-gray-700">
-                  <span className="font-semibold">Note:</span> For International Residents, CLICK TO DONATE NOW
+                  <span className="font-semibold">Note:</span> For International Residents
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                 <p className="font-poppins text-gray-700">
-                  "No freebies applicable for Foreign members as shipping money is huge and can be used for animal welfare in India"
+                  No freebies applicable for Foreign members, but guess what you have the access to our e-books
                 </p>
               </div>
 
@@ -545,7 +568,7 @@ export default function MembershipPage() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                 <p className="font-poppins text-gray-700">
-                  Cheque / DD can also be sent at 14 Ashoka Road, New Delhi 110001.
+                  Cheque / DD can also be sent at Bhopal, Madhya Pradesh.
                 </p>
               </div>
 

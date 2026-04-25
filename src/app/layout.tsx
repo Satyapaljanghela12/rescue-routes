@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Poetsen_One, Fredoka } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/contexts/CartContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -36,7 +38,13 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${poetsenOne.variable} ${fredoka.variable} h-full antialiased`}
     >
-      <body className="font-sans bg-white text-foreground min-h-screen flex flex-col" suppressHydrationWarning>{children}</body>
+      <body className="font-sans bg-white text-foreground min-h-screen flex flex-col" suppressHydrationWarning>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

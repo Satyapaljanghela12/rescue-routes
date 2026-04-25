@@ -56,9 +56,27 @@ export async function POST(request: NextRequest) {
       paymentStatus
     } = body;
 
-    if (!firstName || !lastName || !email || !phone || !streetAddress || !city || !state || !pinCode || !country || !productId || !productName || !productPrice || !quantity || !paymentMethod) {
+    // Detailed validation with specific error messages
+    const missingFields = [];
+    if (!firstName) missingFields.push("firstName");
+    if (!lastName) missingFields.push("lastName");
+    if (!email) missingFields.push("email");
+    if (!phone) missingFields.push("phone");
+    if (!streetAddress) missingFields.push("streetAddress");
+    if (!city) missingFields.push("city");
+    if (!state) missingFields.push("state");
+    if (!pinCode) missingFields.push("pinCode");
+    if (!country) missingFields.push("country");
+    if (!productId) missingFields.push("productId");
+    if (!productName) missingFields.push("productName");
+    if (!productPrice) missingFields.push("productPrice");
+    if (!quantity) missingFields.push("quantity");
+    if (!paymentMethod) missingFields.push("paymentMethod");
+
+    if (missingFields.length > 0) {
+      console.error("Missing fields:", missingFields);
       return NextResponse.json(
-        { success: false, error: "Missing required fields" },
+        { success: false, error: `Missing required fields: ${missingFields.join(", ")}` },
         { status: 400 }
       );
     }
@@ -111,7 +129,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Error creating order:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to create order" },
+      { success: false, error: `Failed to create order: ${error instanceof Error ? error.message : "Unknown error"}` },
       { status: 500 }
     );
   }

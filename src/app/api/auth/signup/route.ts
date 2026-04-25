@@ -64,6 +64,13 @@ export async function POST(request: NextRequest) {
         message: role === "volunteer" 
           ? "Signup successful! Your account is pending admin approval. You'll receive an email once approved."
           : "User created successfully",
+        user: {
+          _id: result.insertedId.toString(),
+          name,
+          email,
+          role,
+          status,
+        },
         userId: result.insertedId,
         role,
         status,

@@ -27,7 +27,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, price, description, image } = body;
+    const { title, price, description, image, media } = body;
 
     if (!title || !price || !description) {
       return NextResponse.json(
@@ -43,7 +43,8 @@ export async function POST(request: NextRequest) {
       title,
       price: Number(price),
       description,
-      image: image || "/dog1.png",
+      image: image || "/dog1.png", // Keep for backward compatibility
+      media: media || [{ type: "image", url: image || "/dog1.png" }], // New media array
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -69,7 +70,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productId, title, price, description, image } = body;
+    const { productId, title, price, description, image, media } = body;
 
     if (!productId) {
       return NextResponse.json(
@@ -86,6 +87,7 @@ export async function PATCH(request: NextRequest) {
     if (price) updateData.price = Number(price);
     if (description) updateData.description = description;
     if (image) updateData.image = image;
+    if (media) updateData.media = media;
 
     const result = await db.collection("products").updateOne(
       { _id: new ObjectId(productId) },
