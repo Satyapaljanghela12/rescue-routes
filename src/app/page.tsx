@@ -21,10 +21,10 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import FoundingTeamSection from "@/components/sections/FoundingTeamSection";
 import PastCampaignsSection from "@/components/sections/PastCampaignsSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
-import RealtimeNotifications from "@/components/RealtimeNotifications";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import DonationNotification from "@/components/DonationNotification";
-import SocialMediaPopup from "@/components/SocialMediaPopup";
+import RealtimeNotifications from "@/components/shared/RealtimeNotifications";
+import WhatsAppButton from "@/components/shared/WhatsAppButton";
+import DonationNotification from "@/components/shared/DonationNotification";
+import SocialMediaPopup from "@/components/shared/SocialMediaPopup";
 
 const heroVideo = "/Camapigns/hero.mp4";
 
