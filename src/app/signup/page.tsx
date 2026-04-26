@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Shield, Users, Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const roles = [
 
 export default function SignupPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const [selectedRole, setSelectedRole] = useState("user");
   const [formData, setFormData] = useState({
     name: "",
@@ -24,6 +24,19 @@ export default function SignupPage() {
     password: "",
     confirmPassword: "",
   });
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user.role === "admin") {
+        router.push("/admin/dashboard");
+      } else if (user.role === "volunteer" || user.role === "Volunteer") {
+        router.push("/volunteer/dashboard");
+      } else {
+        router.push("/user/dashboard");
+      }
+    }
+  }, [isAuthenticated, user, router]);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();

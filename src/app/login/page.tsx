@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Shield, Users, Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
@@ -15,10 +15,23 @@ const roles = [
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const [selectedRole, setSelectedRole] = useState("user");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user.role === "admin") {
+        router.push("/admin/dashboard");
+      } else if (user.role === "volunteer" || user.role === "Volunteer") {
+        router.push("/volunteer/dashboard");
+      } else {
+        router.push("/user/dashboard");
+      }
+    }
+  }, [isAuthenticated, user, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
