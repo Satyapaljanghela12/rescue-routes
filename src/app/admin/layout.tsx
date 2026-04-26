@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
-export default function VolunteerLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -19,16 +19,16 @@ export default function VolunteerLayout({
       return;
     }
 
-    // Check if user has volunteer role
-    if (user?.role !== "volunteer" && user?.role !== "Volunteer") {
-      alert("Access denied. Volunteer privileges required.");
+    // Check if user has admin role
+    if (user?.role !== "admin") {
+      alert("Access denied. Admin privileges required.");
       router.push("/");
       return;
     }
   }, [isAuthenticated, user, router]);
 
-  // Show loading while checking authentication
-  if (!isAuthenticated || (user?.role !== "volunteer" && user?.role !== "Volunteer")) {
+  // Show loading or nothing while checking authentication
+  if (!isAuthenticated || user?.role !== "admin") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
