@@ -25,7 +25,7 @@ interface MediaItem {
 export default function StorePage() {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
-  const { addToCart } = useCart();
+  const { addToCart, cartCount } = useCart();
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
