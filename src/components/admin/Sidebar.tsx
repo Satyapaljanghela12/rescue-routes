@@ -35,6 +35,7 @@ const menuItems = [
   { icon: Package, label: "Products", href: "/admin/products" },
   { icon: ShoppingBag, label: "Orders", href: "/admin/orders" },
   { icon: BookOpen, label: "Blogs", href: "/admin/blogs" },
+  { icon: Heart, label: "Stories", href: "/admin/stories" },
   { icon: BarChart3, label: "Analytics", href: "/admin/analytics" },
   { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];

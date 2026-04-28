@@ -27,6 +27,8 @@ export default function StorePage() {
   const { isAuthenticated } = useAuth();
   const { addToCart, cartCount } = useCart();
   const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
@@ -72,11 +74,21 @@ export default function StorePage() {
       const data = await response.json();
       if (data.success) {
         setProducts(data.products);
+        setFilteredProducts(data.products);
       }
       setLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
       setLoading(false);
+    }
+  };
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category);
+    if (category === "all") {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(products.filter(p => p.category === category));
     }
   };
 
@@ -105,7 +117,7 @@ export default function StorePage() {
   };
 
   const handleAddToCartSubmit = () => {
-    if (!selectedSize) {
+    if (selectedProduct.hasSize && !selectedSize) {
       alert("Please select a size");
       return;
     }
@@ -119,7 +131,7 @@ export default function StorePage() {
       price: selectedProduct.price,
       image: mainImage,
       quantity,
-      size: selectedSize,
+      size: selectedSize || "N/A",
     });
 
     setShowModal(false);
@@ -416,53 +428,85 @@ export default function StorePage() {
       <Navbar />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-primary to-orange-600 text-white py-20 pt-32">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-3 mb-4"
-            >
-              <ShoppingBag className="w-12 h-12" />
-              <h1 className="font-poetsen text-5xl md:text-6xl">
-                Merchandise Store
-              </h1>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-poppins text-lg md:text-xl max-w-2xl mx-auto opacity-90"
-            >
-              Support Our Cause Through Merchandise
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="font-poppins text-sm md:text-base max-w-xl mx-auto mt-2 opacity-80"
-            >
-              Every purchase helps us rescue and care for animals in need
-            </motion.p>
-          </div>
+        <div className="relative h-[520px] overflow-hidden pt-16">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/images/gallery/storechnage.png"
+            alt="Merchandise Store"
+            className="w-full h-full object-cover object-top"
+          />
         </div>
 
         {/* Products Grid */}
         <div className="container mx-auto px-4 py-16">
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-3 mb-8 justify-center">
+            <button
+              onClick={() => handleCategoryFilter("all")}
+              className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all ${
+                selectedCategory === "all"
+                  ? "bg-primary text-white shadow-md"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-primary"
+              }`}
+            >
+              All Products
+            </button>
+            <button
+              onClick={() => handleCategoryFilter("tshirt")}
+              className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all ${
+                selectedCategory === "tshirt"
+                  ? "bg-blue-600 text-white shadow-md"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600"
+              }`}
+            >
+              T-Shirts
+            </button>
+            <button
+              onClick={() => handleCategoryFilter("book")}
+              className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all ${
+                selectedCategory === "book"
+                  ? "bg-green-600 text-white shadow-md"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-green-600"
+              }`}
+            >
+              Books
+            </button>
+            <button
+              onClick={() => handleCategoryFilter("keychain")}
+              className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all ${
+                selectedCategory === "keychain"
+                  ? "bg-purple-600 text-white shadow-md"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-600"
+              }`}
+            >
+              Keychains
+            </button>
+            <button
+              onClick={() => handleCategoryFilter("phonecover")}
+              className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all ${
+                selectedCategory === "phonecover"
+                  ? "bg-pink-600 text-white shadow-md"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-pink-600"
+              }`}
+            >
+              Phone Covers
+            </button>
+          </div>
+
           {loading ? (
             <div className="flex justify-center items-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
-          ) : products.length > 0 ? (
+          ) : filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <ProductCard key={product._id} product={product} index={index} />
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
               <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="font-poppins text-gray-500">No products available yet</p>
+              <p className="font-poppins text-gray-500">No products available in this category</p>
             </div>
           )}
         </div>
@@ -503,56 +547,63 @@ export default function StorePage() {
                       <h3 className="font-poppins text-xl font-semibold text-gray-800 mb-2">
                         {selectedProduct.title}
                       </h3>
+                      <p className="font-poppins text-sm text-gray-600 mb-2">
+                        Category: {selectedProduct.category ? selectedProduct.category.charAt(0).toUpperCase() + selectedProduct.category.slice(1) : "Product"}
+                      </p>
                       <p className="font-poppins text-2xl font-bold text-primary mb-3">
                         ₹{selectedProduct.price.toLocaleString()}
                       </p>
                       
-                      {/* Size Selector */}
-                      <div className="mb-3">
-                        <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
-                          Select Size:
-                        </label>
-                        <div className="flex gap-2">
-                          {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
-                            <button
-                              key={size}
-                              type="button"
-                              onClick={() => setSelectedSize(size)}
-                              className={`px-4 py-2 border rounded-lg font-poppins text-sm font-medium transition-all ${
-                                selectedSize === size
-                                  ? "bg-primary text-white border-primary"
-                                  : "bg-white text-gray-700 border-gray-300 hover:border-primary"
-                              }`}
-                            >
-                              {size}
-                            </button>
-                          ))}
+                      {/* Size Selector - Only for products with hasSize */}
+                      {selectedProduct.hasSize && (
+                        <div className="mb-3">
+                          <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
+                            Select Size:
+                          </label>
+                          <div className="flex gap-2 flex-wrap">
+                            {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+                              <button
+                                key={size}
+                                type="button"
+                                onClick={() => setSelectedSize(size)}
+                                className={`px-4 py-2 border rounded-lg font-poppins text-sm font-medium transition-all ${
+                                  selectedSize === size
+                                    ? "bg-primary text-white border-primary"
+                                    : "bg-white text-gray-700 border-gray-300 hover:border-primary"
+                                }`}
+                              >
+                                {size}
+                              </button>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
                       
-                      {/* Quantity Selector */}
-                      <div className="flex items-center gap-3">
-                        <span className="font-poppins text-sm font-medium text-gray-700">Quantity:</span>
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                            className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-all"
-                          >
-                            <Minus className="w-4 h-4" />
-                          </button>
-                          <span className="font-poppins text-lg font-semibold text-gray-800 w-12 text-center">
-                            {quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(quantity + 1)}
-                            className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-all"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
+                      {/* Quantity Selector - Only for products with hasQuantity */}
+                      {selectedProduct.hasQuantity && (
+                        <div className="flex items-center gap-3">
+                          <span className="font-poppins text-sm font-medium text-gray-700">Quantity:</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-all"
+                            >
+                              <Minus className="w-4 h-4" />
+                            </button>
+                            <span className="font-poppins text-lg font-semibold text-gray-800 w-12 text-center">
+                              {quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => setQuantity(quantity + 1)}
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-all"
+                            >
+                              <Plus className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
 
@@ -729,7 +780,7 @@ export default function StorePage() {
                     <button
                       type="button"
                       onClick={handleAddToCartSubmit}
-                      disabled={!selectedSize}
+                      disabled={selectedProduct.hasSize && !selectedSize}
                       className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-poppins font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <ShoppingCart className="w-5 h-5" />
@@ -737,14 +788,14 @@ export default function StorePage() {
                     </button>
                     <button
                       type="submit"
-                      disabled={!selectedSize}
+                      disabled={selectedProduct.hasSize && !selectedSize}
                       className="flex-1 bg-primary hover:bg-orange-600 text-white font-poppins font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Buy Now
                       <ArrowRight className="w-5 h-5" />
                     </button>
                   </div>
-                  {!selectedSize && (
+                  {selectedProduct.hasSize && !selectedSize && (
                     <p className="text-center text-sm text-red-600 font-poppins">
                       Please select a size to continue
                     </p>
@@ -802,7 +853,7 @@ export default function StorePage() {
                         <p className="font-poppins text-sm text-gray-600">
                           ₹{selectedProduct.price.toLocaleString()} × {quantity}
                         </p>
-                        {selectedSize && (
+                        {selectedProduct.hasSize && selectedSize && (
                           <p className="font-poppins text-sm text-gray-600">
                             Size: {selectedSize}
                           </p>
@@ -1034,7 +1085,7 @@ export default function StorePage() {
                       Added to Cart!
                     </h3>
                     <p className="font-poppins text-sm text-gray-600">
-                      {selectedProduct.title} ({selectedSize})
+                      {selectedProduct.title} ({selectedSize || "No size"})
                     </p>
                   </div>
                   <button

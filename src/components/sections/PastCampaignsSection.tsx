@@ -26,7 +26,7 @@ const pastCampaigns: PastCampaign[] = [
       "Pet license registration & rabies vaccinations"
     ],
     organization: "Ram Astha Mission & Nagar Nigam",
-    image: "/Camapigns/27-28dec.jpg"
+    image: "/assets/images/campaigns/27-28dec.jpg"
   },
   {
     title: "Winter Bed Drive",
@@ -37,7 +37,7 @@ const pastCampaigns: PastCampaign[] = [
       "Stubble-filled sacks distributed"
     ],
     organization: "Parwati Sewa Foundation",
-    image: "/Camapigns/Winterbeddrive.jpg"
+    image: "/assets/images/campaigns/winter-bed-drive.jpg"
   },
   {
     title: "Water Pot Drive",
@@ -47,7 +47,7 @@ const pastCampaigns: PastCampaign[] = [
       "100 water pots distributed",
       "City-wide coverage"
     ],
-    image: "/Camapigns/WaterPotDrive.jpg"
+    image: "/assets/images/campaigns/water-pot-drive.jpg"
   },
   {
     title: "Year-End Adoption Camp",
@@ -57,7 +57,7 @@ const pastCampaigns: PastCampaign[] = [
       "60 puppies participated",
       "18 successful adoptions"
     ],
-    image: "/Camapigns/yearend.jpg"
+    image: "/assets/images/campaigns/year-end.jpg"
   },
   {
     title: "Annual Bed Drive",
@@ -67,7 +67,7 @@ const pastCampaigns: PastCampaign[] = [
       "800 protective beds created",
       "Stubble and sacks used"
     ],
-    image: "/Camapigns/Annualbeddrive.jpg"
+    image: "/assets/images/campaigns/annual-bed-drive.jpg"
   },
   {
     title: "New Year Adoption Drive",
@@ -78,7 +78,7 @@ const pastCampaigns: PastCampaign[] = [
       "50 puppies participated",
       "21 successful adoptions"
     ],
-    image: "/Camapigns/Adoptiondrive.jpg"
+    image: "/assets/images/campaigns/adoption-drive.jpg"
   },
   {
     title: "Adoption Camp at Olivers",
@@ -89,7 +89,7 @@ const pastCampaigns: PastCampaign[] = [
       "20 puppies participated",
       "3 successful adoptions"
     ],
-    image: "/Camapigns/adoptionolivers.jpg"
+    image: "/assets/images/campaigns/adoption-olivers.jpg"
   },
   {
     title: "Foundation Bed Drive",
@@ -99,7 +99,7 @@ const pastCampaigns: PastCampaign[] = [
       "600 beds created",
       "Boris (sacks) and bhusa (stubble) used"
     ],
-    image: "/Camapigns/foundationbed.jpg"
+    image: "/assets/images/campaigns/foundation-bed.jpg"
   }
 ];
 

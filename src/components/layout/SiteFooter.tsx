@@ -19,6 +19,17 @@ export default function SiteFooter() {
             </p>
             <div className="mt-6 flex items-center gap-3">
               <Link
+                href="https://www.facebook.com/rescueroutes/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#2563EB]"
+                aria-label="Facebook"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </Link>
+              <Link
                 href="https://www.instagram.com/rescueroutes?igsh=cG0zeGpkZHgwNGk="
                 target="_blank"
                 rel="noopener noreferrer"
@@ -32,7 +43,7 @@ export default function SiteFooter() {
                 </svg>
               </Link>
               <Link
-                href="mailto:pawsonparade2020@gmail.com"
+                href="mailto:rescueroutes2020@gmail.com"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#2563EB]"
                 aria-label="Email"
               >
@@ -80,7 +91,7 @@ export default function SiteFooter() {
                 Donate
               </Link>
               <Link href="/membership" className="transition hover:text-white">
-                Membership
+                Support Program
               </Link>
               <Link href="/volunteers" className="transition hover:text-white">
                 Volunteer
@@ -99,11 +110,14 @@ export default function SiteFooter() {
               <div className="mt-5 space-y-4 text-sm leading-7 font-poppins text-white/78">
                 <div className="flex items-start gap-3">
                   <Phone className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
-                  <p>+91 96300 57355</p>
+                  <div>
+                   
+                    <p>+91 70672 23922</p>
+                  </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Mail className="mt-1 h-4 w-4 flex-shrink-0 text-white" />
-                  <p>pawsonparade2020@gmail.com</p>
+                  <p>rescueroutes2020@gmail.com</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="mt-1 h-4 w-4 flex-shrink-0 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -145,7 +159,7 @@ export default function SiteFooter() {
               Donate
             </Link>
             <Link href="/membership" className="transition hover:text-white">
-              Membership
+              Support Program
             </Link>
           </div>
         </div>

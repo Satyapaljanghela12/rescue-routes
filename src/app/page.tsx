@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import {
   ArrowRight,
   HeartHandshake,
@@ -26,29 +27,29 @@ import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import DonationNotification from "@/components/shared/DonationNotification";
 import SocialMediaPopup from "@/components/shared/SocialMediaPopup";
 
-const heroVideo = "/Camapigns/hero.mp4";
+const heroVideo = "/assets/videos/hero.mp4";
 
 const galleryImages = [
   {
-    src: "/Images/harrison-lin-dKxvmVH7Bi0-unsplash.jpg",
+    src: "/assets/images/gallery/volunteer-care.jpg",
     alt: "Volunteer comforting a rescued dog",
     title: "Daily rescue care",
     description: "Emergency response, nourishment, and gentle recovery for animals in need.",
   },
   {
-    src: "/Images/harrison-lin-dKxvmVH7Bi0-unsplash%20(1).jpg",
+    src: "/assets/images/gallery/rescued-dog.jpg",
     alt: "Dog looking calmly at the camera",
     title: "Second chances",
     description: "Each recovery story begins with patience, treatment, and a safe shelter space.",
   },
   {
-    src: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.14.jpeg",
+    src: "/assets/images/gallery/shelter-care.jpeg",
     alt: "Rescued animal receiving care",
     title: "On-ground compassion",
     description: "Our team works where the need is most urgent, from streets to treatment centers.",
   },
   {
-    src: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.18.jpeg",
+    src: "/assets/images/gallery/animals-shelter.jpeg",
     alt: "Animals at the shelter",
     title: "Safe shelter moments",
     description: "Recovery is about more than treatment, it is about dignity, security, and hope.",
@@ -57,34 +58,50 @@ const galleryImages = [
 
 const whyRescueMattersImages = [
   {
-    image: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.14%20(1).jpeg",
+    image: "/assets/images/gallery/stories-bg.jpeg",
     alt: "Rescued dog receiving care",
     className: "",
   },
   {
-    image: "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.18%20(1).jpeg",
+    image: "/assets/images/gallery/animals-shelter.jpeg",
     alt: "Street animal in need of support",
     className: "",
   },
 ];
 
-const whyRescueMattersVideo = "/Images/WhatsApp Video 2026-04-11 at 20.21.15 (1).mp4";
+const whyRescueMattersVideo = "/assets/images/gallery/VID_20260425_053252_847_bsl (1).mp4";
 
 const whyRescueMattersPoints = [
   {
-    text: "Rapid response for injured street animals hit by vehicles",
+    text: (
+      <>
+        <strong>Rapid response</strong> for injured street animals hit by vehicles
+      </>
+    ),
     icon: Ambulance,
   },
   {
-    text: "Humane sterilization to prevent overpopulation and suffering",
+    text: (
+      <>
+        <strong>Humane sterilization</strong> to prevent overpopulation and suffering
+      </>
+    ),
     icon: Stethoscope,
   },
   {
-    text: "Shelter and healing for abandoned pets who lost their homes",
+    text: (
+      <>
+        <strong>Shelter and healing</strong> for abandoned pets who lost their homes
+      </>
+    ),
     icon: HomeIcon,
   },
   {
-    text: "Nutritional support for severely malnourished rescues",
+    text: (
+      <>
+        <strong>Nutritional support</strong> for severely malnourished rescues
+      </>
+    ),
     icon: Utensils,
   },
 ];
@@ -122,7 +139,7 @@ const programsShowcase = [
     description:
       "We’re on the ground for street animals in distress, providing immediate first aid and survival care.",
     mediaType: "video" as const,
-    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.14.mp4",
+    src: "/assets/images/gallery/WhatsApp Video 2026-04-11 at 20.21.15 (2).mp4",
     alt: "Emergency rescue operation",
   },
   {
@@ -130,7 +147,7 @@ const programsShowcase = [
     description:
       "A safe, temporary haven for recovery, preparing every animal for their loving forever family.",
     mediaType: "image" as const,
-    src: "/new/WhatsApp Image 2026-04-24 at 00.13.11.jpeg",
+    src: "/assets/images/gallery/20240128_161809.jpg",
     alt: "Animal healing and shelter support",
   },
   {
@@ -138,7 +155,7 @@ const programsShowcase = [
     description:
       "Humane sterilization programs to ensure fewer animals are born into hardship on the streets.",
     mediaType: "image" as const,
-    src: "/Images/population.jpg",
+    src: "/assets/images/gallery/population-control.jpg",
     alt: "Animal welfare population care effort",
   },
   {
@@ -146,12 +163,79 @@ const programsShowcase = [
     description:
       "Free rabies shots and vaccinations because every life deserves protection and health.",
     mediaType: "video" as const,
-    src: "/Images/WhatsApp%20Video%202026-04-11%20at%2020.21.13.mp4",
+    src: "/assets/images/gallery/WhatsApp Video 2026-04-11 at 20.21.13 (2).mp4",
     alt: "Health and safety support for animals",
   },
 ];
 
+// CountUp component — animates from 0 to target when scrolled into view
+function CountUp({ target, duration = 2000 }: { target: number; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const startTime = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return <span ref={ref}>{count.toLocaleString()}</span>;
+}
+
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Play video with audio when in view
+            video.play();
+            video.muted = false;
+          } else {
+            // Pause video when out of view
+            video.pause();
+            video.muted = true;
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of video is visible
+      }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -160,31 +244,20 @@ export default function Home() {
       <DonationNotification />
       <SocialMediaPopup />
       <main className="flex-1 overflow-hidden bg-background text-foreground">
-        <section className="relative isolate min-h-[88vh] overflow-hidden">
-          {/* Background Video */}
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          >
-            <source src="/Camapigns/hero.mp4" type="video/mp4" />
-          </video>
-          
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
+        <section className="relative isolate min-h-[88vh] overflow-hidden bg-gradient-to-br from-[#2563EB] from-0% via-[#2563EB] via-30% to-white to-100%">
           <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-center px-4 pt-36 pb-16 sm:px-6 lg:px-8 z-10">
-            <div className="max-w-3xl">
-              {/* Text content */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+              {/* Left Side - Text content */}
               <div className="text-white">
-                <h1 className="font-heading text-5xl font-semibold leading-tight sm:text-6xl lg:text-7xl drop-shadow-lg">
+                <div className="inline-block mb-6">
+                  <p className="text-sm sm:text-base font-semibold uppercase tracking-widest text-white-300 px-6 py-3 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-md shadow-lg">
+                    NGO under Parwati Sewa Foundation
+                  </p>
+                </div>
+                <h1 className="font-heading text-5xl font-semibold leading-tight sm:text-6xl lg:text-7xl text-white">
                   Build a kinder path for every stray, injured, and abandoned life.
                 </h1>
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg font-normal drop-shadow-md">
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg font-normal">
                   Rescue Routes pairs urgent rescue, treatment, shelter support, and warmer, people-first movement for animal welfare
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -198,7 +271,7 @@ export default function Home() {
                     href="/volunteers"
                     className="inline-flex items-center justify-center rounded-full border-2 border-white bg-white/10 backdrop-blur-sm px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/20 shadow-lg"
                   >
-                    Join the Mission
+                    Support the Mission
                   </Link>
                 </div>
                 
@@ -212,41 +285,65 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Organizations Carousel Section */}
-        <section className="bg-white py-8">
-          <div className="mx-auto max-w-7xl">
-            {/* Scrolling carousel */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll gap-16 items-center">
-                {/* First set of names */}
-                <div className="flex gap-16 items-center shrink-0">
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Welfare Board</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Pet Care India</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Rescue Foundation</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Rights NGO</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Paws & Hearts</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Compassion Trust</span>
-                </div>
-                
-                {/* Duplicate set for seamless loop */}
-                <div className="flex gap-16 items-center shrink-0">
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Welfare Board</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Pet Care India</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Rescue Foundation</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Animal Rights NGO</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Paws & Hearts</span>
-                  <span className="font-fredoka text-xl text-gray-600 whitespace-nowrap">Compassion Trust</span>
+              {/* Right Side - Video with creative frame */}
+              <div className="relative flex items-center justify-center">
+                <div className="relative w-full max-w-md aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover object-top"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src="/assets/images/gallery/whatwedo.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-white py-20 sm:py-24">
+        {/* Organizations Carousel Section */}
+        <section className="bg-white py-8 overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 mb-6">
+            <p className="text-center font-poppins text-sm text-gray-500 uppercase tracking-wider">
+              Associated Organizations &amp; Partners
+            </p>
+          </div>
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            <div className="flex items-center animate-scroll gap-12">
+              {[...Array(3)].map((_, repeat) =>
+                [
+                  { logo: "/assets/images/logos/1.png", name: "Ram Ashta Mission Foundation" },
+                  { logo: "/assets/images/logos/2.png", name: "Saute Digital" },
+                  { logo: "/assets/images/logos/3.png", name: "Life on Canvas" },
+                  { logo: "/assets/images/logos/4.png", name: "Nagar Nigam Bhopal" },
+                  { logo: "/assets/images/logos/5.jpeg", name: "QCB Bhopal" },
+                ].map((partner, idx) => (
+                  <div key={`${repeat}-${idx}`} className="flex-shrink-0 flex items-center gap-4 px-4">
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={80}
+                      height={80}
+                      className="object-contain grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                      style={{ maxHeight: 80, width: "auto" }}
+                    />
+                    <span className="font-poppins text-base font-medium text-gray-700 whitespace-nowrap">
+                      {partner.name}
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-white py-10 sm:py-12">
           <div className="absolute left-0 top-10 h-40 w-40 rounded-full bg-blue-100/30 blur-3xl" />
           <div className="absolute bottom-10 right-0 h-48 w-48 rounded-full bg-blue-50/30 blur-3xl" />
           <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
@@ -255,7 +352,7 @@ export default function Home() {
                 Seva • Karuna • Jeevan
               </p>
               <Image
-                src="/hindi.png"
+                src="/assets/images/brand/hindi.png"
                 alt="Hindi compassion message"
                 width={360}
                 height={120}
@@ -274,7 +371,7 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="relative py-20 overflow-hidden bg-white">
+        <section className="relative py-10 overflow-hidden bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-4">
@@ -297,7 +394,7 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">+3400</h4>
+                <h4 className="font-heading text-6xl text-white mb-2">+<CountUp target={3400} /></h4>
                 <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Beds Installed</p>
               </motion.div>
 
@@ -309,7 +406,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.15 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">+1400</h4>
+                <h4 className="font-heading text-6xl text-white mb-2">+<CountUp target={1400} /></h4>
                 <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Animals Rescued/Adopted</p>
               </motion.div>
 
@@ -321,7 +418,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="p-12 rounded-[2rem] bg-[#2563EB] shadow-lg text-center"
               >
-                <h4 className="font-heading text-6xl text-white mb-2">+700</h4>
+                <h4 className="font-heading text-6xl text-white mb-2">+<CountUp target={700} /></h4>
                 <p className="font-poppins text-white/90 font-semibold uppercase tracking-wider text-sm">Community Strays Sterilized</p>
               </motion.div>
             </div>
@@ -331,40 +428,20 @@ export default function Home() {
         <section className="bg-background py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-              <div className="grid h-full gap-4">
-                <div className="group relative overflow-hidden rounded-[2rem] border border-black/10 bg-surface shadow-[0_18px_50px_rgba(90,55,32,0.08)]">
-                  <div className="relative min-h-[280px] sm:min-h-[340px] lg:min-h-[520px]">
-                    <video
-                      className="absolute inset-0 h-full w-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                    >
-                      <source src={whyRescueMattersVideo} type="video/mp4" />
-                    </video>
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/28 via-transparent to-transparent" />
-                  </div>
-                </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {whyRescueMattersImages.map((item) => (
-                    <div
-                      key={item.image}
-                      className={`group relative overflow-hidden rounded-[2rem] border border-black/10 bg-surface shadow-[0_18px_50px_rgba(90,55,32,0.08)] ${item.className}`}
-                    >
-                      <div className="relative aspect-[4/3] h-full min-h-[220px]">
-                        <Image
-                          src={item.image}
-                          alt={item.alt}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          className="object-cover transition duration-700 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
-                    </div>
-                  ))}
+              <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-surface shadow-[0_18px_50px_rgba(90,55,32,0.08)]">
+                <div className="relative h-full min-h-[500px]">
+                  <video
+                    ref={videoRef}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loop
+                    playsInline
+                    preload="metadata"
+                    controls
+                    muted
+                  >
+                    <source src={whyRescueMattersVideo} type="video/mp4" />
+                  </video>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/28 via-transparent to-transparent" />
                 </div>
               </div>
 
@@ -382,9 +459,9 @@ export default function Home() {
                 </p>
 
                 <div className="mt-8 space-y-4">
-                  {whyRescueMattersPoints.map((point) => (
+                  {whyRescueMattersPoints.map((point, index) => (
                     <div
-                      key={point.text}
+                      key={index}
                       className="flex items-start gap-4 rounded-[1.6rem] border border-white/35 bg-white/45 px-5 py-4 shadow-[0_14px_40px_rgba(90,55,32,0.08)] backdrop-blur-md"
                     >
                       <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#bad701]/18 text-primary">
@@ -440,7 +517,7 @@ export default function Home() {
                     playsInline
                     preload="metadata"
                   >
-                    <source src="/Images/WhatsApp Video 2026-04-11 at 20.21.12.mp4" type="video/mp4" />
+                    <source src="/assets/images/gallery/whatwedo.mp4" type="video/mp4" />
                   </video>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                 </div>
@@ -466,7 +543,13 @@ export default function Home() {
                           <source src={program.src} type="video/mp4" />
                         </video>
                       ) : (
-                        <Image src={program.src} alt={program.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-center" />
+                        <Image 
+                          src={program.src} 
+                          alt={program.alt} 
+                          fill 
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                          className={`object-cover ${program.title === "Healing & Homes" ? "object-top" : "object-center"}`}
+                        />
                       )}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/18 to-transparent" />
                     </div>
@@ -564,3 +647,4 @@ export default function Home() {
     </>
   );
 }
+

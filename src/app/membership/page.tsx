@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Star, Gift, Award, Crown } from "lucide-react";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Script from "next/script";
 
@@ -15,8 +16,9 @@ declare global {
 const membershipTiers = [
   {
     id: "student",
-    name: "Student Rescue Circle",
+    name: "Karuna Rescue Circle",
     price: 500,
+    lifetime: false,
     icon: Award,
     color: "orange",
     benefits: [
@@ -28,12 +30,13 @@ const membershipTiers = [
   },
   {
     id: "silver",
-    name: "Silver Rescue Circle",
+    name: "Aashray Rescue Circle",
     price: 1000,
+    lifetime: false,
     icon: Star,
     color: "gray",
     benefits: [
-      "All Student benefits",
+      "All Karuna benefits",
       "Using laws to save animals book",
       "Priority event registration",
       "Volunteer opportunities",
@@ -42,12 +45,13 @@ const membershipTiers = [
   },
   {
     id: "golden",
-    name: "Golden Rescue Circle",
+    name: "Rakshak Rescue Circle",
     price: 2500,
+    lifetime: false,
     icon: Gift,
     color: "yellow",
     benefits: [
-      "All Silver benefits",
+      "All Aashray benefits",
       "Rescue Routes T-Shirt",
       "Keep Your Dog Vegetarian Book",
       "Exclusive webinars access",
@@ -56,12 +60,13 @@ const membershipTiers = [
   },
   {
     id: "platinum",
-    name: "Platinum Rescue Circle",
+    name: "Jeevan Rescue Circle",
     price: 5000,
+    lifetime: false,
     icon: Crown,
     color: "purple",
     benefits: [
-      "All Golden benefits",
+      "All Rakshak benefits",
       "Wrist Band",
       "Keep Your Dog Vegetarian Book",
       "Heads & Tails Book",
@@ -74,10 +79,11 @@ const membershipTiers = [
     id: "lifetime",
     name: "Lifetime Rescue Circle",
     price: 10000,
+    lifetime: true,
     icon: Crown,
     color: "orange",
     benefits: [
-      "All Platinum benefits",
+      "All Jeevan benefits",
       "Complete book set",
       "Lifetime recognition",
       "Advisory board invitation",
@@ -196,7 +202,7 @@ export default function MembershipPage() {
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
                     to: formData.email,
-                    subject: "🎉 Welcome to Rescue Routes - Membership Confirmed!",
+                    subject: "ðŸŽ‰ Welcome to Rescue Routes - Membership Confirmed!",
                     type: "membership-confirmation",
                     membershipData: {
                       name: formData.name,
@@ -278,20 +284,30 @@ export default function MembershipPage() {
       />
       <Navbar />
       <div className="min-h-screen bg-white">
-        <div className="bg-gradient-to-br from-primary to-orange-600 text-white py-20 pt-32">
-          <div className="container mx-auto px-4 text-center">
+        <div className="relative text-white py-20 pt-32 overflow-hidden">
+          <Image
+            src="/assets/images/gallery/WhatsApp Image 2026-04-28 at 11.39.58 (1).jpeg"
+            alt="Membership background"
+            fill
+            className="object-cover object-center"
+            style={{ filter: 'blur(2px)', transform: 'scale(1.05)' }}
+            priority
+          />
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="container mx-auto px-4 text-center relative z-10">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="font-poetsen text-5xl md:text-6xl mb-4"
             >
-              Join Our <span className="text-gray-100">Community</span>
+              <span className="text-[#2563EB]">Join Our </span>
+              <span className="text-white">Community</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-poppins text-lg md:text-xl max-w-2xl mx-auto opacity-90"
+              className="font-poppins text-lg md:text-xl max-w-2xl mx-auto text-white font-semibold"
             >
               Become a member and help us rescue, rehabilitate, and rehome animals in need
             </motion.p>
@@ -340,7 +356,10 @@ export default function MembershipPage() {
                           <div>
                             <h3 className="font-fredoka text-xl text-gray-800">{tier.name}</h3>
                             <p className="font-poppins text-2xl font-bold text-primary">
-                              ₹{tier.price.toLocaleString()}
+                              <span style={{fontFamily: 'sans-serif'}}>₹</span>{tier.price.toLocaleString()}
+                              {!tier.lifetime && (
+                                <span className="font-poppins text-sm font-normal text-gray-500 ml-1">/ month</span>
+                              )}
                             </p>
                           </div>
                         </div>
@@ -493,7 +512,7 @@ export default function MembershipPage() {
                     </div>
                     <div className="flex items-center justify-between mb-6 p-4 bg-gray-50 rounded-lg">
                       <span className="font-poppins text-gray-700 font-semibold">Total Amount:</span>
-                      <span className="font-fredoka text-2xl text-primary">₹{selectedMembership?.price.toLocaleString()}</span>
+                      <span className="font-fredoka text-2xl text-primary"><span style={{fontFamily: 'sans-serif'}}>₹</span>{selectedMembership?.price.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -626,7 +645,7 @@ export default function MembershipPage() {
                       transition={{ delay: i * 0.1, repeat: Infinity, duration: 1 }}
                       className="text-2xl"
                     >
-                      🐾
+                      ðŸ¾
                     </motion.div>
                   ))}
                 </div>

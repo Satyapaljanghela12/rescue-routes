@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const navLinks = [
   { name: "About Us", href: "/about" },
   { name: "Mission", href: "/mission" },
-  { name: "Campaigns", href: "/campaigns" },
+  { 
+    name: "Get Involved", 
+    href: "#",
+    dropdown: [
+      { name: "Campaigns", href: "/campaigns" },
+      { name: "Adoption", href: "/adoption" }
+    ]
+  },
   { name: "Stories", href: "/stories" },
   { name: "Blogs", href: "/blogs" },
   { name: "Volunteers", href: "/volunteers" },
@@ -19,15 +26,25 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 16);
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -42,21 +59,60 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <div className={`relative transition-all duration-300 overflow-hidden rounded-full border border-black/8 bg-white ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}>
-              <Image src="/logo.png" alt="Rescue Routes" fill sizes="48px" className="object-contain p-1.5" priority />
+              <Image src="/assets/images/brand/logo.png" alt="Rescue Routes" fill sizes="48px" className="object-contain p-1.5" priority />
             </div>
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-medium uppercase tracking-[0.16em] transition ${
-                  "text-black/75 hover:text-black"
-                }`}
-              >
-                {link.name}
-              </Link>
+              link.dropdown ? (
+                <div
+                  key={link.name}
+                  className="relative"
+                  ref={dropdownRef}
+                >
+                  <button
+                    onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
+                    className={`flex items-center gap-1 text-sm font-medium uppercase tracking-[0.16em] transition ${
+                      openDropdown === link.name ? "text-primary" : "text-black/75 hover:text-black"
+                    }`}
+                  >
+                    {link.name}
+                    <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${openDropdown === link.name ? "rotate-180" : ""}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {openDropdown === link.name && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-0 mt-2 w-48 rounded-2xl border border-black/8 bg-white shadow-lg py-2"
+                      >
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setOpenDropdown(null)}
+                            className="block px-4 py-2 text-sm font-medium text-black/75 hover:bg-primary/5 hover:text-primary transition"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium uppercase tracking-[0.16em] transition text-black/75 hover:text-black"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -67,7 +123,7 @@ export default function Navbar() {
                 "border-black/10 text-black hover:border-black/20 hover:bg-black/3"
               }`}
             >
-              Join
+              Support
             </Link>
             <Link
               href="/donate"
@@ -97,14 +153,34 @@ export default function Navbar() {
             >
               <div className="flex flex-col gap-2">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-2xl px-4 py-3 text-sm font-medium uppercase tracking-[0.14em] text-foreground/80 transition hover:bg-[#fac602]/12 hover:text-primary"
-                  >
-                    {link.name}
-                  </Link>
+                  link.dropdown ? (
+                    <div key={link.name}>
+                      <div className="rounded-2xl px-4 py-3 text-sm font-medium uppercase tracking-[0.14em] text-foreground/80">
+                        {link.name}
+                      </div>
+                      <div className="ml-4 flex flex-col gap-1">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="rounded-2xl px-4 py-2 text-sm font-medium text-foreground/70 transition hover:bg-[#fac602]/12 hover:text-primary"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="rounded-2xl px-4 py-3 text-sm font-medium uppercase tracking-[0.14em] text-foreground/80 transition hover:bg-[#fac602]/12 hover:text-primary"
+                    >
+                      {link.name}
+                    </Link>
+                  )
                 ))}
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -113,7 +189,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="rounded-full border border-black/10 px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-foreground"
                 >
-                  Join
+                  Support
                 </Link>
                 <Link
                   href="/donate"

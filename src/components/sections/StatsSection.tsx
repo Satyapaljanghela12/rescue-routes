@@ -48,7 +48,7 @@ export default function StatsSection() {
             <div className="relative w-full h-full">
               {/* Assuming the image already has the yellow background baked in, if not it will render transparently. */}
               <Image 
-                src="/dog2.png" 
+                src="/assets/images/animals/dog2.png" 
                 alt="Rescued Puppy" 
                 fill 
                 className="object-contain" 
@@ -65,7 +65,7 @@ export default function StatsSection() {
           >
             <div className="relative w-full h-full">
               <Image 
-                src="/dog1.png" 
+                src="/assets/images/animals/dog1.png" 
                 alt="Two dogs playing" 
                 fill 
                 className="object-contain" 

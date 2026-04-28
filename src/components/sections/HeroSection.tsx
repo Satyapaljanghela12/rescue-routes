@@ -90,7 +90,7 @@ export default function HeroSection() {
           preload="auto"
           className="w-full h-full object-cover"
           aria-label="Background video showing rescue work"
-          src="/Camapigns/hero.mp4"
+          src="/assets/videos/hero.mp4"
           onLoadedData={() => console.log('Video loaded successfully')}
           onError={(e) => console.error('Video error:', e)}
           onCanPlay={() => console.log('Video can play')}
@@ -170,7 +170,7 @@ export default function HeroSection() {
               className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80"
             >
               <Image
-                src="/Lion_King_-_orange_paw_print-removebg-preview 9.png"
+                src="/assets/images/brand/paw-print.png"
                 alt="Orange Paw Print Decoration"
                 fill
                 className="object-contain drop-shadow-2xl"

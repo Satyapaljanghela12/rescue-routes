@@ -32,20 +32,9 @@ const getIconForCampaign = (title: string) => {
 
 export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<any[]>([]);
-  const [adoptions, setAdoptions] = useState<any[]>([]);
-  const [selectedAnimal, setSelectedAnimal] = useState<any>(null);
-  const [showAdoptionForm, setShowAdoptionForm] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    reason: "",
-  });
 
   useEffect(() => {
     fetchCampaigns();
-    fetchAdoptions();
   }, []);
 
   const fetchCampaigns = async () => {
@@ -60,53 +49,6 @@ export default function CampaignsPage() {
     }
   };
 
-  const fetchAdoptions = async () => {
-    try {
-      const response = await fetch("/api/adoptions");
-      const data = await response.json();
-      if (data.success) {
-        // Only show available animals
-        setAdoptions(data.adoptions.filter((a: any) => a.status === "Available"));
-      }
-    } catch (error) {
-      console.error("Error fetching adoptions:", error);
-    }
-  };
-
-  const handleAdoptClick = (animal: any) => {
-    setSelectedAnimal(animal);
-    setShowAdoptionForm(true);
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch("/api/adoption-applications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          animalId: selectedAnimal._id,
-          animalName: selectedAnimal.animalName,
-        }),
-      });
-
-      const data = await response.json();
-      
-      if (data.success) {
-        alert("Adoption application submitted successfully! We'll contact you soon.");
-        setShowAdoptionForm(false);
-        setFormData({ name: "", email: "", phone: "", address: "", reason: "" });
-        setSelectedAnimal(null);
-      } else {
-        alert("Failed to submit application. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting application:", error);
-      alert("An error occurred. Please try again.");
-    }
-  };
   return (
     <>
       <Navbar />
@@ -116,7 +58,7 @@ export default function CampaignsPage() {
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
           {/* bg image */}
           <Image
-            src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg"
+            src="/assets/images/gallery/shelter-care.jpeg"
             alt="Support Our Campaigns"
             fill
             sizes="100vw"
@@ -305,7 +247,7 @@ export default function CampaignsPage() {
                     "Pet license registration & rabies vaccinations"
                   ],
                   organization: "Ram Astha Mission & Nagar Nigam",
-                  image: "/Camapigns/27-28dec.jpg",
+                  image: "/assets/images/campaigns/27-28dec.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -317,7 +259,7 @@ export default function CampaignsPage() {
                     "Stubble-filled sacks distributed"
                   ],
                   organization: "Parwati Sewa Foundation",
-                  image: "/Camapigns/Winterbeddrive.jpg",
+                  image: "/assets/images/campaigns/winter-bed-drive.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -328,7 +270,7 @@ export default function CampaignsPage() {
                     "100 water pots distributed",
                     "City-wide coverage"
                   ],
-                  image: "/Camapigns/WaterPotDrive.jpg",
+                  image: "/assets/images/campaigns/water-pot-drive.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -339,7 +281,7 @@ export default function CampaignsPage() {
                     "60 puppies participated",
                     "18 successful adoptions"
                   ],
-                  image: "/Camapigns/yearend.jpg",
+                  image: "/assets/images/campaigns/year-end.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -350,7 +292,7 @@ export default function CampaignsPage() {
                     "800 protective beds created",
                     "Stubble and sacks used"
                   ],
-                  image: "/Camapigns/Annualbeddrive.jpg",
+                  image: "/assets/images/campaigns/annual-bed-drive.jpg",
                   objectPosition: "object-center"
                 },
                 {
@@ -362,7 +304,7 @@ export default function CampaignsPage() {
                     "50 puppies participated",
                     "21 successful adoptions"
                   ],
-                  image: "/Camapigns/Adoptiondrive.jpg",
+                  image: "/assets/images/campaigns/adoption-drive.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -374,7 +316,7 @@ export default function CampaignsPage() {
                     "20 puppies participated",
                     "3 successful adoptions"
                   ],
-                  image: "/Camapigns/adoptionolivers.jpg",
+                  image: "/assets/images/campaigns/adoption-olivers.jpg",
                   objectPosition: "object-top"
                 },
                 {
@@ -385,7 +327,7 @@ export default function CampaignsPage() {
                     "600 beds created",
                     "Boris (sacks) and bhusa (stubble) used"
                   ],
-                  image: "/Camapigns/foundationbed.jpg",
+                  image: "/assets/images/campaigns/foundation-bed.jpg",
                   objectPosition: "object-top"
                 }
               ].map((campaign, index) => (
@@ -459,98 +401,6 @@ export default function CampaignsPage() {
           </div>
         </section>
 
-        {/* Adoption Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-fredoka text-4xl md:text-5xl mb-4 text-primary">
-                Meet Your New Friend
-              </h2>
-              <p className="font-poppins text-lg text-gray-600">
-                These rescued animals are looking for their forever homes
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {adoptions.map((animal, index) => (
-                <motion.div
-                  key={animal._id || index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 overflow-hidden"
-                >
-                  {/* Animal Image */}
-                  <div className="relative h-56 bg-gray-100">
-                    <Image
-                      src={animal.image}
-                      alt={animal.animalName}
-                      fill
-                      className="object-cover"
-                    />
-                    {/* Gender Badge */}
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-fredoka font-medium text-gray-700">
-                        {animal.gender}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5">
-                    <h3 className="font-poetsen text-2xl mb-2 text-primary">
-                      {animal.animalName}
-                    </h3>
-                    
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="font-poppins text-sm text-gray-600">{animal.animalType}</span>
-                      <span className="text-gray-400">•</span>
-                      <span className="font-poppins text-sm text-gray-600">{animal.age}</span>
-                    </div>
-
-                    {animal.description && (
-                      <p className="font-poppins text-sm text-gray-700 leading-relaxed mb-4 line-clamp-2">
-                        {animal.description}
-                      </p>
-                    )}
-
-                    <button 
-                      onClick={() => handleAdoptClick(animal)}
-                      className="w-full bg-primary hover:bg-orange-600 text-white font-fredoka py-2.5 rounded-xl transition-all"
-                    >
-                      Adopt Me
-                    </button>
-
-                    {/* Paw decoration */}
-                    <div className="absolute bottom-3 right-3 opacity-10">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
-                        <circle cx="12" cy="16" r="3" />
-                        <circle cx="8" cy="12" r="2" />
-                        <circle cx="16" cy="12" r="2" />
-                        <circle cx="10" cy="8" r="1.5" />
-                        <circle cx="14" cy="8" r="1.5" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {adoptions.length === 0 && (
-              <div className="text-center py-12">
-                <p className="font-poppins text-gray-500">No animals available for adoption at the moment</p>
-              </div>
-            )}
-          </div>
-        </section>
-
         {/* Emotional Connect */}
         <section className="py-16 md:py-24 bg-white relative overflow-hidden">
           {/* Decorative paw prints background */}
@@ -618,122 +468,6 @@ export default function CampaignsPage() {
         </section>
 
       </main>
-
-      {/* Adoption Form Modal */}
-      {showAdoptionForm && selectedAnimal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-          >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-fredoka text-2xl text-primary">
-                  Adopt {selectedAnimal.animalName}
-                </h3>
-                <button
-                  onClick={() => {
-                    setShowAdoptionForm(false);
-                    setSelectedAnimal(null);
-                  }}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
-                    Address *
-                  </label>
-                  <textarea
-                    required
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-1">
-                    Why do you want to adopt {selectedAnimal.animalName}? *
-                  </label>
-                  <textarea
-                    required
-                    value={formData.reason}
-                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                    rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowAdoptionForm(false);
-                      setSelectedAnimal(null);
-                    }}
-                    className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-fredoka rounded-lg hover:bg-gray-50 transition"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 px-4 py-2.5 bg-primary text-white font-fredoka rounded-lg hover:bg-orange-600 transition"
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
-            </div>
-          </motion.div>
-        </div>
-      )}
 
       <SiteFooter />
     </>

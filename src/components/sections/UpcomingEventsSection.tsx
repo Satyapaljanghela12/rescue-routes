@@ -85,7 +85,7 @@ export default function UpcomingEventsSection() {
               >
                 <div className="relative aspect-[4/3]">
                   <Image
-                    src={campaign.image || "/Images/WhatsApp%20Image%202026-04-11%20at%2020.21.17%20(3).jpeg"}
+                    src={campaign.image || "/assets/images/gallery/shelter-care.jpeg"}
                     alt={campaign.title}
                     fill
                     className="object-cover"

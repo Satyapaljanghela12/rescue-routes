@@ -27,7 +27,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, price, description, image, media } = body;
+    const { title, price, description, image, media, category, hasSize, hasQuantity } = body;
 
     if (!title || !price || !description) {
       return NextResponse.json(
@@ -43,8 +43,11 @@ export async function POST(request: NextRequest) {
       title,
       price: Number(price),
       description,
-      image: image || "/dog1.png", // Keep for backward compatibility
-      media: media || [{ type: "image", url: image || "/dog1.png" }], // New media array
+      image: image || "/assets/images/animals/dog1.png", // Keep for backward compatibility
+      media: media || [{ type: "image", url: image || "/assets/images/animals/dog1.png" }], // New media array
+      category: category || "tshirt",
+      hasSize: hasSize !== undefined ? hasSize : true,
+      hasQuantity: hasQuantity !== undefined ? hasQuantity : true,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -70,7 +73,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productId, title, price, description, image, media } = body;
+    const { productId, title, price, description, image, media, category, hasSize, hasQuantity } = body;
 
     if (!productId) {
       return NextResponse.json(
@@ -88,6 +91,9 @@ export async function PATCH(request: NextRequest) {
     if (description) updateData.description = description;
     if (image) updateData.image = image;
     if (media) updateData.media = media;
+    if (category) updateData.category = category;
+    if (hasSize !== undefined) updateData.hasSize = hasSize;
+    if (hasQuantity !== undefined) updateData.hasQuantity = hasQuantity;
 
     const result = await db.collection("products").updateOne(
       { _id: new ObjectId(productId) },

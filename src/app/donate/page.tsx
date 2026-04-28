@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowLeft, CheckCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
 import confetti from "canvas-confetti";
@@ -163,8 +164,20 @@ export default function DonatePage() {
     <>
       <Navbar />
       <main className="flex-1 w-full overflow-hidden pt-20">
-        <section className="py-16 md:py-24 bg-gray-50 min-h-screen">
-          <div className="container mx-auto px-4 md:px-8 max-w-2xl">
+        <section className="relative py-16 md:py-24 min-h-screen">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/assets/images/gallery/download (11).jpg"
+              alt="Support our mission"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-white/90 to-primary/20" />
+          </div>
+          
+          <div className="container mx-auto px-4 md:px-8 max-w-2xl relative z-10">
             
             {/* Back Button */}
             <Link 

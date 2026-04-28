@@ -20,10 +20,10 @@ const impactVideo   = "/Images/WhatsApp Video 2026-04-11 at 20.21.11.mp4";
 
 const img1 = "/Images/WhatsApp Image 2026-04-11 at 20.21.09.jpeg";
 const img2 = "/Images/WhatsApp Image 2026-04-11 at 20.21.10 (1).jpeg";
-const img3 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (2).jpeg";
-const img4 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (3).jpeg";
-const img5 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17 (4).jpeg";
-const img6 = "/Images/WhatsApp Image 2026-04-11 at 20.21.18 (2).jpeg";
+const img3 = "/assets/images/gallery/rescue.jpg";
+const img4 = "/assets/images/gallery/treatment.jpg";
+const img5 = "/assets/images/gallery/IMG-20251228-WA0110.jpg";
+const img6 = "/assets/images/gallery/20251228_201854.jpg";
 const img7 = "/Images/WhatsApp Image 2026-04-11 at 20.21.16 (1).jpeg";
 const img8 = "/Images/WhatsApp Image 2026-04-11 at 20.21.17.jpeg";
 
@@ -65,7 +65,7 @@ export default function AboutPage() {
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
           {/* bg image */}
           <Image
-            src="/Images/20260322_165926.jpg"
+            src="/assets/images/gallery/20260322_165926 (1).jpg"
             alt="Rescue Routes Team"
             fill
             sizes="100vw"
@@ -100,7 +100,7 @@ export default function AboutPage() {
                 </Link>
                 <Link href="/volunteers"
                   className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white hover:text-black">
-                  Join the Mission
+                  Support the Mission
                 </Link>
               </div>
             </motion.div>
@@ -168,16 +168,16 @@ export default function AboutPage() {
                     className="absolute inset-0 w-full h-full object-cover"
                     autoPlay loop muted playsInline preload="metadata"
                   >
-                    <source src={storyVideo} type="video/mp4" />
+                    <source src="/assets/images/gallery/aboutus.mp4" type="video/mp4" />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <span className="absolute bottom-5 left-5 text-white font-heading text-xl">On-ground rescue</span>
                 </div>
                 <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
-                  <Image src={img1} alt="Rescue in Bhopal" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
+                  <Image src="/assets/images/gallery/WhatsApp Image 2026-04-28 at 16.11.32.jpeg" alt="Rescue in Bhopal" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
                 </div>
                 <div className="relative rounded-[1.5rem] overflow-hidden h-48 shadow-lg">
-                  <Image src={img2} alt="Street animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
+                  <Image src="/assets/images/gallery/WhatsApp Image 2026-04-28 at 16.11.32 (1).jpeg" alt="Street animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition hover:scale-105 duration-500" />
                 </div>
               </motion.div>
             </div>
@@ -216,7 +216,7 @@ export default function AboutPage() {
                       alt={point.title} 
                       fill 
                       sizes="(max-width: 768px) 100vw, 50vw" 
-                      className={`object-cover hover:scale-105 transition duration-700 ${i === 0 ? 'object-top' : 'object-center'}`} 
+                      className={`transition duration-700 hover:scale-105 ${i === 0 ? 'object-cover object-center' : 'object-cover object-center'}`} 
                     />
                   </div>
                   {/* Right inline paragraph */}
@@ -243,17 +243,21 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-              {/* video */}
+              {/* image */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 className="relative rounded-[2.5rem] overflow-hidden h-[520px] shadow-2xl"
               >
-                <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
-                  <source src={missionVideo} type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <Image
+                  src="/assets/images/gallery/ourvision.jpeg"
+                  alt="Our Vision"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </motion.div>
 
               {/* text */}
@@ -261,6 +265,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
+                className="h-full flex flex-col"
               >
                 <div className="flex items-center gap-3 mb-6 text-primary font-bold tracking-widest uppercase text-xs">
                   <PawPrint size={14} className="text-primary" />
@@ -270,11 +275,22 @@ export default function AboutPage() {
                   Creating a Better Future for Animals
                 </h2>
                 <p className="font-poppins text-lg text-black leading-relaxed mb-6">
-                  Our mission is to rescue, treat, and protect animals in need while building a compassionate ecosystem where every life is valued and no animal suffers due to lack of care, attention, or support.
+                  We envision a compassionate ecosystem where every animal receives care, dignity, and protection. Through rescue, treatment, and community engagement, we're building a future where no animal suffers alone.
                 </p>
-                <p className="font-poppins text-lg text-black leading-relaxed">
-                  We are committed to a future where communities and animals coexist with dignity, safety, and compassion — starting right here in Bhopal.
+                <p className="font-poppins text-lg text-black leading-relaxed mb-8">
+                  Starting in Bhopal, we're creating a model where communities and animals coexist with mutual respect and compassion.
                 </p>
+
+                {/* 2030 Goal Card */}
+                <div className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-4">
+                  <span className="text-3xl">🍖</span>
+                  <div className="flex-1">
+                    <h3 className="font-poppins text-base font-bold text-primary mb-1">Annapurna Feeding Bharat</h3>
+                    <p className="font-poppins text-sm text-gray-700 leading-relaxed">
+                      Annapurna Feeding Bharat, led by Rescue Routes, is an initiative dedicated to feeding strays in Bhopal. We have pledged to feed every dog across Bhopal by 2030. Eventually spreading our auto-feeders across all of Bharat.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -338,22 +354,22 @@ export default function AboutPage() {
             </div>
 
             {/* 3-column media grid */}
-            <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-3 gap-6">
               <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
-                <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
-                  <source src={impactVideo} type="video/mp4" />
+                  <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
+                  <source src="/assets/images/gallery/section1.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Field Rescue</span>
               </div>
               <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
-                <Image src={img7} alt="Community care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <Image src="/assets/images/gallery/community.jpg" alt="Community care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Community Care</span>
               </div>
               <div className="relative rounded-[2rem] overflow-hidden h-80 shadow-xl">
-                <Image src={img8} alt="Recovery" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <Image src="/assets/images/gallery/recovery.jpg" alt="Recovery" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className="absolute bottom-5 left-5 font-heading text-white text-xl">Recovery</span>
               </div>
             </div>
@@ -406,16 +422,16 @@ export default function AboutPage() {
                 className="grid grid-cols-2 gap-4"
               >
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
-                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.10.jpeg" alt="Community volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/assets/images/gallery/rescue1.jpg" alt="Community volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
-                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.14.jpeg" alt="Animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/assets/images/gallery/Angie Bright.jpg" alt="Animal care" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl">
-                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.16.jpeg" alt="Relove and adopt" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/assets/images/gallery/rescue8.jpg" alt="Relove and adopt" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
                 <div className="relative rounded-[1.8rem] overflow-hidden h-56 shadow-xl mt-8">
-                  <Image src="/Images/WhatsApp Image 2026-04-11 at 20.21.18.jpeg" alt="volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
+                  <Image src="/assets/images/gallery/WhatsApp Image 2026-04-28 at 16.11.32 (1).jpeg" alt="volunteers" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover hover:scale-105 transition duration-700" />
                 </div>
               </motion.div>
             </div>

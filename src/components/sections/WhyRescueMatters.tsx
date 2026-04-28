@@ -145,7 +145,7 @@ export default function WhyRescueMatters() {
             <span className="font-briem text-2xl font-bold tracking-wide mt-2 text-gray-800">Stay</span>
             <div className="relative w-20 h-20 overflow-hidden rounded-full border-2 border-orange-100 mb-1">
                <Image 
-                src="/dog2.png" 
+                src="/assets/images/animals/dog2.png" 
                 alt="Pawsitive Dog" 
                 fill 
                 className="object-cover" 

@@ -9,10 +9,10 @@ import Image from "next/image";
 
 // Featured volunteers data
 const featuredVolunteers = [
-  { name: "Anant Verma", role: "Marketing Intern", image: "/Interns/Anant.jpeg" },
-  { name: "Aryan Khushwaha", role: "Operations Intern", image: "/Interns/Aryan.jpeg" },
-  { name: "Harshvardhan Singh", role: "Marketing Intern", image: "/Interns/Harshvardhan.jpeg" },
-  { name: "Vaibhavi Tiwari", role: "Operations Intern", image: "/Interns/Vaibhavi.jpeg" },
+  { name: "Anant Verma", role: "Marketing Intern", image: "/assets/images/team/interns/anant.jpeg" },
+  { name: "Aryan Khushwaha", role: "Operations Intern", image: "/assets/images/team/interns/aryan.jpeg" },
+  { name: "Harshvardhan Singh", role: "Marketing Intern", image: "/assets/images/team/interns/harshvardhan.jpeg" },
+  { name: "Vaibhavi Tiwari", role: "Operations Intern", image: "/assets/images/team/interns/vaibhavi.jpeg" },
 ];
 
 export default function VolunteersPage() {
@@ -25,7 +25,7 @@ export default function VolunteersPage() {
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
           {/* bg image */}
           <Image
-            src="/new/WhatsApp Image 2026-04-24 at 00.13.16.jpeg"
+            src="/assets/images/gallery/volunteers-bg.jpeg"
             alt="Join Our Rescue Family"
             fill
             sizes="100vw"
@@ -264,11 +264,7 @@ export default function VolunteersPage() {
                 transition={{ duration: 0.6 }}
                 className="flex items-center gap-8"
               >
-                <div className="flex-shrink-0 relative">
-                  {/* Dog sitting on top */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-4xl">
-                    🐕
-                  </div>
+                <div className="flex-shrink-0">
                   <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                     <span className="font-poetsen text-3xl text-white">1</span>
                   </div>
@@ -291,11 +287,7 @@ export default function VolunteersPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="flex items-center gap-8 flex-row-reverse"
               >
-                <div className="flex-shrink-0 relative">
-                  {/* Dog sitting on top */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-4xl">
-                    🐕
-                  </div>
+                <div className="flex-shrink-0">
                   <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                     <span className="font-poetsen text-3xl text-white">2</span>
                   </div>
@@ -318,11 +310,7 @@ export default function VolunteersPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="flex items-center gap-8"
               >
-                <div className="flex-shrink-0 relative">
-                  {/* Dog sitting on top */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-4xl">
-                    🐕
-                  </div>
+                <div className="flex-shrink-0">
                   <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                     <span className="font-poetsen text-3xl text-white">3</span>
                   </div>
@@ -345,11 +333,7 @@ export default function VolunteersPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex items-center gap-8 flex-row-reverse"
               >
-                <div className="flex-shrink-0 relative">
-                  {/* Dog sitting on top */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-4xl">
-                    🐕
-                  </div>
+                <div className="flex-shrink-0">
                   <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                     <span className="font-poetsen text-3xl text-white">4</span>
                   </div>
@@ -636,3 +620,4 @@ export default function VolunteersPage() {
     </>
   );
 }
+

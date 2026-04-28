@@ -25,7 +25,10 @@ export default function ProductsPage() {
     title: "",
     price: "",
     description: "",
-    image: "/dog1.png",
+    image: "/assets/images/animals/dog1.png",
+    category: "tshirt",
+    hasSize: true,
+    hasQuantity: true,
   });
 
   useEffect(() => {
@@ -54,6 +57,9 @@ export default function ProductsPage() {
         price: product.price.toString(),
         description: product.description,
         image: product.image,
+        category: product.category || "tshirt",
+        hasSize: product.hasSize !== undefined ? product.hasSize : true,
+        hasQuantity: product.hasQuantity !== undefined ? product.hasQuantity : true,
       });
       setImagePreview(product.image);
       setMedia(product.media || [{ type: "image", url: product.image }]);
@@ -63,7 +69,10 @@ export default function ProductsPage() {
         title: "",
         price: "",
         description: "",
-        image: "/dog1.png",
+        image: "/assets/images/animals/dog1.png",
+        category: "tshirt",
+        hasSize: true,
+        hasQuantity: true,
       });
       setImagePreview("");
       setMedia([]);
@@ -133,8 +142,8 @@ export default function ProductsPage() {
       const mainImage = media.find(m => m.type === "image")?.url || media[0].url;
       
       const body = editingProduct
-        ? { ...formData, image: mainImage, media, productId: editingProduct._id }
-        : { ...formData, image: mainImage, media };
+        ? { ...formData, image: mainImage, media, productId: editingProduct._id, price: parseFloat(formData.price) }
+        : { ...formData, image: mainImage, media, price: parseFloat(formData.price) };
 
       const response = await fetch(url, {
         method,
@@ -244,6 +253,22 @@ export default function ProductsPage() {
                     />
                   </div>
                   <div className="p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                        product.category === "tshirt" ? "bg-blue-100 text-blue-700" :
+                        product.category === "book" ? "bg-green-100 text-green-700" :
+                        product.category === "keychain" ? "bg-purple-100 text-purple-700" :
+                        product.category === "phonecover" ? "bg-pink-100 text-pink-700" :
+                        "bg-gray-100 text-gray-700"
+                      }`}>
+                        {product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1) : "Product"}
+                      </span>
+                      {product.hasSize && (
+                        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-700">
+                          Sizes
+                        </span>
+                      )}
+                    </div>
                     <h3 className="font-poppins text-lg font-semibold text-gray-800 mb-1">
                       {product.title}
                     </h3>
@@ -320,6 +345,27 @@ export default function ProductsPage() {
               <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
                 <div>
                   <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
+                    Product Category
+                  </label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => {
+                      const category = e.target.value;
+                      const hasSize = category === "tshirt";
+                      setFormData({ ...formData, category, hasSize });
+                    }}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-poppins"
+                    required
+                  >
+                    <option value="tshirt">T-Shirt</option>
+                    <option value="book">Book</option>
+                    <option value="keychain">Keychain</option>
+                    <option value="phonecover">Phone Cover</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-poppins text-sm font-medium text-gray-700 mb-2">
                     Product Title
                   </label>
                   <input
@@ -358,6 +404,38 @@ export default function ProductsPage() {
                     rows={4}
                     required
                   />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="flex items-center gap-2 font-poppins text-sm font-medium text-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={formData.hasSize}
+                        onChange={(e) => setFormData({ ...formData, hasSize: e.target.checked })}
+                        className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                      Has Size Options
+                    </label>
+                    <p className="font-poppins text-xs text-gray-500 mt-1 ml-6">
+                      Enable for T-shirts
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="flex items-center gap-2 font-poppins text-sm font-medium text-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={formData.hasQuantity}
+                        onChange={(e) => setFormData({ ...formData, hasQuantity: e.target.checked })}
+                        className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                      Has Quantity Selector
+                    </label>
+                    <p className="font-poppins text-xs text-gray-500 mt-1 ml-6">
+                      Enable for all products
+                    </p>
+                  </div>
                 </div>
 
                 <div>

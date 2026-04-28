@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function WhatsAppButton() {
   const [isVisible, setIsVisible] = useState(false);
-  const phoneNumber = "919302781206"; // Format: country code + number without + or spaces
+  const phoneNumber = "917067223922"; // Format: country code + number without + or spaces
   const message = "Hi, I would like to know more about Rescue Routes.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

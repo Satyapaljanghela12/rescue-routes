@@ -20,7 +20,7 @@ export default function AboutSection() {
             className="mb-8"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-4 leading-tight">
-              <img src="/hindi.png" alt="Compassion towards all living beings" />
+              <img src="/assets/images/brand/hindi.png" alt="Compassion towards all living beings" />
             </h2>
             <h3 className="text-3xl md:text-5xl lg:text-5xl font-briem font-bold mt-4">
               <span className="text-primary">Compassion</span> <span className="text-gray-500">towards all living beings</span>

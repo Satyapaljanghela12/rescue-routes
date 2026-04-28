@@ -23,7 +23,7 @@ export default function AdoptionsPage() {
     gender: "",
     description: "",
     medicalHistory: "",
-    image: "/dog1.png",
+    image: "/assets/images/animals/dog1.png",
     status: "Available",
   });
 
@@ -135,7 +135,7 @@ export default function AdoptionsPage() {
           gender: "",
           description: "",
           medicalHistory: "",
-          image: "/dog1.png",
+          image: "/assets/images/animals/dog1.png",
           status: "Available",
         });
         setImagePreview("");

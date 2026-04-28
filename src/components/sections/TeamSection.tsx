@@ -9,7 +9,7 @@ const team = [
     name: "Sneha Saxena",
     role: "Founder & Director",
     bio: "With over 12 years of experience in animal rescue, Sneha founded Rescue Routes to create a safe path for every stray. Her mission is to build a world where every paw has a home.",
-    image: "/sneha2.png",
+    image: "/assets/images/team/founder/sneha.png",
     color: "bg-primary/10",
   },
 ];

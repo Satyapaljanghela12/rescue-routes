@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, PawPrint } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -12,53 +13,121 @@ const stories = [
     name: "Shampoo",
     subtitle: "A Second Chance",
     description: "Rescued with a fractured jaw and unable to eat, Shampoo was in critical condition when we found him. After emergency surgery and weeks of careful nursing, he made a full recovery. Today, he's healthy, playful, and living his best life. His journey reminds us that every animal deserves a chance to heal and thrive.",
-    image: "/story1.jpg",
+    image: "/assets/images/animals/stories/story1.jpg",
+    afterImage: null,
   },
   {
     name: "Mithi",
     subtitle: "Strength Beyond Loss",
     description: "Mithi lost a limb in a tragic accident, but her spirit remained unbroken. With proper medical care and rehabilitation, she adapted beautifully to her new life. She now runs, plays, and enjoys every moment with incredible resilience. Mithi's story is a testament to the strength and courage animals possess when given love and support.",
-    image: "/mithi.png",
+    image: "/assets/images/animals/stories/mithi.png",
+    afterImage: null,
   },
   {
     name: "Ladoo",
     subtitle: "Fighting Cancer",
     description: "When Ladoo was diagnosed with a tumor, we knew time was critical. Through multiple medical sessions, chemotherapy, and constant care, he fought bravely. Today, Ladoo is cancer-free and full of energy. His recovery shows that with timely intervention and dedication, even the toughest battles can be won.",
-    image: "/ladoo.png",
+    image: "/assets/images/animals/stories/ladoo.png",
+    afterImage: "/assets/images/after/ladoo1.png",
   },
   {
     name: "Milky",
     subtitle: "Life Renewed",
     description: "Milky suffered from a large tumor that affected her quality of life. After a successful surgery and months of recovery care, she was given a second chance. Now she's active, healthy, and enjoying life to the fullest. Milky's transformation is a beautiful reminder of what compassionate care can achieve.",
-    image: "/milky.png",
+    image: "/assets/images/animals/stories/milky.png",
+    afterImage: null,
   },
   {
     name: "Damru",
     subtitle: "Recovery from Critical Condition",
     description: "Damru was rescued with severe swelling and breathing difficulties that put his life at risk. Emergency treatment and round-the-clock monitoring helped stabilize him. After weeks of intensive care, he made a remarkable recovery. Damru's story highlights the importance of immediate action in saving lives.",
-    image: "/damru.png",
+    image: "/assets/images/animals/stories/damru.png",
+    afterImage: null,
   },
   {
     name: "Sambhar",
     subtitle: "Saving a Vision",
     description: "Sambhar suffered a serious eye injury that threatened his sight. Thanks to early medical intervention and specialized treatment, his vision was saved. He can now see the world clearly and live without pain. Sambhar's recovery shows how crucial timely care is in preventing permanent damage.",
-    image: "/sambhar.png",
+    image: "/assets/images/animals/stories/sambhar.png",
+    afterImage: "/assets/images/after/sambharrep.png",
   },
   {
     name: "Kismis",
     subtitle: "Surgery Success",
     description: "Kismis was diagnosed with a hernia that caused him constant discomfort. After a successful surgery and proper post-operative care, he recovered completely. Now he's pain-free and back to his playful self. Kismis's journey proves that even complex medical conditions can be treated with the right resources.",
-    image: "/kismis.png",
+    image: "/assets/images/animals/stories/kismis.png",
+    afterImage: null,
   },
   {
     name: "Sona",
     subtitle: "From Pain to Healing",
     description: "Sona was found with severe wound infections that were spreading rapidly. Immediate medical attention, antibiotics, and daily wound care saved her life. After months of treatment, she made a full recovery. Sona's transformation from suffering to healing is a powerful example of what rescue work can accomplish.",
-    image: "/sona.png",
+    image: "/assets/images/animals/stories/sona.png",
+    afterImage: "/assets/images/after/sona1.png",
   },
 ];
 
+// Before/After image component with auto-toggle every 3 seconds
+function BeforeAfterImage({ story }: { story: typeof stories[0] }) {
+  const [showAfter, setShowAfter] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    if (!story.afterImage) return;
+    const interval = setInterval(() => {
+      if (!hovered) setShowAfter(prev => !prev);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [story.afterImage, hovered]);
+
+  const currentImage = showAfter && story.afterImage ? story.afterImage : story.image;
+  const label = showAfter && story.afterImage ? "After" : "Before";
+  const labelColor = showAfter ? "bg-green-500" : "bg-orange-500";
+
+  return (
+    <div
+      className="relative h-96 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white cursor-pointer"
+      onMouseEnter={() => { if (story.afterImage) { setHovered(true); setShowAfter(true); } }}
+      onMouseLeave={() => { if (story.afterImage) { setHovered(false); setShowAfter(false); } }}
+    >
+      <Image
+        src={currentImage}
+        alt={story.name}
+        fill
+        className="object-cover transition-opacity duration-700"
+        key={currentImage}
+      />
+      {story.afterImage && (
+        <div className={`absolute top-4 left-4 ${labelColor} text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg transition-all duration-500`}>
+          {label}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function StoriesPage() {
+  const [allStories, setAllStories] = useState<any[]>(stories);
+
+  useEffect(() => {
+    fetch("/api/stories")
+      .then(r => r.json())
+      .then(data => {
+        if (data.success && data.stories.length > 0) {
+          // Map DB stories to match the same shape, merge with static
+          const dbStories = data.stories.map((s: any) => ({
+            name: s.name,
+            subtitle: s.subtitle,
+            description: s.description,
+            image: s.beforeImage,
+            afterImage: s.afterImage || null,
+          }));
+          setAllStories([...dbStories, ...stories]);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -68,7 +137,7 @@ export default function StoriesPage() {
         <section className="relative min-h-[90vh] flex items-end overflow-hidden">
           {/* bg image */}
           <Image
-            src="/Images/WhatsApp Image 2026-04-11 at 20.21.14 (1).jpeg"
+            src="/assets/images/gallery/stories-bg.jpeg"
             alt="Stories of Hope & Recovery"
             fill
             sizes="100vw"
@@ -131,7 +200,7 @@ export default function StoriesPage() {
 
             {/* Stories in creative layout */}
             <div className="space-y-24">
-              {stories.map((story, index) => (
+              {allStories.map((story, index) => (
                 <motion.div
                   key={story.name}
                   initial={{ opacity: 0, y: 50 }}
@@ -150,19 +219,12 @@ export default function StoriesPage() {
                         transition={{ duration: 0.3 }}
                         className="relative"
                       >
-                        {/* Main image */}
-                        <div className="relative h-96 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
-                          <Image
-                            src={story.image}
-                            alt={story.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                        {/* Main image with before/after toggle */}
+                        <BeforeAfterImage story={story} />
 
-                        {/* Simple badge with dog emoji */}
+                        {/* Simple badge with paw */}
                         <div className={`absolute ${index % 2 === 0 ? '-bottom-6 -right-6' : '-bottom-6 -left-6'} bg-[#2563EB] rounded-3xl px-6 py-4 shadow-2xl transform ${index % 2 === 0 ? 'rotate-12' : '-rotate-12'}`}>
-                          <span className="text-3xl">🐕</span>
+                          <PawPrint className="w-8 h-8 text-white" />
                         </div>
 
                         {/* Floating paws */}
@@ -190,7 +252,7 @@ export default function StoriesPage() {
                         {/* Decorative blob behind */}
                         <div className={`absolute -inset-8 bg-primary/5 rounded-[4rem] blur-3xl ${index % 2 === 0 ? '-rotate-3' : 'rotate-3'}`} />
                         
-                        <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl">
+                        <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl overflow-hidden min-w-0">
                           {/* Story name with cute styling */}
                           <div className="mb-6">
                             <h3 className="font-fredoka text-4xl md:text-5xl mb-2 text-primary">
@@ -204,13 +266,13 @@ export default function StoriesPage() {
                             </div>
                           </div>
                           
-                          <p className="font-poppins text-lg text-gray-700 leading-relaxed">
+                          <p className="font-poppins text-lg text-gray-700 leading-relaxed break-words whitespace-normal overflow-hidden">
                             {story.description}
                           </p>
 
                           {/* Simple line separator */}
                           <div className="absolute bottom-4 right-4 opacity-20">
-                            <span className="text-2xl">🐕</span>
+                            <PawPrint className="w-6 h-6 text-primary" />
                           </div>
                         </div>
                       </div>
@@ -219,7 +281,7 @@ export default function StoriesPage() {
                   </div>
 
                   {/* Simple paw separator */}
-                  {index < stories.length - 1 && (
+                  {index < allStories.length - 1 && (
                     <div className="flex justify-center my-16">
                       <div className="text-primary/20">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">

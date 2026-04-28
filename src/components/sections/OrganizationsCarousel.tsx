@@ -1,66 +1,56 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 
-const organizations = [
-  "World Animal Protection",
-  "PETA India",
-  "Blue Cross of India",
-  "Animal Aid Unlimited",
-  "Wildlife SOS",
-  "Humane Society International",
-  "SPCA India",
-  "Friendicoes",
-  "Red Paws Rescue",
-  "Visakha SPCA",
-  "Karuna Society for Animals",
-  "Animal Rahat",
+const logos = [
+  { src: "/assets/images/logos/1.png", alt: "Partner 1" },
+  { src: "/assets/images/logos/2.png", alt: "Partner 2" },
+  { src: "/assets/images/logos/3.png", alt: "Partner 3" },
+  { src: "/assets/images/logos/4.png", alt: "Partner 4" },
 ];
 
 export default function OrganizationsCarousel() {
-  // Duplicate the array for seamless infinite scroll
-  const duplicatedOrgs = [...organizations, ...organizations];
+  // Triple for seamless loop
+  const items = [...logos, ...logos, ...logos];
 
   return (
-    <section className="bg-white py-12 overflow-hidden">
+    <section className="bg-white py-10 overflow-hidden">
       <div className="container mx-auto px-4 mb-6">
         <p className="text-center font-poppins text-sm text-gray-500 uppercase tracking-wider">
-          Associated Organizations & Partners
+          Associated Organizations &amp; Partners
         </p>
       </div>
-      
+
       <div className="relative">
-        {/* Gradient overlays for fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
-        
-        {/* Scrolling container */}
-        <motion.div
-          className="flex gap-12"
-          animate={{
-            x: [0, -50 * organizations.length],
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 30,
-              ease: "linear",
-            },
-          }}
-        >
-          {duplicatedOrgs.map((org, index) => (
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div className="flex" style={{ animation: "scroll-logos 15s linear infinite" }}>
+          {items.map((logo, i) => (
             <div
-              key={index}
-              className="flex-shrink-0 flex items-center justify-center"
+              key={i}
+              className="flex-shrink-0 flex items-center justify-center mx-10"
+              style={{ width: 160 }}
             >
-              <span className="font-fredoka text-lg font-normal text-gray-400 whitespace-nowrap">
-                {org}
-              </span>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={140}
+                height={60}
+                className="object-contain grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                style={{ maxHeight: 60, width: "auto" }}
+              />
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll-logos {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(calc(-160px * ${logos.length} - 80px * ${logos.length})); }
+        }
+      `}</style>
     </section>
   );
 }

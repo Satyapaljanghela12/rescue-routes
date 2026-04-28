@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       gender,
       description: description || "",
       medicalHistory: medicalHistory || "",
-      image: image || "/dog1.png",
+      image: image || "/assets/images/animals/dog1.png",
       status: status || "Available",
       applicants: 0,
       createdAt: new Date(),

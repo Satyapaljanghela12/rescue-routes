@@ -5,7 +5,7 @@ import Image from "next/image";
 const founder = {
   name: "Sneha Saxena",
   role: "Founder & Director",
-  image: "/sneha2.png",
+  image: "/assets/images/team/founder/sneha.png",
   description: "Sneha Sharma founded Rescue Routes with a vision to create a compassionate community for street animals. With years of experience in animal welfare, she leads our mission to provide comprehensive care and find loving homes for rescued animals."
 };
 
@@ -13,22 +13,22 @@ const interns = [
   {
     name: "Kaushiki Tiwari",
     role: "Creative Director",
-    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.17.jpeg"
+    image: "/assets/images/team/core/kaushiki.jpeg"
   },
   {
     name: "Sarvang Sharma",
     role: "Influencer and Partnership Lead",
-    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.44.jpeg"
+    image: "/assets/images/team/core/sarvang.jpeg"
   },
   {
     name: "Vinayak Awasthi",
     role: "Marketing Lead",
-    image: "/Core members/WhatsApp Image 2026-04-22 at 08.50.50.jpeg"
+    image: "/assets/images/team/core/vinayak.jpeg"
   },
   {
     name: "Suryansha Singh Bundela",
     role: "Operations Manager",
-    image: "/Core members/WhatsApp Image 2026-04-22 at 14.13.18.jpeg"
+    image: "/assets/images/team/core/WhatsApp Image 2026-04-28 at 13.30.46.jpeg"
   }
 ];
 
@@ -79,7 +79,7 @@ export default function FoundingTeamSection() {
                       alt={intern.name} 
                       fill 
                       sizes="(max-width: 768px) 50vw, 300px" 
-                      className={`object-cover ${index === 0 ? 'object-center' : 'object-top'}`}
+                      className={`object-cover ${index === 0 ? 'object-center' : index === 1 ? 'object-top scale-125' : index === 3 ? 'object-center scale-90' : 'object-top'}`}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3f251f]/20 to-transparent" />
                   </div>

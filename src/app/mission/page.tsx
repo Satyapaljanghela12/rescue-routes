@@ -19,10 +19,6 @@ const missionPillars = [
     title: "Rehome",
     description: "We help rescued animals find loving homes where they can live safely and happily.",
   },
-  {
-    title: "Revive",
-    description: "We give animals a second chance at life with dignity, care, and protection.",
-  },
 ];
 
 export default function MissionPage() {
@@ -42,7 +38,7 @@ export default function MissionPage() {
               className="text-center mb-16"
             >
               <h1 className="font-fredoka text-4xl md:text-5xl lg:text-6xl mb-4 text-primary">
-                Rescue. Rehabilitate. Rehome. Revive.
+                Rescue. Rehabilitate. Rehome.
               </h1>
               <p className="font-poppins text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 Every life deserves care, compassion, and a second chance.
@@ -86,7 +82,7 @@ export default function MissionPage() {
               >
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/About1.png"
+                    src="/assets/images/gallery/edit1.jpeg"
                     alt="Rescued dog"
                     fill
                     className="object-cover"
@@ -94,7 +90,7 @@ export default function MissionPage() {
                 </div>
                 <div className="relative h-64 rounded-xl overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/Images/WhatsApp Image 2026-04-11 at 20.29.35.jpeg"
+                    src="/assets/images/gallery/edit2.jpeg"
                     alt="Happy rescued animal"
                     fill
                     className="object-cover"
@@ -136,7 +132,7 @@ export default function MissionPage() {
                   </svg>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                   {missionPillars.map((pillar, index) => (
                     <motion.div
                       key={pillar.title}
