@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Quote,
   CheckCircle,
+  HandHeart,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -283,7 +284,9 @@ export default function AboutPage() {
 
                 {/* 2030 Goal Card */}
                 <div className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-4">
-                  <span className="text-3xl">🍖</span>
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <HandHeart className="w-6 h-6 text-primary" />
+                  </div>
                   <div className="flex-1">
                     <h3 className="font-poppins text-base font-bold text-primary mb-1">Annapurna Feeding Bharat</h3>
                     <p className="font-poppins text-sm text-gray-700 leading-relaxed">

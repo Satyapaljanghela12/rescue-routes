@@ -78,7 +78,7 @@ export default function HeroSection() {
     }
   }, []);
   return (
-    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen bg-gray-900">
+    <section className="relative pt-24 pb-16 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen bg-gray-900">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video

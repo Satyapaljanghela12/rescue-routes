@@ -12,7 +12,7 @@ const featuredVolunteers = [
   { name: "Anant Verma", role: "Marketing Intern", image: "/assets/images/team/interns/anant.jpeg" },
   { name: "Aryan Khushwaha", role: "Operations Intern", image: "/assets/images/team/interns/aryan.jpeg" },
   { name: "Harshvardhan Singh", role: "Marketing Intern", image: "/assets/images/team/interns/harshvardhan.jpeg" },
-  { name: "Vaibhavi Tiwari", role: "Operations Intern", image: "/assets/images/team/interns/vaibhavi.jpeg" },
+  { name: "Vaibhavi Tiwari", role: "Operations Intern", image: "/assets/images/team/interns/vaibhavi2.jpeg" },
 ];
 
 export default function VolunteersPage() {
@@ -344,6 +344,29 @@ export default function VolunteersPage() {
                   </h3>
                   <p className="font-poppins text-sm text-gray-700 leading-relaxed">
                     Spread awareness online, create content, and help amplify our mission to reach more people.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Step 5 */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex items-center gap-8"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="font-poetsen text-3xl text-white">5</span>
+                  </div>
+                </div>
+                <div className="flex-1 bg-gray-50 rounded-2xl p-8 shadow-md">
+                  <h3 className="font-poetsen text-2xl mb-3 text-primary">
+                    Poultry Farm and Auditing
+                  </h3>
+                  <p className="font-poppins text-sm text-gray-700 leading-relaxed">
+                    Care for poultry animals at our farm and help audit our operations, finances, and impact.
                   </p>
                 </div>
               </motion.div>

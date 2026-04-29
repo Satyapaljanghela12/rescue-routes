@@ -234,13 +234,7 @@ export default function StoriesPage() {
                           className={`absolute ${index % 2 === 0 ? '-top-4 -left-4' : '-top-4 -right-4'}`}
                         >
                           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
-                              <circle cx="12" cy="16" r="3" />
-                              <circle cx="8" cy="12" r="2" />
-                              <circle cx="16" cy="12" r="2" />
-                              <circle cx="10" cy="8" r="1.5" />
-                              <circle cx="14" cy="8" r="1.5" />
-                            </svg>
+                            <PawPrint className="w-6 h-6 text-primary" />
                           </div>
                         </motion.div>
                       </motion.div>
@@ -284,13 +278,7 @@ export default function StoriesPage() {
                   {index < allStories.length - 1 && (
                     <div className="flex justify-center my-16">
                       <div className="text-primary/20">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                          <circle cx="12" cy="16" r="3" />
-                          <circle cx="8" cy="12" r="2" />
-                          <circle cx="16" cy="12" r="2" />
-                          <circle cx="10" cy="8" r="1.5" />
-                          <circle cx="14" cy="8" r="1.5" />
-                        </svg>
+                        <PawPrint className="w-8 h-8" />
                       </div>
                     </div>
                   )}

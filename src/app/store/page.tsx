@@ -431,7 +431,7 @@ export default function StorePage() {
         <div className="relative h-[520px] overflow-hidden pt-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/images/gallery/storechnage.png"
+            src="/assets/images/gallery/Gemini_Generated_Image_940jvd940jvd940j.png"
             alt="Merchandise Store"
             className="w-full h-full object-cover object-top"
           />

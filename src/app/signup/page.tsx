@@ -3,12 +3,11 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Shield, Users, Heart } from "lucide-react";
+import { Users, Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
 const roles = [
-  { id: "admin", label: "Admin", icon: Shield, color: "bg-purple-50 text-purple-600 border-purple-200", desc: "Manage platform" },
   { id: "volunteer", label: "Volunteer", icon: Users, color: "bg-blue-50 text-blue-600 border-blue-200", desc: "Help rescue animals" },
   { id: "user", label: "User", icon: Heart, color: "bg-green-50 text-green-600 border-green-200", desc: "Shop & support" },
 ];
@@ -67,9 +66,7 @@ export default function SignupPage() {
         login(data.user);
         
         // Redirect based on role
-        if (selectedRole === "admin") {
-          router.push("/admin/dashboard");
-        } else if (selectedRole === "volunteer") {
+        if (selectedRole === "volunteer") {
           if (data.requiresApproval) {
             alert("Account created successfully! Your account is pending admin approval.");
             router.push("/login");
@@ -112,7 +109,7 @@ export default function SignupPage() {
             <label className="block font-poppins text-sm font-medium text-gray-700 mb-3">
               I want to join as
             </label>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {roles.map((role) => (
                 <button
                   key={role.id}

@@ -148,7 +148,7 @@ export default function UserDashboard() {
               <div>
                 <h1 className="font-poetsen text-4xl mb-2">My Dashboard</h1>
                 <p className="font-poppins text-white/90">
-                  Welcome back, {user?.firstName || user?.email}!
+                  Welcome back, {user?.name || user?.firstName || user?.email}!
                 </p>
               </div>
               <button
